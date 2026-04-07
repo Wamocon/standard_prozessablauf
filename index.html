@@ -1,0 +1,1293 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>WAMOCON — Standard Prozessablauf</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+<style>
+/* ─── ROOT VARIABLES ───────────────────────────────────────────── */
+:root{
+  --bg:#0a0a1c;--bg2:#0e0e24;--surface:rgba(255,255,255,0.05);--surface2:rgba(255,255,255,0.08);
+  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.14);
+  --text:#f1f5f9;--text2:#94a3b8;--text3:#475569;
+  --blue:#3b82f6;--violet:#8b5cf6;--cyan:#06b6d4;--pink:#ec4899;--green:#22c55e;--amber:#f59e0b;
+  --blue-dim:rgba(59,130,246,0.12);--violet-dim:rgba(139,92,246,0.12);
+  --cyan-dim:rgba(6,182,212,0.10);--pink-dim:rgba(236,72,153,0.10);
+  --glow-blue:rgba(59,130,246,0.3);--glow-violet:rgba(139,92,246,0.3);
+  --glow-cyan:rgba(6,182,212,0.25);--glow-pink:rgba(236,72,153,0.25);
+  --radius:16px;--font:'Inter',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;
+  --shadow:0 20px 60px rgba(0,0,0,0.6);
+  --neu:6px 6px 18px rgba(0,0,0,0.75),-3px -3px 10px rgba(255,255,255,0.03);
+  --neu-sm:3px 3px 9px rgba(0,0,0,0.65),-2px -2px 6px rgba(255,255,255,0.03);
+  --neu-inset:inset 4px 4px 10px rgba(0,0,0,0.65),inset -2px -2px 6px rgba(255,255,255,0.03);
+  --neu-glow-blue:6px 6px 18px rgba(0,0,0,0.75),-3px -3px 10px rgba(59,130,246,0.08);
+  --neu-glow-violet:6px 6px 18px rgba(0,0,0,0.75),-3px -3px 10px rgba(139,92,246,0.08);
+  --neu-glow-cyan:6px 6px 18px rgba(0,0,0,0.75),-3px -3px 10px rgba(6,182,212,0.08);
+  --neu-glow-pink:6px 6px 18px rgba(0,0,0,0.75),-3px -3px 10px rgba(236,72,153,0.08);
+  --transition:0.35s cubic-bezier(0.4,0,0.2,1);
+}
+html[data-theme="light"]{
+  --bg:#e8edf4;--bg2:#e2e8f2;--surface:rgba(255,255,255,0.75);--surface2:rgba(255,255,255,0.92);
+  --border:rgba(0,0,0,0.07);--border2:rgba(0,0,0,0.12);
+  --text:#0f172a;--text2:#334155;--text3:#64748b;
+  --shadow:0 8px 30px rgba(0,0,0,0.08);
+  --neu:4px 4px 12px rgba(163,177,198,0.6),-4px -4px 8px rgba(255,255,255,0.88);
+  --neu-sm:3px 3px 8px rgba(163,177,198,0.5),-2px -2px 6px rgba(255,255,255,0.82);
+  --neu-inset:inset 4px 4px 10px rgba(163,177,198,0.5),inset -2px -2px 8px rgba(255,255,255,0.78);
+  --neu-glow-blue:4px 4px 12px rgba(163,177,198,0.6),-4px -4px 8px rgba(59,130,246,0.08);
+  --neu-glow-violet:4px 4px 12px rgba(163,177,198,0.6),-4px -4px 8px rgba(139,92,246,0.08);
+  --neu-glow-cyan:4px 4px 12px rgba(163,177,198,0.6),-4px -4px 8px rgba(6,182,212,0.08);
+  --neu-glow-pink:4px 4px 12px rgba(163,177,198,0.6),-4px -4px 8px rgba(236,72,153,0.08);
+}
+/* ─── RESET & BASE ─────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font);background:var(--bg);color:var(--text);
+  line-height:1.6;overflow-x:hidden;
+  transition:background var(--transition),color var(--transition);
+}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(139,92,246,0.4);border-radius:2px}
+/* ─── TYPOGRAPHY ──────────────────────────────────────────────── */
+h1,h2,h3,h4{letter-spacing:-0.03em;line-height:1.15}
+a{color:var(--blue);text-decoration:none;transition:color 0.2s}
+a:hover{color:var(--cyan)}
+code{font-family:var(--mono);font-size:0.88em;background:var(--surface2);
+  padding:2px 7px;border-radius:5px;border:1px solid var(--border)}
+/* ─── GLASS CARD ──────────────────────────────────────────────── */
+.card{
+  background:rgba(13,13,28,0.82);border:1px solid var(--border);
+  border-radius:var(--radius);backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  position:relative;overflow:hidden;
+  box-shadow:var(--neu),inset 0 1px 0 rgba(255,255,255,0.05);
+  transition:transform var(--transition),border-color var(--transition),box-shadow var(--transition);
+}
+.card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,0.04),transparent 60%);
+  pointer-events:none;border-radius:inherit;
+}
+html[data-theme="light"] .card{background:rgba(240,244,250,0.88);box-shadow:var(--neu),inset 0 1px 0 rgba(255,255,255,0.95)}
+.card:hover{transform:translateY(-3px);box-shadow:10px 10px 28px rgba(0,0,0,0.8),-4px -4px 14px rgba(255,255,255,0.04),inset 0 1px 0 rgba(255,255,255,0.07)}
+.card.p1:hover{border-color:rgba(59,130,246,0.4);box-shadow:8px 8px 24px rgba(0,0,0,0.75),-3px -3px 10px rgba(59,130,246,0.12),0 0 32px rgba(59,130,246,0.18),inset 0 1px 0 rgba(59,130,246,0.1)}
+.card.p2:hover{border-color:rgba(139,92,246,0.4);box-shadow:8px 8px 24px rgba(0,0,0,0.75),-3px -3px 10px rgba(139,92,246,0.12),0 0 32px rgba(139,92,246,0.18),inset 0 1px 0 rgba(139,92,246,0.1)}
+.card.p3:hover{border-color:rgba(6,182,212,0.4);box-shadow:8px 8px 24px rgba(0,0,0,0.75),-3px -3px 10px rgba(6,182,212,0.12),0 0 32px rgba(6,182,212,0.18),inset 0 1px 0 rgba(6,182,212,0.1)}
+.card.p5:hover{border-color:rgba(236,72,153,0.4);box-shadow:8px 8px 24px rgba(0,0,0,0.75),-3px -3px 10px rgba(236,72,153,0.12),0 0 32px rgba(236,72,153,0.18),inset 0 1px 0 rgba(236,72,153,0.1)}
+/* ─── BADGES ──────────────────────────────────────────────────── */
+.badge{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:3px 11px;border-radius:100px;
+  font-size:11px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;
+}
+.b-blue{background:rgba(59,130,246,0.12);border:1px solid rgba(59,130,246,0.3);color:#93c5fd}
+.b-violet{background:rgba(139,92,246,0.12);border:1px solid rgba(139,92,246,0.3);color:#c4b5fd}
+.b-cyan{background:rgba(6,182,212,0.10);border:1px solid rgba(6,182,212,0.3);color:#67e8f9}
+.b-pink{background:rgba(236,72,153,0.10);border:1px solid rgba(236,72,153,0.3);color:#f9a8d4}
+.b-green{background:rgba(34,197,94,0.10);border:1px solid rgba(34,197,94,0.3);color:#86efac}
+.b-amber{background:rgba(245,158,11,0.10);border:1px solid rgba(245,158,11,0.3);color:#fcd34d}
+html[data-theme="light"] .b-blue{color:#1d4ed8}
+html[data-theme="light"] .b-violet{color:#6d28d9}
+html[data-theme="light"] .b-cyan{color:#0e7490}
+html[data-theme="light"] .b-pink{color:#be185d}
+html[data-theme="light"] .b-green{color:#15803d}
+html[data-theme="light"] .b-amber{color:#b45309}
+/* ─── GRAD TEXT ───────────────────────────────────────────────── */
+.gt-blue{background:linear-gradient(135deg,#60a5fa,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.gt-violet{background:linear-gradient(135deg,#c4b5fd,#818cf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.gt-cyan{background:linear-gradient(135deg,#22d3ee,#67e8f9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.gt-pink{background:linear-gradient(135deg,#f472b6,#fb7185);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.gt-main{background:linear-gradient(135deg,#fff 20%,#94a3b8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+html[data-theme="light"] .gt-main{background:linear-gradient(135deg,#0f172a 20%,#334155);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+/* ─── ANALOGY BOX ─────────────────────────────────────────────── */
+.analogy{
+  padding:16px 20px;border-radius:12px;
+  background:linear-gradient(135deg,rgba(139,92,246,0.1),rgba(6,182,212,0.07));
+  border:1px solid rgba(139,92,246,0.2);margin:16px 0;
+  box-shadow:var(--neu-sm);
+}
+.analogy .label{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#a78bfa;margin-bottom:6px}
+.analogy p{font-size:13.5px;color:var(--text2);line-height:1.65}
+html[data-theme="light"] .analogy{background:linear-gradient(135deg,rgba(139,92,246,0.05),rgba(6,182,212,0.04))}
+/* ─── CODE BLOCK ──────────────────────────────────────────────── */
+.codeblock{
+  background:rgba(4,4,14,0.92);border:1px solid rgba(255,255,255,0.05);
+  border-radius:12px;padding:18px 20px;font-family:var(--mono);
+  font-size:12.5px;line-height:1.8;overflow-x:auto;
+  box-shadow:var(--neu-inset);
+}
+html[data-theme="light"] .codeblock{background:rgba(15,23,42,0.9);border-color:rgba(255,255,255,0.08)}
+.codeblock .c-cmd{color:#67e8f9}.codeblock .c-flag{color:#c4b5fd}
+.codeblock .c-path{color:#86efac}.codeblock .c-comment{color:#475569}
+.codeblock .c-val{color:#fcd34d}
+/* ─── STEP LIST ───────────────────────────────────────────────── */
+.steps{display:flex;flex-direction:column;gap:0}
+.step{display:flex;gap:16px;padding:14px 0;position:relative}
+.step::after{content:'';position:absolute;left:16px;top:46px;bottom:0;width:1px;background:linear-gradient(180deg,var(--border2),transparent)}
+.step:last-child::after{display:none}
+.step-n{
+  min-width:32px;height:32px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:700;flex-shrink:0;margin-top:1px;
+}
+.sn-blue{background:rgba(59,130,246,0.15);color:#93c5fd;border:1px solid rgba(59,130,246,0.3);box-shadow:var(--neu-sm)}
+.sn-violet{background:rgba(139,92,246,0.15);color:#c4b5fd;border:1px solid rgba(139,92,246,0.3);box-shadow:var(--neu-sm)}
+.sn-cyan{background:rgba(6,182,212,0.12);color:#67e8f9;border:1px solid rgba(6,182,212,0.3);box-shadow:var(--neu-sm)}
+.sn-pink{background:rgba(236,72,153,0.12);color:#f9a8d4;border:1px solid rgba(236,72,153,0.3);box-shadow:var(--neu-sm)}
+.step-body h4{font-size:14px;font-weight:700;color:var(--text);margin-bottom:5px}
+.step-body p{font-size:13px;color:var(--text2);line-height:1.65}
+/* ─── INFO ROWS ───────────────────────────────────────────────── */
+.info-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)}
+.info-row:last-child{border-bottom:none}
+.info-row .irl{font-size:12.5px;color:var(--text3)}
+.tag{display:inline-flex;padding:3px 10px;border-radius:100px;font-size:11px;font-weight:500;background:var(--surface2);border:1px solid var(--border2);color:var(--text2)}
+/* ─── WARN BOX ────────────────────────────────────────────────── */
+.warn{background:rgba(245,158,11,0.07);border:1px solid rgba(245,158,11,0.25);border-radius:10px;padding:12px 16px;box-shadow:var(--neu-sm)}
+.warn .wl{font-size:11px;font-weight:700;color:#fcd34d;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.06em}
+.warn p{font-size:12.5px;color:var(--text2);line-height:1.6}
+.note{background:rgba(34,197,94,0.06);border:1px solid rgba(34,197,94,0.2);border-radius:10px;padding:12px 16px;box-shadow:var(--neu-sm)}
+.note .nl{font-size:11px;font-weight:700;color:#86efac;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.06em}
+.note p{font-size:12.5px;color:var(--text2);line-height:1.6}
+/* ─── NAV ─────────────────────────────────────────────────────── */
+#nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 28px;height:64px;
+  background:rgba(10,10,28,0.8);
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--border);
+  box-shadow:0 4px 24px rgba(0,0,0,0.55),inset 0 1px 0 rgba(255,255,255,0.04),inset 0 -1px 0 rgba(255,255,255,0.02);
+  transition:background var(--transition),box-shadow var(--transition);
+}
+html[data-theme="light"] #nav{background:rgba(248,250,252,0.75)}
+.nav-logo{display:flex;align-items:center;gap:10px}
+.nav-logo-mark{
+  width:34px;height:34px;border-radius:9px;
+  background:linear-gradient(135deg,#3b82f6,#8b5cf6);
+  display:flex;align-items:center;justify-content:center;
+  font-size:15px;font-weight:900;color:#fff;flex-shrink:0;
+  box-shadow:3px 3px 8px rgba(0,0,0,0.55),-2px -2px 6px rgba(139,92,246,0.2);
+}
+.nav-logo span{font-size:15px;font-weight:800;color:var(--text);letter-spacing:-0.5px}
+.nav-logo small{font-size:11px;color:var(--text3);margin-left:8px;padding-left:8px;border-left:1px solid var(--border2)}
+.nav-right{display:flex;align-items:center;gap:10px}
+/* ─── TOGGLE BUTTONS ──────────────────────────────────────────── */
+.toggle-btn{
+  display:flex;align-items:center;gap:6px;
+  padding:7px 14px;border-radius:100px;font-size:12px;font-weight:600;
+  border:1px solid var(--border2);background:rgba(13,13,28,0.85);
+  color:var(--text2);cursor:pointer;
+  box-shadow:var(--neu-sm);
+  transition:all 0.2s;user-select:none;
+}
+.toggle-btn:hover{background:rgba(18,18,38,0.95);color:var(--text);border-color:rgba(139,92,246,0.4);box-shadow:4px 4px 12px rgba(0,0,0,0.7),-2px -2px 7px rgba(139,92,246,0.09)}
+.toggle-btn.active{background:rgba(139,92,246,0.15);border-color:rgba(139,92,246,0.4);color:#c4b5fd;box-shadow:var(--neu-inset)}
+.lang-grp{display:flex;border:1px solid var(--border2);border-radius:100px;overflow:hidden;box-shadow:var(--neu-sm)}
+.lang-btn{
+  padding:6px 13px;font-size:12px;font-weight:600;cursor:pointer;
+  background:transparent;border:none;color:var(--text3);
+  transition:all 0.2s;
+}
+.lang-btn.active{background:rgba(139,92,246,0.2);color:#c4b5fd;box-shadow:inset 2px 2px 6px rgba(0,0,0,0.5)}
+/* ─── LIVE DOT ────────────────────────────────────────────────── */
+.live-dot{
+  width:7px;height:7px;border-radius:50%;background:#22c55e;
+  box-shadow:0 0 0 2px rgba(34,197,94,0.2),0 0 8px #22c55e;
+  animation:pulse 2s infinite;
+}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 2px rgba(34,197,94,0.2),0 0 6px #22c55e}50%{box-shadow:0 0 0 4px rgba(34,197,94,0.1),0 0 14px #22c55e}}
+/* ─── HERO ────────────────────────────────────────────────────── */
+#hero{
+  position:relative;padding:140px 28px 80px;text-align:center;
+  background-image:radial-gradient(circle at 50% 0%,rgba(99,102,241,0.12),transparent 60%);
+  overflow:hidden;
+}
+#hero::after{
+  content:'';position:absolute;inset:0;
+  background-image:radial-gradient(circle,rgba(255,255,255,0.08) 1px,transparent 1px);
+  background-size:32px 32px;pointer-events:none;opacity:0.35;
+}
+html[data-theme="light"] #hero::after{opacity:0.15}
+.hero-inner{position:relative;z-index:1;max-width:820px;margin:0 auto}
+.hero-kicker{display:inline-flex;align-items:center;gap:8px;margin-bottom:24px}
+.hero-h1{font-size:clamp(40px,7vw,80px);font-weight:900;line-height:1.04;margin-bottom:20px}
+.hero-sub{font-size:17px;color:var(--text2);max-width:580px;margin:0 auto 36px;line-height:1.7}
+.week-bar{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;max-width:640px;margin:0 auto}
+.week-col{
+  padding:14px 10px;border-radius:12px;text-align:center;
+  background:rgba(13,13,28,0.75);border:1px solid var(--border);
+  box-shadow:var(--neu-sm);
+  transition:all 0.2s;
+}
+.week-col:hover{transform:translateY(-2px);border-color:var(--border2);box-shadow:5px 5px 16px rgba(0,0,0,0.7),-3px -3px 9px rgba(59,130,246,0.07)}
+.week-col .day{font-size:10px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px}
+.week-col .ph{font-size:13px;font-weight:700;margin-bottom:3px}
+.week-col .desc{font-size:10px;color:var(--text3)}
+/* ─── PHASE SECTION ───────────────────────────────────────────── */
+.phase-section{max-width:1240px;margin:0 auto;padding:0 28px 80px}
+.phase-head{display:flex;align-items:center;gap:14px;margin-bottom:36px;padding-bottom:20px;border-bottom:1px solid var(--border)}
+.phase-head .ph-num{font-size:56px;font-weight:900;line-height:1;color:var(--border2);letter-spacing:-3px;flex-shrink:0}
+.phase-head .ph-info .ph-day{font-size:11px;color:var(--text3);font-weight:600;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px}
+.phase-head .ph-info h2{font-size:clamp(22px,3vw,32px);font-weight:800}
+.phase-head .ph-info p{font-size:14px;color:var(--text2);margin-top:6px;max-width:700px;line-height:1.6}
+/* ─── GRID LAYOUTS ────────────────────────────────────────────── */
+.grid12{display:grid;grid-template-columns:repeat(12,1fr);gap:20px}
+.col8{grid-column:span 8}.col6{grid-column:span 6}.col5{grid-column:span 5}.col7{grid-column:span 7}.col4{grid-column:span 4}.col3{grid-column:span 3}.col12{grid-column:span 12}
+@media(max-width:900px){.col8,.col6,.col5,.col7,.col4,.col3,.col12{grid-column:span 12}.grid12{grid-template-columns:1fr}.week-bar{grid-template-columns:1fr 1fr}}
+@media(max-width:500px){.week-bar{grid-template-columns:1fr}.nav-logo small,.live-dot+span{display:none}}
+/* ─── CARD INNER ─────────────────────────────────────────────── */
+.card-pad{padding:28px 30px}
+.card-intro{font-size:13.5px;color:var(--text2);line-height:1.75;margin:10px 0 20px}
+.card-title{font-size:20px;font-weight:800;color:var(--text);margin:8px 0 4px}
+/* ─── CONCEPT GRID ────────────────────────────────────────────── */
+.con-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.con-item{padding:16px;border-radius:12px;border:1px solid var(--border);background:rgba(13,13,28,0.7);box-shadow:var(--neu-sm)}
+.con-item .con-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:7px}
+.con-item p{font-size:12.5px;color:var(--text2);line-height:1.65}
+@media(max-width:600px){.con-grid{grid-template-columns:1fr}}
+/* ─── RISK CARDS ─────────────────────────────────────────────── */
+.risk-item{padding:14px 16px;border-radius:10px;border:1px solid var(--border);background:rgba(13,13,28,0.7);margin-bottom:10px;box-shadow:var(--neu-sm)}
+.risk-item:last-child{margin-bottom:0}
+.risk-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:5px}
+.risk-item p{font-size:12.5px;color:var(--text2);line-height:1.6}
+/* ─── FLOW STEPS (horizontal) ────────────────────────────────── */
+.flow-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.flow-item{text-align:center;padding:18px 14px;border-radius:12px;border:1px solid var(--border);background:rgba(13,13,28,0.7);box-shadow:var(--neu-sm)}
+.flow-item .flow-n{font-size:28px;font-weight:900;line-height:1;margin-bottom:8px;color:var(--text3)}
+.flow-item .flow-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--blue);margin-bottom:5px}
+.flow-item p{font-size:12px;color:var(--text3);line-height:1.55}
+@media(max-width:600px){.flow-grid{grid-template-columns:1fr}}
+/* ─── SCROLL REVEAL ───────────────────────────────────────────── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.65s ease,transform 0.65s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+/* ─── PROGRESS TRACKER ────────────────────────────────────────── */
+#progress-wrap{max-width:860px;margin:0 auto;padding:0 28px 100px}
+.prog-header{text-align:center;margin-bottom:36px}
+.prog-bar-wrap{background:rgba(5,5,18,0.9);border-radius:999px;height:5px;overflow:hidden;margin:12px 0 4px;box-shadow:inset 2px 2px 5px rgba(0,0,0,0.7),inset -1px -1px 3px rgba(255,255,255,0.02)}
+.prog-bar{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--blue),var(--violet));transition:width 0.45s ease;box-shadow:0 0 10px rgba(139,92,246,0.5)}
+.prog-label{font-size:13px;color:var(--text3);text-align:right}
+.check-group{margin-bottom:14px}
+.check-section-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;padding:14px 18px 8px;color:var(--text3)}
+.chk-item{
+  display:flex;align-items:flex-start;gap:14px;
+  padding:13px 18px;border-radius:10px;cursor:pointer;
+  transition:background 0.15s;user-select:none;
+}
+.chk-item:hover{background:var(--surface2)}
+.chk-item.done{background:rgba(34,197,94,0.04)}
+.chk-box{
+  width:22px;height:22px;min-width:22px;border-radius:7px;
+  border:1.5px solid var(--border2);display:flex;align-items:center;
+  justify-content:center;margin-top:1px;transition:all 0.2s;
+  box-shadow:var(--neu-sm);
+}
+.chk-item.done .chk-box{background:rgba(34,197,94,0.2);border-color:rgba(34,197,94,0.5)}
+.chk-tick{display:none;font-size:12px;font-weight:800;color:#86efac}
+.chk-item.done .chk-tick{display:block}
+.chk-item.done .chk-main{text-decoration:line-through;color:var(--text3)}
+.chk-main{font-size:14px;font-weight:600;color:var(--text);margin-bottom:3px}
+.chk-sub{font-size:12px;color:var(--text3);line-height:1.55}
+/* ─── COMPLETION BANNER ───────────────────────────────────────── */
+#done-banner{display:none;text-align:center;padding:40px 28px;border-radius:var(--radius);background:linear-gradient(135deg,rgba(34,197,94,0.08),rgba(34,197,94,0.04));border:1px solid rgba(34,197,94,0.25);margin-top:16px;box-shadow:var(--neu)}
+#done-banner h3{font-size:28px;font-weight:900;color:#86efac;margin-bottom:8px}
+#done-banner p{font-size:14px;color:var(--text3)}
+/* ─── FOOTER ──────────────────────────────────────────────────── */
+footer{border-top:1px solid var(--border);padding:28px;text-align:center}
+.foot-inner{max-width:1240px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+footer small{font-size:12px;color:var(--text3)}
+/* ─── PHASE COLOR ACCENTS ─────────────────────────────────────── */
+.p1-accent{border-left:3px solid var(--blue);padding-left:14px}
+.p2-accent{border-left:3px solid var(--violet);padding-left:14px}
+.p3-accent{border-left:3px solid var(--cyan);padding-left:14px}
+.p5-accent{border-left:3px solid var(--pink);padding-left:14px}
+/* ─── FLOATING GLOW SHAPES (background decoration) ───────────── */
+.glow-shape{position:absolute;pointer-events:none;border-radius:50%;filter:blur(80px);opacity:0.35;animation:floatGlow 8s ease-in-out infinite}
+@keyframes floatGlow{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
+html[data-theme="light"] .glow-shape{opacity:0.15}
+html[data-theme="light"] .week-col{background:rgba(240,244,250,0.8)}
+html[data-theme="light"] .con-item{background:rgba(240,244,250,0.8)}
+html[data-theme="light"] .risk-item{background:rgba(240,244,250,0.8)}
+html[data-theme="light"] .flow-item{background:rgba(240,244,250,0.8)}
+html[data-theme="light"] .codeblock{background:rgba(15,23,42,0.9);border-color:rgba(255,255,255,0.08);box-shadow:inset 4px 4px 10px rgba(0,0,0,0.4),inset -2px -2px 6px rgba(255,255,255,0.05)}
+html[data-theme="light"] #nav{background:rgba(232,237,244,0.85);box-shadow:0 4px 20px rgba(163,177,198,0.4),inset 0 1px 0 rgba(255,255,255,0.9)}
+html[data-theme="light"] .toggle-btn{background:rgba(232,237,244,0.9);box-shadow:var(--neu-sm)}
+html[data-theme="light"] .toggle-btn:hover{background:rgba(220,228,238,0.95);box-shadow:4px 4px 12px rgba(163,177,198,0.55),-2px -2px 7px rgba(255,255,255,0.85)}
+html[data-theme="light"] .toggle-btn.active{box-shadow:var(--neu-inset)}
+html[data-theme="light"] .lang-grp{box-shadow:var(--neu-sm)}
+/* ─── BG ORB ANIMATION ─────────────────────────────────────────── */
+#bg-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;overflow:hidden;pointer-events:none;}
+.orb{position:absolute;border-radius:50%;will-change:transform;filter:blur(110px);}
+.orb-1{width:90vw;height:70vh;background:radial-gradient(circle at 40% 35%,rgba(59,130,246,0.52),transparent 65%);top:-25vh;left:-20vw;animation:orbA 24s ease-in-out infinite;}
+.orb-2{width:80vw;height:75vh;background:radial-gradient(circle at 45% 45%,rgba(139,92,246,0.46),transparent 65%);top:10vh;right:-22vw;animation:orbB 30s ease-in-out infinite;}
+.orb-3{width:70vw;height:55vh;background:radial-gradient(circle at 50% 50%,rgba(6,182,212,0.30),transparent 65%);bottom:-8vh;left:5vw;animation:orbC 20s ease-in-out infinite;}
+.orb-4{width:60vw;height:60vh;background:radial-gradient(circle at 50% 50%,rgba(236,72,153,0.26),transparent 65%);bottom:-12vh;right:-8vw;animation:orbD 27s ease-in-out infinite;}
+.orb-5{width:55vw;height:55vh;background:radial-gradient(circle at 50% 50%,rgba(79,32,180,0.38),transparent 65%);top:35vh;left:22vw;animation:orbE 38s ease-in-out infinite;}
+.orb-6{width:45vw;height:45vh;background:radial-gradient(circle at 50% 50%,rgba(245,158,11,0.18),transparent 65%);top:18vh;left:48vw;animation:orbF 18s ease-in-out infinite;}
+@keyframes orbA{0%,100%{transform:translate(0,0) scale(1)}25%{transform:translate(14vw,20vh) scale(1.20)}50%{transform:translate(-8vw,30vh) scale(0.86)}75%{transform:translate(20vw,-6vh) scale(1.10)}}
+@keyframes orbB{0%,100%{transform:translate(0,0) scale(1)}20%{transform:translate(-20vw,14vh) scale(1.14)}40%{transform:translate(-10vw,-18vh) scale(0.87)}60%{transform:translate(-24vw,10vh) scale(1.18)}80%{transform:translate(-14vw,20vh) scale(0.94)}}
+@keyframes orbC{0%,100%{transform:translate(0,0) scale(1)}35%{transform:translate(24vw,-24vh) scale(1.28)}70%{transform:translate(-10vw,-14vh) scale(0.80)}}
+@keyframes orbD{0%,100%{transform:translate(0,0) scale(1)}30%{transform:translate(-20vw,-20vh) scale(1.22)}65%{transform:translate(10vw,-24vh) scale(0.87)}}
+@keyframes orbE{0%,100%{transform:translate(0,0) scale(1)}18%{transform:translate(-24vw,-20vh) scale(1.32)}38%{transform:translate(20vw,14vh) scale(0.80)}58%{transform:translate(-10vw,24vh) scale(1.14)}78%{transform:translate(14vw,-14vh) scale(0.92)}}
+@keyframes orbF{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-16vw,22vh) scale(1.22)}}
+html[data-theme="light"] .orb{opacity:0.22;}
+/* ─── PHASE 4 STYLES ────────────────────────────────────────────── */
+.card.p4:hover{border-color:rgba(245,158,11,0.4);box-shadow:8px 8px 24px rgba(0,0,0,0.75),-3px -3px 10px rgba(245,158,11,0.12),0 0 32px rgba(245,158,11,0.18),inset 0 1px 0 rgba(245,158,11,0.1)}
+.sn-amber{background:rgba(245,158,11,0.15);color:#fcd34d;border:1px solid rgba(245,158,11,0.3);box-shadow:var(--neu-sm)}
+.gt-amber{background:linear-gradient(135deg,#fbbf24,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.p4-accent{border-left:3px solid var(--amber);padding-left:14px}
+/* ─── SEPARATOR ───────────────────────────────────────────────── */
+.sep{height:1px;background:linear-gradient(90deg,transparent,var(--border2),transparent);margin:32px 0}
+/* ─── ENV TABLE ───────────────────────────────────────────────── */
+.env-table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:12px}
+.env-table th{text-align:left;padding:8px 12px;background:var(--surface2);color:var(--text3);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em}
+.env-table td{padding:10px 12px;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:top}
+.env-table td:first-child{color:var(--cyan);font-weight:600}
+/* ─── LANGUAGE HIDDEN ─────────────────────────────────────────── */
+[data-lang]{display:none}
+[data-lang].lang-visible{display:block}
+span[data-lang]{display:none}
+span[data-lang].lang-visible{display:inline}
+</style>
+</head>
+<body>
+<!-- ===== BG ANIMATION CANVAS ===== -->
+<div id="bg-canvas" aria-hidden="true">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <div class="orb orb-4"></div>
+  <div class="orb orb-5"></div>
+  <div class="orb orb-6"></div>
+</div>
+<!-- ===== NAV ===== -->
+<nav id="nav">
+  <div class="nav-logo">
+    <div class="nav-logo-mark">W</div>
+    <span>WAMOCON</span>
+    <small>Standard Prozessablauf</small>
+  </div>
+  <div class="nav-right">
+    <div class="badge b-green"><div class="live-dot"></div><span>Internal v2.0</span></div>
+    <div class="lang-grp" id="langGrp">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('de')">DE</button>
+    </div>
+    <button class="toggle-btn" id="themeBtn" onclick="toggleTheme()">
+      <span id="themeIcon">&#9790;</span>
+      <span id="themeText">Light</span>
+    </button>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section id="hero">
+  <div class="glow-shape" style="width:500px;height:500px;background:radial-gradient(#3b82f6,transparent 70%);top:-150px;left:-100px;animation-delay:0s"></div>
+  <div class="glow-shape" style="width:400px;height:400px;background:radial-gradient(#8b5cf6,transparent 70%);top:-80px;right:-80px;animation-delay:3s"></div>
+  <div class="hero-inner">
+    <div class="hero-kicker">
+      <div class="badge b-violet">2026 — Weekly Sprint Protocol</div>
+    </div>
+    <h1 class="hero-h1">
+      <span class="gt-main">Standard</span><br>
+      <span class="gt-blue">Prozessablauf</span>
+    </h1>
+    <p class="hero-sub">
+      <span data-lang="en" class="lang-visible">A structured, repeatable framework for shipping production-grade applications from concept to live deployment — in a single week.</span>
+      <span data-lang="de">Ein strukturiertes, wiederholbares Framework, um produktionsreife Anwendungen von der Idee bis zum Live-Deployment — in einer einzigen Woche — zu liefern.</span>
+    </p>
+    <div style="display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:40px">
+      <div class="badge b-blue">Monday → Friday</div>
+      <div class="badge b-cyan">Next.js · Supabase · Vercel</div>
+      <div class="badge b-amber">GitHub Copilot · MCP</div>
+    </div>
+    <div class="week-bar">
+      <div class="week-col"><div class="day">Mon</div><div class="ph gt-blue">Phase 1</div><div class="desc" data-lang="en">Initiation</div><div class="desc" data-lang="de">Planung</div></div>
+      <div class="week-col"><div class="day">Mon–Thu</div><div class="ph gt-violet">Phase 2</div><div class="desc" data-lang="en">Build</div><div class="desc" data-lang="de">Entwicklung</div></div>
+      <div class="week-col"><div class="day">Fri AM</div><div class="ph gt-cyan">Phase 3</div><div class="desc" data-lang="en">Deploy</div><div class="desc" data-lang="de">Deployment</div></div>
+      <div class="week-col"><div class="day">Thu</div><div class="ph gt-amber">Phase 4</div><div class="desc" data-lang="en">Deliverables</div><div class="desc" data-lang="de">Liefergegenstände</div></div>
+      <div class="week-col"><div class="day">Mon Eve</div><div class="ph gt-pink">Phase 5</div><div class="desc" data-lang="en">Closure</div><div class="desc" data-lang="de">Abschluss</div></div>
+    </div>
+  </div>
+</section>
+<!-- =================== PHASE 1 =================== -->
+<section class="phase-section reveal" id="phase1">
+  <div class="phase-head">
+    <div class="ph-num gt-blue">01</div>
+    <div class="ph-info">
+      <div class="ph-day"><span data-lang="en" class="lang-visible">Phase 1 — Monday</span><span data-lang="de">Phase 1 — Montag</span></div>
+      <h2><span data-lang="en" class="lang-visible">Initiation &amp; Planning</span><span data-lang="de">Initiierung &amp; Planung</span></h2>
+      <p>
+        <span data-lang="en" class="lang-visible">Every great product begins with a clear idea and a solid plan. Monday is entirely dedicated to answering one question: <em>What exactly are we building this week — and how?</em></span>
+        <span data-lang="de">Jedes großartige Produkt beginnt mit einer klaren Idee und einem soliden Plan. Der Montag ist vollständig einer einzigen Frage gewidmet: <em>Was genau bauen wir diese Woche — und wie?</em></span>
+      </p>
+    </div>
+  </div>
+  <div class="grid12">
+
+    <!-- The Idea -->
+    <div class="card p1 card-pad col8 reveal">
+      <div class="badge b-blue" style="margin-bottom:12px"><span data-lang="en" class="lang-visible">The Idea</span><span data-lang="de">Die Idee</span></div>
+      <h3 class="card-title"><span data-lang="en" class="lang-visible">Choosing What to Build</span><span data-lang="de">Was wird gebaut?</span></h3>
+      <p class="card-intro">
+        <span data-lang="en" class="lang-visible">The first thing you do on Monday morning is decide which app you are building. You have two options: pick an existing idea from the <strong>innovation pipeline</strong> (a backlog of pre-approved ideas waiting to be built), or propose a brand-new idea. Think of it like choosing your next LEGO set — you can either grab a box that's already been designed (the pipeline), or invent your own creation from scratch.</span>
+        <span data-lang="de">Das Erste am Montagmorgen ist die Entscheidung, welche App gebaut wird. Es gibt zwei Optionen: eine bereits vorhandene Idee aus der <strong>Innovations-Pipeline</strong> (eine Liste vorab genehmigter Ideen) auswählen oder eine brandneue Idee vorschlagen. Es ist wie beim LEGO: Man kann ein fertiges Set nehmen oder völlig neu erfinden.</span>
+      </p>
+      <div class="analogy">
+        <div class="label">ELI5 Analogy</div>
+        <p><span data-lang="en" class="lang-visible">Imagine a shelf of recipe boxes. The <strong>pipeline</strong> is like grabbing a pre-made recipe box with all ingredients listed. A <strong>new idea</strong> is like deciding to invent a completely new dish — more exciting, but you need to figure out the recipe yourself first.</span><span data-lang="de">Stell dir ein Regal mit Rezeptkisten vor. Die <strong>Pipeline</strong> ist wie eine fertige Rezeptkiste mit allen Zutaten. Eine <strong>neue Idee</strong> ist wie das Erfinden eines neuen Gerichts — aufregend, aber du musst das Rezept zuerst selbst herausfinden.</span></p>
+      </div>
+      <div class="con-grid">
+        <div class="con-item">
+          <div class="con-title" style="color:#93c5fd"><span data-lang="en" class="lang-visible">Pipeline App</span><span data-lang="de">Pipeline-App</span></div>
+          <p><span data-lang="en" class="lang-visible">An existing backlog item with pre-defined requirements, stakeholder sign-off, and known constraints. Easier to scope, faster to start.</span><span data-lang="de">Eine bestehende Backlog-Idee mit vordefinierten Anforderungen und Stakeholder-Freigabe. Einfacher zu planen, schneller zu beginnen.</span></p>
+        </div>
+        <div class="con-item">
+          <div class="con-title" style="color:#c4b5fd"><span data-lang="en" class="lang-visible">New Idea</span><span data-lang="de">Neue Idee</span></div>
+          <p><span data-lang="en" class="lang-visible">A greenfield concept you propose fresh. Requires rapid discovery, hypothesis validation, and very tight scope control to fit inside one week.</span><span data-lang="de">Ein neues Konzept, das von Grund auf vorgeschlagen wird. Erfordert schnelle Erkundung und sehr striktes Scope-Management.</span></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Risk -->
+    <div class="card p1 card-pad col4 reveal">
+      <div class="badge b-amber" style="margin-bottom:12px"><span data-lang="en" class="lang-visible">Risk Assessment</span><span data-lang="de">Risikobewertung</span></div>
+      <h3 class="card-title"><span data-lang="en" class="lang-visible">Spot Problems Before They Happen</span><span data-lang="de">Probleme im Voraus erkennen</span></h3>
+      <p class="card-intro"><span data-lang="en" class="lang-visible">A "risk" is anything that could stop or slow down the project. Thinking about risks on Day 1 — before coding begins — saves enormous amounts of time later.</span><span data-lang="de">Ein „Risiko" ist alles, was das Projekt stoppen oder verlangsamen könnte. Risiken am ersten Tag zu identifizieren spart später enorme Zeit.</span></p>
+      <div class="risk-item">
+        <div class="risk-title" style="color:#fcd34d">Scope Creep</div>
+        <p><span data-lang="en" class="lang-visible">Adding new features mid-week. Solution: freeze the scope after Monday and move every new idea to the backlog.</span><span data-lang="de">Neue Features mitten in der Woche hinzufügen. Lösung: Scope nach Montag einfrieren; neue Ideen kommen ins Backlog.</span></p>
+      </div>
+      <div class="risk-item">
+        <div class="risk-title" style="color:#fca5a5">Integration Risk</div>
+        <p><span data-lang="en" class="lang-visible">Third-party APIs or Supabase behaving unexpectedly. Solution: validate connections on Day 1 before writing business logic.</span><span data-lang="de">Externe APIs oder Supabase verhalten sich unerwartet. Lösung: Verbindungen bereits am ersten Tag validieren.</span></p>
+      </div>
+      <div class="risk-item">
+        <div class="risk-title" style="color:#86efac">Mitigation Plan</div>
+        <p><span data-lang="en" class="lang-visible">For every risk, write a one-line backup plan. Log all decisions in the requirements document so the whole team is aligned.</span><span data-lang="de">Für jedes Risiko einen Backup-Plan notieren. Alle Entscheidungen im Anforderungsdokument festhalten.</span></p>
+      </div>
+    </div>
+
+    <!-- Requirements -->
+    <div class="card p1 card-pad col5 reveal">
+      <div class="badge b-blue" style="margin-bottom:12px"><span data-lang="en" class="lang-visible">Requirements &amp; Scope</span><span data-lang="de">Anforderungen &amp; Umfang</span></div>
+      <h3 class="card-title"><span data-lang="en" class="lang-visible">Breaking Down the Plan</span><span data-lang="de">Den Plan aufteilen</span></h3>
+      <p class="card-intro"><span data-lang="en" class="lang-visible">A "requirement" is simply a precise description of what the app must do. Modularization means splitting the big app into small, independent building blocks — like breaking a LEGO castle into individual sections you can build separately.</span><span data-lang="de">Eine „Anforderung" ist eine genaue Beschreibung, was die App tun muss. Modularisierung bedeutet, die App in kleine, unabhängige Bausteine aufzuteilen — wie ein LEGO-Schloss in einzelne Segmente.</span></p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-n sn-blue">1</div>
+          <div class="step-body">
+            <h4><span data-lang="en" class="lang-visible">List Must-Haves vs. Nice-to-Haves</span><span data-lang="de">Muss-Features vs. Kann-Features auflisten</span></h4>
+            <p><span data-lang="en" class="lang-visible">Write every feature idea down. Then ruthlessly separate what absolutely must exist for the app to work (must-have) vs. what would be cool to add later (nice-to-have). Only build must-haves this week.</span><span data-lang="de">Alle Feature-Ideen aufschreiben. Dann strikt trennen: Was muss die App haben (Muss) und was wäre cool, aber nicht notwendig (Kann). Nur Muss-Features werden diese Woche gebaut.</span></p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n sn-blue">2</div>
+          <div class="step-body">
+            <h4><span data-lang="en" class="lang-visible">Split into Modules</span><span data-lang="de">In Module aufteilen</span></h4>
+            <p><span data-lang="en" class="lang-visible">Break the requirements into three layers: the database tables (what data is stored), the API/logic (how data moves), and the UI (what the user sees). Each can be developed and tested independently.</span><span data-lang="de">Anforderungen in drei Schichten aufteilen: Datenbanktabellen (welche Daten werden gespeichert), API/Logik (wie Daten fließen) und UI (was der Nutzer sieht). Jede Schicht kann unabhängig entwickelt und getestet werden.</span></p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n sn-blue">3</div>
+          <div class="step-body">
+            <h4><span data-lang="en" class="lang-visible">Write Acceptance Criteria</span><span data-lang="de">Akzeptanzkriterien schreiben</span></h4>
+            <p><span data-lang="en" class="lang-visible">For each module, define exactly what "done" looks like. This prevents arguments later. Example: "User can log in with email and password, and see their dashboard within 2 seconds."</span><span data-lang="de">Für jedes Modul festlegen, was „fertig" bedeutet. Beispiel: „Der Nutzer kann sich mit E-Mail und Passwort einloggen und sein Dashboard innerhalb von 2 Sekunden sehen."</span></p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n sn-blue">4</div>
+          <div class="step-body">
+            <h4><span data-lang="en" class="lang-visible">Submit for Review — No Code Yet</span><span data-lang="de">Zur Überprüfung einreichen — noch kein Code</span></h4>
+            <p><span data-lang="en" class="lang-visible">Before touching the keyboard for code, the full requirements document must be submitted to the team for review. This single rule saves days of rework.</span><span data-lang="de">Bevor Code geschrieben wird, muss das vollständige Anforderungsdokument zur Überprüfung eingereicht werden. Diese eine Regel spart Tage an Nacharbeit.</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Approval workflow -->
+    <div class="card p1 card-pad col7 reveal" style="background:var(--blue-dim)">
+      <div class="badge b-blue" style="margin-bottom:12px"><span data-lang="en" class="lang-visible">Approval Workflow</span><span data-lang="de">Genehmigungsprozess</span></div>
+      <h3 class="card-title"><span data-lang="en" class="lang-visible">Review → Green Light → Setup</span><span data-lang="de">Überprüfung → Grünes Licht → Setup</span></h3>
+      <p class="card-intro"><span data-lang="en" class="lang-visible">The Monday workflow follows a strict sequence. Skipping any step is the most common reason projects lose an entire day mid-sprint.</span><span data-lang="de">Der Montagsablauf folgt einer strengen Reihenfolge. Das Überspringen eines Schritts ist der häufigste Grund, warum Projekte mitten im Sprint einen ganzen Tag verlieren.</span></p>
+      <div class="flow-grid">
+        <div class="flow-item">
+          <div class="flow-n gt-blue">01</div>
+          <div class="flow-label"><span data-lang="en" class="lang-visible">Submit</span><span data-lang="de">Einreichen</span></div>
+          <p><span data-lang="en" class="lang-visible">Send the completed requirements document to your manager/team lead for review. Include scope, modules, risks, and acceptance criteria.</span><span data-lang="de">Das fertige Anforderungsdokument an den Teamleiter senden — mit Scope, Modulen, Risiken und Kriterien.</span></p>
+        </div>
+        <div class="flow-item">
+          <div class="flow-n gt-violet">02</div>
+          <div class="flow-label"><span data-lang="en" class="lang-visible">Supabase Setup</span><span data-lang="de">Supabase erstellen</span></div>
+          <p><span data-lang="en" class="lang-visible">Once approved, request the creation of a new Supabase project. This is the cloud database that will power the app.</span><span data-lang="de">Nach Genehmigung ein neues Supabase-Projekt anfordern. Das ist die Cloud-Datenbank, die die App antreibt.</span></p>
+        </div>
+        <div class="flow-item">
+          <div class="flow-n gt-cyan">03</div>
+          <div class="flow-label"><span data-lang="en" class="lang-visible">OneDrive</span><span data-lang="de">OneDrive</span></div>
+          <p><span data-lang="en" class="lang-visible">Move all planning documents to the shared <a href="https://wamocon-my.sharepoint.com/:f:/p/waleri_moretz/IgCR3LBmpqCMSaYnwc-H_ErwAZHItPeGItlCq5MGWBAZ37M?e=VM7vVi" target="_blank">OneDrive folder</a> so the entire team has visibility. No planning docs should live only on one person's laptop.</span><span data-lang="de">Alle Planungsdokumente in den gemeinsamen <a href="https://wamocon-my.sharepoint.com/:f:/p/waleri_moretz/IgCR3LBmpqCMSaYnwc-H_ErwAZHItPeGItlCq5MGWBAZ37M?e=VM7vVi" target="_blank">OneDrive-Ordner</a> verschieben. Kein Dokument darf nur auf einem Laptop liegen.</span></p>
+        </div>
+      </div>
+      <div class="note" style="margin-top:16px">
+        <div class="nl">Rule</div>
+        <p><span data-lang="en" class="lang-visible">Zero lines of code are written until the requirements document is approved. This is non-negotiable.</span><span data-lang="de">Es wird keine einzige Zeile Code geschrieben, bis das Anforderungsdokument genehmigt ist. Das ist nicht verhandelbar.</span></p>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- =================== PHASE 2 =================== -->
+<section class="phase-section reveal" id="phase2">
+  <div class="phase-head">
+    <div class="ph-num gt-violet">02</div>
+    <div class="ph-info">
+      <div class="ph-day"><span data-lang="en" class="lang-visible">Phase 2 — Monday to Friday</span><span data-lang="de">Phase 2 — Montag bis Freitag</span></div>
+      <h2><span data-lang="en" class="lang-visible">Deep Dive Implementation</span><span data-lang="de">Tiefe Implementierung</span></h2>
+      <p><span data-lang="en" class="lang-visible">This is the heart of the week. You move from planning to building. Every tool, process, and convention described here exists to help you build faster, with fewer bugs, with AI as your co-pilot.</span><span data-lang="de">Das ist das Herzstück der Woche. Du wechselst vom Planen zum Bauen. Jedes hier beschriebene Tool und jeder Prozess hilft dir, schneller und mit weniger Fehlern zu bauen — mit KI als Co-Pilot.</span></p>
+    </div>
+  </div>
+  <div class="grid12">
+
+    <!-- FOUNDATION: template_repo -->
+    <div class="card p2 card-pad col6 reveal" id="template-repo">
+      <div class="badge b-violet" style="margin-bottom:12px"><span data-lang="en" class="lang-visible">The Foundation — GitHub</span><span data-lang="de">Das Fundament — GitHub</span></div>
+      <h3 class="card-title gt-violet">template_repo</h3>
+      <p class="card-intro">
+        <span data-lang="en" class="lang-visible">Think of <code>template_repo</code> as a professionally-prepared empty house. Instead of building from scratch — pouring the concrete, wiring the electricity — you get a house that already has electricity, plumbing, and internet. You just move in and start decorating (building features).
+        <br><br>
+        It is the official WAMOCON starting point for every new application. It ships with Next.js 16, TypeScript, Tailwind CSS, Supabase, CI/CD pipelines, and a full GitHub Copilot configuration — all pre-wired and ready.</span>
+        <span data-lang="de">Stell dir <code>template_repo</code> wie ein professionell vorbereitetes, leeres Haus vor. Statt von Grund auf zu bauen — Beton gießen, Strom verlegen — bekommst du ein Haus, das bereits Strom, Wasser und Internet hat. Du ziehst einfach ein und fängst an, es einzurichten (Features zu bauen).
+        <br><br>
+        Es ist der offizielle WAMOCON-Startpunkt für jede neue Anwendung. Enthalten: Next.js 16, TypeScript, Tailwind CSS, Supabase, CI/CD-Pipelines und eine vollständige GitHub-Copilot-Konfiguration.</span>
+      </p>
+      <div style="margin-bottom:18px">
+        <div class="info-row"><span class="irl">Framework</span><span class="tag">Next.js 16 App Router</span></div>
+        <div class="info-row"><span class="irl">Language</span><span class="tag">TypeScript (strict mode)</span></div>
+        <div class="info-row"><span class="irl">Styling</span><span class="tag">Tailwind CSS v4</span></div>
+        <div class="info-row"><span class="irl">Database</span><span class="tag">Supabase (PostgreSQL + RLS)</span></div>
+        <div class="info-row"><span class="irl">Deployment</span><span class="tag">Vercel via GitHub Actions</span></div>
+        <div class="info-row"><span class="irl">CI/CD Source</span><span class="tag">Wamocon/github_workflow</span></div>
+        <div class="info-row"><span class="irl">AI Config</span><span class="tag">AGENTS.md + Instructions</span></div>
+      </div>
+      <div style="font-size:12px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:8px">Quick Start</div>
+      <div class="codeblock">
+<span class="c-comment"># Step 1: Clone the repository to your computer</span>
+<span class="c-cmd">git clone</span> https://github.com/Wamocon/<span class="c-path">&lt;your-repo&gt;</span>.git
+<span class="c-cmd">cd</span> <span class="c-path">&lt;your-repo&gt;</span>
+
+<span class="c-comment"># Step 2: Install all dependencies (like downloading all ingredients)</span>
+<span class="c-cmd">npm install</span>
+
+<span class="c-comment"># Step 3: Copy the environment variable template</span>
+<span class="c-cmd">cp</span> .env.example .env.local
+
+<span class="c-comment"># Step 4: Start the development server</span>
+<span class="c-cmd">npm run dev</span>  <span class="c-comment"># Open http://localhost:3000</span></div>
+      <div class="analogy" style="margin-top:16px">
+        <div class="label">ELI5 Analogy</div>
+        <p><span data-lang="en" class="lang-visible">Cloning a repo is like photocopying a recipe book. The original stays on the shelf (GitHub), and you now have your own personal copy to write notes in (your local machine). Running <code>npm install</code> is like going to the grocery store after getting the recipe — buying all the ingredients you need.</span><span data-lang="de">Einen Repo klonen ist wie das Fotokopieren eines Rezeptbuchs. Das Original bleibt im Regal (GitHub), und du hast jetzt deine eigene Kopie, in die du Notizen schreiben kannst. <code>npm install</code> ausführen ist wie Einkaufen gehen, nachdem man das Rezept hat.</span></p>
+      </div>
+    </div>
+
+    <!-- AI: COPILOT -->
+    <div class="card p2 card-pad col6 reveal">
+      <div class="badge b-violet" style="margin-bottom:12px"><span data-lang="en" class="lang-visible">The AI Assistant — GitHub Copilot</span><span data-lang="de">Der KI-Assistent — GitHub Copilot</span></div>
+      <h3 class="card-title"><span data-lang="en" class="lang-visible">Your Intelligent Co-Pilot</span><span data-lang="de">Dein intelligenter Co-Pilot</span></h3>
+      <p class="card-intro"><span data-lang="en" class="lang-visible">GitHub Copilot is an AI that lives inside VS Code and writes code alongside you. But unlike a simple autocomplete, Copilot in this project is fine-tuned to know exactly our tech stack, our rules, and our coding conventions — through a set of configuration files that ship inside <code>template_repo</code>.</span><span data-lang="de">GitHub Copilot ist eine KI, die in VS Code lebt und Code neben dir schreibt. Aber anders als ein einfaches Autocomplete kennt Copilot in diesem Projekt unseren Tech-Stack, unsere Regeln und Konventionen — durch Konfigurationsdateien in <code>template_repo</code>.</span></p>
+      <div class="analogy">
+        <div class="label">ELI5 Analogy</div>
+        <p><span data-lang="en" class="lang-visible">Imagine having a genius friend who has read every programming book ever written, knows your project inside-out, and sits next to you while you code. When you start typing, they finish the sentence — correctly, every time. That is GitHub Copilot. The configuration files are like giving that friend a briefing document about your specific project before they start.</span><span data-lang="de">Stell dir vor, du hast einen genialen Freund, der jedes Programmierbuch gelesen hat, dein Projekt in- und auswendig kennt und neben dir sitzt. Wenn du anfängst zu tippen, vervollständigt er den Satz — jedes Mal korrekt. Das ist GitHub Copilot.</span></p>
+      </div>
+      <div class="steps" style="margin-top:16px">
+        <div class="step">
+          <div class="step-n sn-violet">1</div>
+          <div class="step-body">
+            <h4>copilot-instructions.md</h4>
+            <p><span data-lang="en" class="lang-visible">Located at <code>.github/copilot-instructions.md</code>. This file is automatically loaded on <strong>every single Copilot interaction</strong>. It tells the AI the tech stack, critical rules (how to use Supabase, how to handle async components), and team conventions. Think of it as the AI's standing briefing document.</span><span data-lang="de">In <code>.github/copilot-instructions.md</code>. Diese Datei wird bei <strong>jeder</strong> Copilot-Interaktion automatisch geladen. Sie teilt der KI den Tech-Stack, kritische Regeln und Team-Konventionen mit.</span></p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n sn-violet">2</div>
+          <div class="step-body">
+            <h4>.instructions.md Files</h4>
+            <p><span data-lang="en" class="lang-visible">Pattern-scoped guidelines inside <code>.github/instructions/</code>. For example, the Next.js instruction file only activates when Copilot works on <code>.tsx</code> or <code>.ts</code> files. This keeps instructions focused and relevant — the AI only receives the guidance that applies to the file it is currently editing.</span><span data-lang="de">Muster-gebundene Richtlinien in <code>.github/instructions/</code>. Die Next.js-Datei aktiviert sich z. B. nur bei <code>.tsx</code>/<code>.ts</code>-Dateien. So bleiben die Anweisungen fokussiert.</span></p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n sn-violet">3</div>
+          <div class="step-body">
+            <h4>@planner Agent</h4>
+            <p><span data-lang="en" class="lang-visible">A specialized AI persona defined in <code>.github/agents/</code>. Invoked by typing <code>@planner</code> in the VS Code Copilot chat. When you give it a task (like "Add an authentication page"), it explores the codebase, identifies all affected files, and creates a numbered plan — but it never writes code. Use it to <em>plan before you build</em>.</span><span data-lang="de">Eine spezialisierte KI-Persona in <code>.github/agents/</code>. Aufgerufen mit <code>@planner</code> im Copilot-Chat. Es erkundet die Codebase, identifiziert betroffene Dateien und erstellt einen nummerierten Plan — schreibt aber nie Code. Zum <em>Planen vor dem Bauen</em> verwenden.</span></p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n sn-violet">4</div>
+          <div class="step-body">
+            <h4>AGENTS.md — Read This First</h4>
+            <p><span data-lang="en" class="lang-visible">The most important onboarding file in the entire project. It explains every agent, every instruction file, and when to use each one. Before writing a single line of code on a new project, read <code>AGENTS.md</code> from cover to cover.</span><span data-lang="de">Die wichtigste Onboarding-Datei im gesamten Projekt. Sie erklärt jeden Agenten, jede Instruction-Datei und wann welche zu verwenden ist. Vor dem Schreiben von Code unbedingt lesen.</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DATABASE: SUPABASE & MCP -->
+    <div class="card p2 card-pad col5 reveal">
+      <div class="badge b-cyan" style="margin-bottom:12px"><span data-lang="en" class="lang-visible">The Database — Supabase &amp; MCP</span><span data-lang="de">Die Datenbank — Supabase &amp; MCP</span></div>
+      <h3 class="card-title"><span data-lang="en" class="lang-visible">Where Your App Stores Its Memory</span><span data-lang="de">Wo die App Daten speichert</span></h3>
+      <p class="card-intro"><span data-lang="en" class="lang-visible">Every app needs to remember things — user accounts, product listings, messages. Supabase is the cloud database that stores all of this. It is like a giant, secure filing cabinet in the cloud that your app reads from and writes to 24/7.</span><span data-lang="de">Jede App muss Dinge speichern — Nutzerkonten, Produkte, Nachrichten. Supabase ist die Cloud-Datenbank, in der all das gespeichert wird. Es ist wie ein riesiger, sicherer Aktenschrank in der Cloud.</span></p>
+      <div class="analogy">
+        <div class="label">ELI5 Analogy — What is MCP?</div>
+        <p><span data-lang="en" class="lang-visible">MCP (Model Context Protocol) is like giving Copilot a direct phone line to Supabase. Instead of you manually clicking buttons in Supabase to create tables, you can simply tell Copilot: "Create a users table with name, email, and created_at columns" — and Copilot calls Supabase directly through MCP and does it for you.</span><span data-lang="de">MCP (Model Context Protocol) ist wie ein direkter Telefonanschluss zwischen Copilot und Supabase. Statt manuell Tabellen anzulegen, sagt man Copilot: „Erstelle eine Nutzertabelle mit name, email und created_at" — und Copilot ruft Supabase direkt über MCP an.</span></p>
+      </div>
+      <div class="steps" style="margin-top:14px">
+        <div class="step">
+          <div class="step-n sn-cyan">1</div>
+          <div class="step-body">
+            <h4><span data-lang="en" class="lang-visible">Create Supabase Project</span><span data-lang="de">Supabase-Projekt erstellen</span></h4>
+            <p><span data-lang="en" class="lang-visible">Go to <a href="https://supabase.com" target="_blank">supabase.com</a>, create a new project. Navigate to <code>Settings → API</code>. You need three pieces of information: the <strong>Project URL</strong>, the <strong>Anon Key</strong>, and the <strong>Service Role Key</strong>.</span><span data-lang="de">Auf <a href="https://supabase.com" target="_blank">supabase.com</a> ein neues Projekt erstellen. Zu <code>Settings → API</code> navigieren. Du benötigst drei Angaben: die <strong>Project URL</strong>, den <strong>Anon Key</strong> und den <strong>Service Role Key</strong>.</span></p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n sn-cyan">2</div>
+          <div class="step-body">
+            <h4><span data-lang="en" class="lang-visible">Populate .env.local</span><span data-lang="de">.env.local befüllen</span></h4>
+            <p><span data-lang="en" class="lang-visible">Paste the three values into your <code>.env.local</code> file. This file is like a secret notebook that your app reads to know where the database is and how to log in. Never commit this file to GitHub — it contains secrets.</span><span data-lang="de">Die drei Werte in <code>.env.local</code> eintragen. Diese Datei ist wie ein geheimes Notizbuch, das die App liest. Niemals auf GitHub hochladen — sie enthält Geheimnisse.</span></p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n sn-cyan">3</div>
+          <div class="step-body">
+            <h4><span data-lang="en" class="lang-visible">Connect Supabase MCP to VS Code</span><span data-lang="de">Supabase MCP mit VS Code verbinden</span></h4>
+            <p><span data-lang="en" class="lang-visible">Install the Supabase MCP extension and configure it with your project credentials. Once connected, Copilot can directly create tables, run migrations, and manage permissions — all via natural language commands in the chat.</span><span data-lang="de">Die Supabase-MCP-Erweiterung installieren und mit den Projektdaten konfigurieren. Danach kann Copilot direkt Tabellen erstellen, Migrationen ausführen und Berechtigungen verwalten.</span></p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n sn-cyan">4</div>
+          <div class="step-body">
+            <h4><span data-lang="en" class="lang-visible">Grant Schema Permissions</span><span data-lang="de">Schema-Berechtigungen vergeben</span></h4>
+            <p><span data-lang="en" class="lang-visible">If using custom schemas (e.g. <code>app</code>, <code>internal</code>), you must grant <code>USAGE</code> and <code>ALL TABLES</code> permissions and expose the schema via <code>Settings → API → Exposed Schemas</code>. Without this, Supabase returns empty results.</span><span data-lang="de">Bei eigenen Schemas (z. B. <code>app</code>, <code>internal</code>) müssen <code>USAGE</code> und <code>ALL TABLES</code> Berechtigungen vergeben und das Schema über <code>Settings → API → Exposed Schemas</code> freigegeben werden.</span></p>
+          </div>
+        </div>
+      </div>
+      <div class="codeblock" style="margin-top:16px">
+<span class="c-comment"># .env.local — fill in your real values</span>
+<span class="c-flag">NEXT_PUBLIC_SUPABASE_URL</span>=https://<span class="c-path">&lt;ref&gt;</span>.supabase.co
+<span class="c-flag">NEXT_PUBLIC_SUPABASE_ANON_KEY</span>=<span class="c-val">&lt;anon-key&gt;</span>
+<span class="c-flag">SUPABASE_SERVICE_ROLE_KEY</span>=<span class="c-val">&lt;service-role-key&gt;</span></div>
+      <div class="warn" style="margin-top:14px">
+        <div class="wl">Critical Rule</div>
+        <p><span data-lang="en" class="lang-visible">Never store test data as local JSON files or SQL dumps in the project folder. Insert all data directly into Supabase via the Dashboard, MCP, or a migration script. One source of truth from day one.</span><span data-lang="de">Testdaten niemals als lokale JSON-Dateien oder SQL-Dumps im Projektordner speichern. Alle Daten direkt in Supabase einfügen. Eine einzige Datenquelle von Anfang an.</span></p>
+      </div>
+    </div>
+
+    <!-- BRANCHING & CI/CD -->
+    <div class="card p2 card-pad col7 reveal">
+      <div class="badge b-violet" style="margin-bottom:12px"><span data-lang="en" class="lang-visible">The Safe Path — Branching &amp; CI/CD</span><span data-lang="de">Der sichere Weg — Branching &amp; CI/CD</span></div>
+      <h3 class="card-title"><span data-lang="en" class="lang-visible">Never Break the Live App</span><span data-lang="de">Die Live-App niemals beschädigen</span></h3>
+      <p class="card-intro"><span data-lang="en" class="lang-visible">The <code>main</code> branch is the source of truth for production. It is always stable and always deployable. To add new features, you work on a separate copy called a "feature branch." Once your feature is finished and tested, you merge it in.</span><span data-lang="de">Der <code>main</code>-Branch ist die Quelle der Wahrheit für die Produktion. Er ist immer stabil. Neue Features werden in einem separaten „Feature-Branch" entwickelt und erst nach Tests gemergt.</span></p>
+      <div class="analogy">
+        <div class="label">ELI5 Analogy</div>
+        <p><span data-lang="en" class="lang-visible">Imagine <code>main</code> is the published version of a book in the bookstore. A feature branch is your personal draft copy where you write new chapters and fix mistakes. Only when the new chapter is perfect do you send it to the publisher to update the bookstore version.</span><span data-lang="de"><code>main</code> ist die veröffentlichte Version eines Buches. Ein Feature-Branch ist dein persönliches Exemplar, in dem du neue Kapitel schreibst. Erst wenn das neue Kapitel perfekt ist, schickst du es zum Verlag.</span></p>
+      </div>
+      <div class="steps" style="margin-top:16px">
+        <div class="step">
+          <div class="step-n sn-violet">1</div>
+          <div class="step-body">
+            <h4><span data-lang="en" class="lang-visible">Create a Feature Branch</span><span data-lang="de">Feature-Branch erstellen</span></h4>
+            <p><span data-lang="en" class="lang-visible">Always name it <code>feature/your-feature-name</code>. This naming convention makes it immediately clear what the branch contains. Run: <code>git checkout -b feature/my-feature</code></span><span data-lang="de">Immer nach dem Muster <code>feature/feature-name</code> benennen. Ausführen: <code>git checkout -b feature/mein-feature</code></span></p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n sn-violet">2</div>
+          <div class="step-body">
+            <h4><span data-lang="en" class="lang-visible">Run Local Quality Checks Before Every Push</span><span data-lang="de">Lokale Qualitätsprüfungen vor jedem Push</span></h4>
+            <p><span data-lang="en" class="lang-visible"><code>npm run typecheck</code> catches any TypeScript type errors (like trying to use a number where a word is expected). <code>npm run lint</code> catches code style problems. Both must pass before you push. This saves GitHub Actions minutes and prevents PR failures.</span><span data-lang="de"><code>npm run typecheck</code> findet TypeScript-Typfehler. <code>npm run lint</code> findet Code-Stilprobleme. Beide müssen bestehen, bevor gepusht wird. Das spart GitHub-Actions-Minuten.</span></p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n sn-violet">3</div>
+          <div class="step-body">
+            <h4><span data-lang="en" class="lang-visible">Push All Changes, Then Open the PR</span><span data-lang="de">Alle Änderungen pushen, dann PR öffnen</span></h4>
+            <p><span data-lang="en" class="lang-visible">Push everything you need before opening a Pull Request. Every new push to an open PR triggers the full CI pipeline — which consumes GitHub Actions minutes. Open the PR once, when you are done, not incrementally.</span><span data-lang="de">Alles pushen, bevor ein Pull Request geöffnet wird. Jeder neue Push auf einen offenen PR löst die vollständige CI-Pipeline aus. Den PR nur einmal öffnen, wenn alles fertig ist.</span></p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n sn-violet">4</div>
+          <div class="step-body">
+            <h4><span data-lang="en" class="lang-visible">The CI Pipeline Does the Rest</span><span data-lang="de">Die CI-Pipeline erledigt den Rest</span></h4>
+            <p><span data-lang="en" class="lang-visible">When a PR is opened, the centralized <code>Wamocon/github_workflow</code> automatically fixes formatting issues, runs typecheck and lint again, and deploys a Vercel <strong>preview URL</strong> so you can review the changes live before merging to <code>main</code>.</span><span data-lang="de">Wenn ein PR geöffnet wird, behebt der zentrale <code>Wamocon/github_workflow</code> automatisch Formatierungsprobleme, führt Typecheck und Lint aus und deployt eine Vercel-<strong>Vorschau-URL</strong> zum Testen.</span></p>
+          </div>
+        </div>
+      </div>
+      <div class="codeblock" style="margin-top:16px">
+<span class="c-comment"># The complete feature branch workflow</span>
+<span class="c-cmd">git checkout -b</span> <span class="c-path">feature/my-feature</span>
+
+<span class="c-comment"># Build your feature… then test locally</span>
+<span class="c-cmd">npm run typecheck</span>  <span class="c-comment"># must pass</span>
+<span class="c-cmd">npm run lint</span>       <span class="c-comment"># must pass</span>
+
+<span class="c-comment"># Commit and push ALL changes at once</span>
+<span class="c-cmd">git add</span> .
+<span class="c-cmd">git commit -m</span> <span class="c-val">"feat: description of change"</span>
+<span class="c-cmd">git push origin</span> <span class="c-path">feature/my-feature</span>
+<span class="c-comment"># NOW open the Pull Request on GitHub</span></div>
+      <div class="warn" style="margin-top:14px">
+        <div class="wl">Golden Rule</div>
+        <p><span data-lang="en" class="lang-visible">Never push directly to <code>main</code>. Never have more than one PR open at a time. Test locally first — then push — then open the PR.</span><span data-lang="de">Niemals direkt auf <code>main</code> pushen. Niemals mehr als einen offenen PR gleichzeitig. Erst lokal testen — dann pushen — dann PR öffnen.</span></p>
+      </div>
+    </div>
+
+    <!-- VERCEL -->
+    <div class="card p2 card-pad col6 reveal">
+      <div class="badge b-cyan" style="margin-bottom:12px"><span data-lang="en" class="lang-visible">The Live Server — Vercel</span><span data-lang="de">Der Live-Server — Vercel</span></div>
+      <h3 class="card-title"><span data-lang="en" class="lang-visible">Opening the Store to the World</span><span data-lang="de">Das Geschäft für die Welt öffnen</span></h3>
+      <p class="card-intro"><span data-lang="en" class="lang-visible">Vercel is the platform that hosts the application. When code is merged to <code>main</code>, Vercel automatically picks it up and publishes the new version within minutes. It is like having a robot employee whose entire job is to update the website the moment you approve a change.</span><span data-lang="de">Vercel ist die Plattform, die die Anwendung hostet. Wenn Code in <code>main</code> gemergt wird, veröffentlicht Vercel automatisch die neue Version. Es ist wie ein Roboter-Mitarbeiter, dessen einzige Aufgabe es ist, die Website sofort nach Genehmigung einer Änderung zu aktualisieren.</span></p>
+      <div class="analogy">
+        <div class="label">ELI5 Analogy</div>
+        <p><span data-lang="en" class="lang-visible">Deploying to Vercel is like printing and putting your book in the bookstore for the first time. Once it is there, every customer can read it. Every time you release a new edition (merge to main), Vercel automatically swaps the old copies with the new ones — no manual work needed.</span><span data-lang="de">Auf Vercel deployen ist wie das Drucken und Einlegen eines Buches in den Buchladen. Jeder kann es lesen. Jedes neue Release tauscht Vercel automatisch gegen die neue Version aus.</span></p>
+      </div>
+      <div class="steps" style="margin-top:16px">
+        <div class="step">
+          <div class="step-n sn-cyan">1</div>
+          <div class="step-body">
+            <h4><span data-lang="en" class="lang-visible">Temporarily Make Repo Public</span><span data-lang="de">Repo vorübergehend öffentlich machen</span></h4>
+            <p><span data-lang="en" class="lang-visible">Vercel needs to read the code to import the project. Go to <code>Repository → Settings → General → Change visibility → Public</code>. You will revert this to Internal immediately after.</span><span data-lang="de">Vercel muss den Code lesen, um das Projekt zu importieren. Zu <code>Repository → Settings → General → Change visibility → Public</code> gehen. Danach sofort wieder auf Internal zurücksetzen.</span></p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n sn-cyan">2</div>
+          <div class="step-body">
+            <h4><span data-lang="en" class="lang-visible">Import &amp; Deploy on Vercel</span><span data-lang="de">Auf Vercel importieren &amp; deployen</span></h4>
+            <p><span data-lang="en" class="lang-visible">Go to <a href="https://vercel.com" target="_blank">vercel.com</a> → Add New Project → Import your repository → Deploy. Vercel will build the app and give it a public URL.</span><span data-lang="de">Auf <a href="https://vercel.com" target="_blank">vercel.com</a> gehen → Neues Projekt hinzufügen → Repository importieren → Deployen.</span></p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n sn-cyan">3</div>
+          <div class="step-body">
+            <h4><span data-lang="en" class="lang-visible">Copy Project ID → GitHub Secret</span><span data-lang="de">Projekt-ID → GitHub Secret</span></h4>
+            <p><span data-lang="en" class="lang-visible">In Vercel, go to <code>Settings → General → Project ID</code>. Copy it. In GitHub, go to <code>Repository → Settings → Secrets → Actions → New secret</code>. Name it <code>VERCEL_PROJECT_ID</code>. This connects GitHub Actions to your specific Vercel project.</span><span data-lang="de">In Vercel zu <code>Settings → General → Project ID</code> gehen und die ID kopieren. In GitHub als Secret <code>VERCEL_PROJECT_ID</code> hinzufügen. Das verbindet GitHub Actions mit dem Vercel-Projekt.</span></p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n sn-cyan">4</div>
+          <div class="step-body">
+            <h4><span data-lang="en" class="lang-visible">Import All Environment Variables</span><span data-lang="de">Alle Umgebungsvariablen importieren</span></h4>
+            <p><span data-lang="en" class="lang-visible">Go to <code>Vercel → Settings → Environment Variables</code> and add every variable from your <code>.env.local</code> file. If you skip this, the production build will fail because the app cannot find its database credentials.</span><span data-lang="de">Zu <code>Vercel → Settings → Environment Variables</code> gehen und alle Variablen aus <code>.env.local</code> hinzufügen. Ohne diesen Schritt schlägt der Produktions-Build fehl.</span></p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n sn-cyan">5</div>
+          <div class="step-body">
+            <h4><span data-lang="en" class="lang-visible">Revert Repo to Internal</span><span data-lang="de">Repo auf Internal zurücksetzen</span></h4>
+            <p><span data-lang="en" class="lang-visible">Go back to <code>Repository → Settings → General → Change visibility → Internal</code>. The existing Vercel connection continues to work via GitHub Actions — the repo does not need to stay public.</span><span data-lang="de">Zurück zu <code>Repository → Settings → General → Change visibility → Internal</code>. Die Vercel-Verbindung funktioniert weiterhin über GitHub Actions.</span></p>
+          </div>
+        </div>
+      </div>
+      <div class="note" style="margin-top:14px">
+        <div class="nl">Pre-configured Secrets</div>
+        <p><span data-lang="en" class="lang-visible"><code>VERCEL_TOKEN</code> and <code>VERCEL_ORG_ID</code> are already configured at the GitHub organization level. You only need to add <code>VERCEL_PROJECT_ID</code> to the individual repository.</span><span data-lang="de"><code>VERCEL_TOKEN</code> und <code>VERCEL_ORG_ID</code> sind bereits auf GitHub-Organisationsebene konfiguriert. Nur <code>VERCEL_PROJECT_ID</code> muss zum Repository hinzugefügt werden.</span></p>
+      </div>
+    </div>
+
+    <!-- BUILD LOOP -->
+    <div class="card p2 card-pad col6 reveal" style="background:var(--violet-dim)">
+      <div class="badge b-violet" style="margin-bottom:12px"><span data-lang="en" class="lang-visible">The Daily Build Loop</span><span data-lang="de">Die tägliche Build-Schleife</span></div>
+      <h3 class="card-title"><span data-lang="en" class="lang-visible">Build → Test → Document → Repeat</span><span data-lang="de">Bauen → Testen → Dokumentieren → Wiederholen</span></h3>
+      <p class="card-intro"><span data-lang="en" class="lang-visible">From Tuesday to Thursday, the team runs on a tight daily loop. Each feature is built, functionally tested in the browser, and only then pushed. High-quality Copilot prompts that produce excellent results are saved as "Golden Prompts" — a growing knowledge base for the team.</span><span data-lang="de">Von Dienstag bis Donnerstag läuft das Team in einer engen täglichen Schleife. Jedes Feature wird gebaut, im Browser getestet und erst dann gepusht. Hochwertige Copilot-Prompts werden als „Golden Prompts" gespeichert — eine wachsende Wissensdatenbank.</span></p>
+      <div class="con-grid">
+        <div class="con-item">
+          <div class="con-title" style="color:#c4b5fd"><span data-lang="en" class="lang-visible">Build with Copilot</span><span data-lang="de">Mit Copilot bauen</span></div>
+          <p><span data-lang="en" class="lang-visible">Use Copilot agent mode for each feature. Use <code>@planner</code> first to plan, then implement. The AI writes 80% of the boilerplate — you focus on business logic and decisions.</span><span data-lang="de">Copilot-Agentenmodus für jedes Feature verwenden. Erst <code>@planner</code> zum Planen, dann implementieren. Die KI schreibt 80% des Boilerplates — du fokussierst dich auf Logik.</span></p>
+        </div>
+        <div class="con-item">
+          <div class="con-title" style="color:#c4b5fd"><span data-lang="en" class="lang-visible">Golden Prompts</span><span data-lang="de">Goldene Prompts</span></div>
+          <p><span data-lang="en" class="lang-visible">When a Copilot prompt produces outstanding, production-ready code on the first try — document it. These "Golden Prompts" are shared with the team and reused in future sprints, compounding sprint efficiency over time.</span><span data-lang="de">Wenn ein Copilot-Prompt beim ersten Versuch hervorragenden Code produziert — dokumentieren. Diese "Goldenen Prompts" werden geteilt und in zukünftigen Sprints wiederverwendet.</span></p>
+        </div>
+        <div class="con-item">
+          <div class="con-title" style="color:#c4b5fd"><span data-lang="en" class="lang-visible">Functional Testing</span><span data-lang="de">Funktionstests</span></div>
+          <p><span data-lang="en" class="lang-visible">After each feature, open the browser and test every user flow end-to-end. Does clicking the button do what it should? Does the data save to Supabase? Test before committing — not after.</span><span data-lang="de">Nach jedem Feature den Browser öffnen und jeden Nutzerflow testen. Funktioniert alles? Werden Daten in Supabase gespeichert? Vor dem Commit testen — nicht danach.</span></p>
+        </div>
+        <div class="con-item">
+          <div class="con-title" style="color:#c4b5fd"><span data-lang="en" class="lang-visible">PR Quality Gate</span><span data-lang="de">PR-Qualitätsstufe</span></div>
+          <p><span data-lang="en" class="lang-visible">Only open a PR once <code>typecheck</code> and <code>lint</code> pass locally. Every push on an open PR burns CI minutes. One clean push — one PR — one merge.</span><span data-lang="de">PR nur öffnen, wenn <code>typecheck</code> und <code>lint</code> lokal bestehen. Ein sauberer Push — ein PR — ein Merge.</span></p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- =================== PHASE 3 =================== -->
+<section class="phase-section reveal" id="phase3">
+  <div class="phase-head">
+    <div class="ph-num gt-cyan">03</div>
+    <div class="ph-info">
+      <div class="ph-day"><span data-lang="en" class="lang-visible">Phase 3 — Monday Morning</span><span data-lang="de">Phase 3 — Montagvormittag</span></div>
+      <h2><span data-lang="en" class="lang-visible">Deployment &amp; Launch</span><span data-lang="de">Deployment &amp; Launch</span></h2>
+      <p><span data-lang="en" class="lang-visible">Monday morning is about taking everything built this week and pushing it into the hands of real users. This phase is not just technical — it also covers the public face of the product (domain, landing page, video) and the legal requirements that every live website must fulfill.</span><span data-lang="de">Der Montagvormittag dreht sich darum, alles was diese Woche gebaut wurde, in die Hände echter Nutzer zu bringen — inklusive öffentlichem Gesicht (Domain, Landing Page, Video) und rechtlichen Anforderungen.</span></p>
+    </div>
+  </div>
+  <div class="grid12">
+
+    <!-- GOING LIVE -->
+    <div class="card p3 card-pad col4 reveal">
+      <div class="badge b-cyan" style="margin-bottom:12px"><span data-lang="en" class="lang-visible">Going Live</span><span data-lang="de">Go-Live</span></div>
+      <h3 class="card-title"><span data-lang="en" class="lang-visible">The Final Merge</span><span data-lang="de">Der finale Merge</span></h3>
+      <p class="card-intro"><span data-lang="en" class="lang-visible">Production launch is the direct result of merging the final PR into <code>main</code>. The GitHub Actions pipeline automatically triggers a Vercel production deployment. No manual steps. No clicking "deploy" buttons. Just merge — and within minutes, the new version is live worldwide.</span><span data-lang="de">Der Production-Launch ist das direkte Ergebnis des Zusammenführens des letzten PRs in <code>main</code>. Die GitHub-Actions-Pipeline löst automatisch ein Vercel-Produktions-Deployment aus. Einfach mergen — und innerhalb von Minuten ist die neue Version live.</span></p>
+      <div class="steps" style="margin-top:14px">
+        <div class="step">
+          <div class="step-n sn-cyan">1</div>
+          <div class="step-body"><h4><span data-lang="en" class="lang-visible">Merge Final PR to main</span><span data-lang="de">Letzten PR in main mergen</span></h4><p><span data-lang="en" class="lang-visible">All feature branches completed and merged. The <code>main</code> branch contains the full, tested product.</span><span data-lang="de">Alle Feature-Branches abgeschlossen und gemergt. <code>main</code> enthält das vollständige, getestete Produkt.</span></p></div>
+        </div>
+        <div class="step">
+          <div class="step-n sn-cyan">2</div>
+          <div class="step-body"><h4><span data-lang="en" class="lang-visible">Verify Vercel Env Vars</span><span data-lang="de">Vercel-Env-Vars prüfen</span></h4><p><span data-lang="en" class="lang-visible">Double-check that all <code>.env.local</code> variables exist in <code>Vercel → Settings → Environment Variables</code>. Missing variables are the #1 cause of production build failures.</span><span data-lang="de">Sicherstellen, dass alle <code>.env.local</code>-Variablen in Vercel eingetragen sind. Fehlende Variablen sind die häufigste Ursache für fehlgeschlagene Produktion-Builds.</span></p></div>
+        </div>
+        <div class="step">
+          <div class="step-n sn-cyan">3</div>
+          <div class="step-body"><h4><span data-lang="en" class="lang-visible">Smoke Test on Production URL</span><span data-lang="de">Smoke-Test auf der Produktions-URL</span></h4><p><span data-lang="en" class="lang-visible">Visit the live URL. Click every button. Log in. Submit a form. Create a record. Verify data appears in Supabase. A 5-minute smoke test catches 90% of deployment issues.</span><span data-lang="de">Die Live-URL besuchen. Jeden Button klicken. Einloggen. Ein Formular abschicken. Daten in Supabase prüfen. Ein 5-minütiger Smoke-Test findet 90% aller Deployment-Probleme.</span></p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DOMAIN & MARKETING -->
+    <div class="card p3 card-pad col4 reveal">
+      <div class="badge b-cyan" style="margin-bottom:12px"><span data-lang="en" class="lang-visible">Name &amp; Face — Domain &amp; Marketing</span><span data-lang="de">Name &amp; Gesicht — Domain &amp; Marketing</span></div>
+      <h3 class="card-title"><span data-lang="en" class="lang-visible">The Product's Public Identity</span><span data-lang="de">Die öffentliche Identität</span></h3>
+      <p class="card-intro"><span data-lang="en" class="lang-visible">A Vercel URL like <code>my-app-xyz.vercel.app</code> works, but a real product needs a real address. This section covers connecting a custom domain, building a marketing landing page, and creating an AI explainer video for onboarding users.</span><span data-lang="de">Eine Vercel-URL funktioniert, aber ein echtes Produkt braucht eine echte Adresse. Hier geht es um eine eigene Domain, eine Marketing-Landing-Page und ein KI-Erklärvideo.</span></p>
+      <div class="steps" style="margin-top:14px">
+        <div class="step">
+          <div class="step-n sn-cyan">1</div>
+          <div class="step-body"><h4><span data-lang="en" class="lang-visible">Purchase Domain via Strato</span><span data-lang="de">Domain über Strato kaufen</span></h4><p><span data-lang="en" class="lang-visible">Go to <a href="https://www.strato.de" target="_blank">strato.de</a>, search and purchase your domain (e.g. <code>myapp.de</code>). Strato is the approved domain registrar for WAMOCON projects.</span><span data-lang="de">Auf <a href="https://www.strato.de" target="_blank">strato.de</a> die Domain suchen und kaufen. Strato ist der genehmigte Domain-Registrar für WAMOCON-Projekte.</span></p></div>
+        </div>
+        <div class="step">
+          <div class="step-n sn-cyan">2</div>
+          <div class="step-body"><h4><span data-lang="en" class="lang-visible">Connect Domain in Vercel</span><span data-lang="de">Domain in Vercel verbinden</span></h4><p><span data-lang="en" class="lang-visible">In Vercel, go to <code>Settings → Domains</code>, add your domain. Vercel shows you the DNS records to set. In Strato's DNS panel, create the CNAME or A-record exactly as shown.</span><span data-lang="de">In Vercel zu <code>Settings → Domains</code> gehen und die Domain hinzufügen. Vercel zeigt die DNS-Einträge an. Im Strato-DNS-Panel genau wie angegeben eintragen.</span></p></div>
+        </div>
+        <div class="step">
+          <div class="step-n sn-cyan">3</div>
+          <div class="step-body"><h4><span data-lang="en" class="lang-visible">Build the Landing Page Layer</span><span data-lang="de">Landing-Page-Layer bauen</span></h4><p><span data-lang="en" class="lang-visible">A marketing landing page is the front door of your product — it shows what the app does, why someone should use it, and a call-to-action (sign up, request access). Build it as a route in your Next.js app.</span><span data-lang="de">Eine Marketing-Landing-Page ist die Eingangstür zum Produkt — sie zeigt was die App macht, warum man sie nutzen sollte und einen Call-to-Action. Als Route in der Next.js-App bauen.</span></p></div>
+        </div>
+        <div class="step">
+          <div class="step-n sn-cyan">4</div>
+          <div class="step-body"><h4><span data-lang="en" class="lang-visible">Create AI Explainer Video</span><span data-lang="de">KI-Erklärvideo erstellen</span></h4><p><span data-lang="en" class="lang-visible">Use an AI video tool (e.g. HeyGen, Synthesia, Loom) to create a short 1-2 minute demo showing the app's core value. Embed it on the landing page. This dramatically improves user understanding and conversion.</span><span data-lang="de">Ein KI-Videotool (z. B. HeyGen, Synthesia) verwenden, um ein 1-2-minütiges Demo-Video zu erstellen. Auf der Landing Page einbetten. Das verbessert das Nutzerverständnis erheblich.</span></p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LEGAL -->
+    <div class="card p3 card-pad col4 reveal" style="border-color:rgba(245,158,11,0.25)">
+      <div class="badge b-amber" style="margin-bottom:12px"><span data-lang="en" class="lang-visible">The Rules — Legal Documents</span><span data-lang="de">Die Regeln — Rechtliche Dokumente</span></div>
+      <h3 class="card-title"><span data-lang="en" class="lang-visible">Every Website Has Legal Obligations</span><span data-lang="de">Jede Website hat rechtliche Pflichten</span></h3>
+      <p class="card-intro"><span data-lang="en" class="lang-visible">Before any website goes live in Germany, it must have three legal pages. These are not optional. Launching without them exposes the company to fines. The <code>template_repo/legal-docs/</code> folder contains pre-written templates in both German and English — you just fill in the company-specific placeholders.</span><span data-lang="de">Bevor eine Website in Deutschland live geht, muss sie drei rechtliche Seiten haben. Das ist Pflicht. Ohne diese riskiert das Unternehmen Bußgelder. <code>template_repo/legal-docs/</code> enthält vorgefertigte Vorlagen auf Deutsch und Englisch.</span></p>
+      <div class="analogy">
+        <div class="label">ELI5 Analogy</div>
+        <p><span data-lang="en" class="lang-visible">Imagine opening a shop. Before you can open the door, you need a sign showing who owns the shop (Imprint), a receipt explaining the rules of buying (Terms &amp; Conditions), and a promise about how you treat customers' private information (Privacy Policy). Without these, the government can fine you and make you close the shop.</span><span data-lang="de">Stell dir vor, du eröffnest ein Geschäft. Bevor du öffnen kannst, brauchst du ein Schild mit dem Eigentümer (Impressum), Kaufregeln (AGB) und ein Versprechen zum Umgang mit Kundendaten (Datenschutz).</span></p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-top:14px">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--surface2);border-radius:10px;border:1px solid var(--border)">
+          <div><div style="font-size:13px;font-weight:700;color:var(--text)">Imprint (Impressum)</div><div style="font-size:12px;color:var(--text3)"><span data-lang="en" class="lang-visible">Who owns the site. Company name, address, contact. Required by German law (TMG §5).</span><span data-lang="de">Wer die Seite betreibt. Firmenname, Adresse, Kontakt. Rechtlich vorgeschrieben (TMG §5).</span></div></div>
+          <div class="badge b-amber">Required</div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--surface2);border-radius:10px;border:1px solid var(--border)">
+          <div><div style="font-size:13px;font-weight:700;color:var(--text)">Terms &amp; Conditions (AGB)</div><div style="font-size:12px;color:var(--text3)"><span data-lang="en" class="lang-visible">The rules for using the service. Defines user rights, liabilities, and permitted usage.</span><span data-lang="de">Die Regeln für die Nutzung des Dienstes. Nutzerrechte, Haftung und erlaubte Nutzung.</span></div></div>
+          <div class="badge b-amber">Required</div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--surface2);border-radius:10px;border:1px solid var(--border)">
+          <div><div style="font-size:13px;font-weight:700;color:var(--text)">Privacy Policy (Datenschutz)</div><div style="font-size:12px;color:var(--text3)"><span data-lang="en" class="lang-visible">How user data is collected, stored, and used. Required by GDPR across all EU countries.</span><span data-lang="de">Wie Nutzerdaten erfasst, gespeichert und verwendet werden. DSGVO-Pflicht für alle EU-Länder.</span></div></div>
+          <div class="badge b-amber">Required</div>
+        </div>
+      </div>
+      <div class="note" style="margin-top:14px">
+        <div class="nl">Action</div>
+        <p><span data-lang="en" class="lang-visible">Open <code>template_repo/legal-docs/</code>. Fill in all placeholders marked with <code>[PLACEHOLDER]</code>. Deploy all three pages linked in the footer before go-live.</span><span data-lang="de"><code>template_repo/legal-docs/</code> öffnen. Alle <code>[PLATZHALTER]</code> ausfüllen. Alle drei Seiten vor dem Go-Live im Footer verlinken.</span></p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- =================== PHASE 4 =================== -->
+<section class="phase-section reveal" id="phase4">
+  <div class="phase-head">
+    <div class="ph-num gt-amber">04</div>
+    <div class="ph-info">
+      <div class="ph-day"><span data-lang="en" class="lang-visible">Phase 4 — Thursday (runs in parallel with Phase 2)</span><span data-lang="de">Phase 4 — Donnerstag (parallel zu Phase 2)</span></div>
+      <h2><span data-lang="en" class="lang-visible">Go-Live Deliverables</span><span data-lang="de">Launch-Liefergegenstände</span></h2>
+      <p>
+        <span data-lang="en" class="lang-visible">Shipping code is only half the job. Every WAMOCON sprint product must also ship with a complete set of go-live artifacts: a <strong>Landing Page</strong> that sells the product, a <strong>Manual</strong> that teaches users how to use it, and a <strong>Demo Video</strong> that communicates value in under two minutes. These are not optional extras — they are required deliverables for every sprint, defined in the HOWTO.md Project Checklist.</span>
+        <span data-lang="de">Code zu schreiben ist nur die Hälfte der Arbeit. Jedes WAMOCON-Produkt muss auch mit einem vollständigen Set an Launch-Liefergegenständen erscheinen: eine <strong>Landing Page</strong>, die das Produkt verkauft, ein <strong>Handbuch</strong> für Nutzer und ein <strong>Demo-Video</strong>, das den Mehrwert in unter zwei Minuten vermittelt. Diese sind Pflicht — definiert in der HOWTO.md-Projektcheckliste.</span>
+      </p>
+    </div>
+  </div>
+  <div class="grid12">
+
+    <!-- Landing Page -->
+    <div class="card p4 card-pad col5 reveal">
+      <div class="badge b-amber" style="margin-bottom:12px"><span data-lang="en" class="lang-visible">Deliverable 1</span><span data-lang="de">Liefergegenstand 1</span></div>
+      <h3 class="card-title"><span data-lang="en" class="lang-visible">Landing Page</span><span data-lang="de">Landing Page</span></h3>
+      <p class="card-intro"><span data-lang="en" class="lang-visible">Every app needs a dedicated marketing landing page. It lives at the product's custom domain and communicates the product's value to visitors who have never seen it before. Built with <code>template_repo</code> and deployed to Vercel alongside the app.</span><span data-lang="de">Jede App braucht eine eigene Marketing-Landing-Page. Sie lebt auf der Produktdomäne und kommuniziert den Mehrwert an Besucher, die das Produkt noch nie gesehen haben. Mit dem <code>template_repo</code> gebaut und mit der App auf Vercel deployt.</span></p>
+      <div class="analogy">
+        <div class="label">ELI5 Analogy</div>
+        <p><span data-lang="en" class="lang-visible">Your app is a great restaurant — but without a sign on the street and a menu in the window, nobody walks in. The landing page is the shop front that makes strangers curious enough to come inside and try the food.</span><span data-lang="de">Deine App ist ein tolles Restaurant — aber ohne Schild an der Straße und Speisekarte im Fenster kommt niemand rein. Die Landing Page ist das Schaufenster, das Neugier auf das Essen weckt.</span></p>
+      </div>
+      <div class="steps" style="margin-top:10px">
+        <div class="step">
+          <div class="step-n sn-amber">1</div>
+          <div class="step-body"><h4><span data-lang="en" class="lang-visible">Write Hero Copy</span><span data-lang="de">Hero-Text schreiben</span></h4><p><span data-lang="en" class="lang-visible">Define the headline, sub-headline, and primary CTA. Answer "What does this product do and who is it for?" in one clear sentence.</span><span data-lang="de">Überschrift, Unterüberschrift und CTA definieren. "Was tut dieses Produkt — und für wen?" in einem klaren Satz beantworten.</span></p></div>
+        </div>
+        <div class="step">
+          <div class="step-n sn-amber">2</div>
+          <div class="step-body"><h4><span data-lang="en" class="lang-visible">Feature Blocks &amp; Social Proof</span><span data-lang="de">Feature-Blöcke &amp; Social Proof</span></h4><p><span data-lang="en" class="lang-visible">List 3–5 key features with icons. Add team member names, use-case examples, or testimonials. Credibility signals that build trust before the visitor tries the app.</span><span data-lang="de">3–5 Kernfeatures mit Icons auflisten. Teammitglieder, Anwendungsbeispiele oder Testimonials. Vertrauenssignale, bevor der Besucher die App ausprobiert.</span></p></div>
+        </div>
+        <div class="step">
+          <div class="step-n sn-amber">3</div>
+          <div class="step-body"><h4><span data-lang="en" class="lang-visible">Embed Demo Video</span><span data-lang="de">Demo-Video einbetten</span></h4><p><span data-lang="en" class="lang-visible">The AI explainer video goes directly in the hero section. A 60–90 second overview of how the app works — the single highest-conversion element on any landing page.</span><span data-lang="de">Das KI-Erklärvideo gehört direkt in den Hero-Bereich. Eine 60–90-Sekunden-Übersicht — das wirkungsvollste Element jeder Landing Page.</span></p></div>
+        </div>
+        <div class="step">
+          <div class="step-n sn-amber">4</div>
+          <div class="step-body"><h4><span data-lang="en" class="lang-visible">Connect Strato Domain &amp; Go Live</span><span data-lang="de">Strato-Domain verbinden &amp; live gehen</span></h4><p><span data-lang="en" class="lang-visible">Point the domain to Vercel. Landing page and app must be live on the custom domain before the Monday evening presentation. No exceptions.</span><span data-lang="de">Domain auf Vercel zeigen lassen. Landing Page und App müssen vor der Montagabend-Präsentation auf der Eigendomain live sein. Keine Ausnahmen.</span></p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Manual -->
+    <div class="card p4 card-pad col4 reveal">
+      <div class="badge b-amber" style="margin-bottom:12px"><span data-lang="en" class="lang-visible">Deliverable 2</span><span data-lang="de">Liefergegenstand 2</span></div>
+      <h3 class="card-title"><span data-lang="en" class="lang-visible">User Manual / Handbuch</span><span data-lang="de">Nutzerhandbuch / Handbuch</span></h3>
+      <p class="card-intro"><span data-lang="en" class="lang-visible">A manual is the first thing a support team reaches for when a user asks "how do I...?". It documents every core workflow step-by-step with screenshots if needed. Every sprint ships a manual. No exceptions.</span><span data-lang="de">Ein Handbuch ist das Erste, auf das ein Support-Team zurückgreift, wenn ein Nutzer fragt "Wie mache ich...?". Es dokumentiert jeden Kernworkflow Schritt für Schritt mit Screenshots, falls erforderlich. Jeder Sprint liefert ein Handbuch. Keine Ausnahmen.</span></p>
+      <div class="con-grid" style="margin-top:10px">
+        <div class="con-item">
+          <div class="con-title" style="color:#fcd34d"><span data-lang="en" class="lang-visible">Quick-Start Guide</span><span data-lang="de">Schnellstart</span></div>
+          <p><span data-lang="en" class="lang-visible">One page: sign up, log in, complete the first key task. A new user follows it in under 5 minutes.</span><span data-lang="de">Eine Seite: Registrierung, Login, erste Kernaufgabe. Neuer Nutzer folgt in unter 5 Minuten.</span></p>
+        </div>
+        <!-- <div class="con-item">
+          <div class="con-title" style="color:#fcd34d"><span data-lang="en" class="lang-visible">Core Workflows</span><span data-lang="de">Kern-Workflows</span></div>
+          <p><span data-lang="en" class="lang-visible">Each major feature gets numbered steps + screenshots. UI-heavy flows require screen recordings.</span><span data-lang="de">Jedes Hauptfeature bekommt nummerierte Schritte + Screenshots. UI-intensive Flows brauchen Screenrecordings.</span></p>
+        </div> -->
+        <div class="con-item">
+          <div class="con-title" style="color:#fcd34d">FAQ</div>
+          <p><span data-lang="en" class="lang-visible">Anticipate the 5 most common questions and write clear answers. The FAQ grows after every sprint.</span><span data-lang="de">Die 5 häufigsten Fragen antizipieren und beantworten. Das FAQ wächst mit jedem Sprint.</span></p>
+        </div>
+        <div class="con-item">
+          <div class="con-title" style="color:#fcd34d"><span data-lang="en" class="lang-visible">Where it lives</span><span data-lang="de">Wo es lebt</span></div>
+          <p><span data-lang="en" class="lang-visible">At <code>/manual</code> in the app, or on OneDrive linked from the footer. Accessible before the Monday evening presentation.</span><span data-lang="de">Unter <code>/manual</code> in der App, oder auf OneDrive verlinkt aus dem Footer. Vor der Montagabend-Präsentation erreichbar.</span></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Demo Video -->
+    <div class="card p4 card-pad col3 reveal">
+      <div class="badge b-amber" style="margin-bottom:12px"><span data-lang="en" class="lang-visible">Deliverable 3</span><span data-lang="de">Liefergegenstand 3</span></div>
+      <h3 class="card-title"><span data-lang="en" class="lang-visible">Demo Video</span><span data-lang="de">Demo-Video</span></h3>
+      <p class="card-intro"><span data-lang="en" class="lang-visible">A 60–120 second AI-narrated screencast showing exactly how the product works. Created Thursday, embedded in the landing page and played in the Monday evening presentation.</span><span data-lang="de">Ein 60–120-sekündiger KI-kommentierter Screencast. Donnerstag erstellt, in die Landing Page eingebettet und in der Montagabend-Präsentation abgespielt.</span></p>
+      <div class="steps" style="margin-top:10px">
+        <div class="step">
+          <div class="step-n sn-amber">1</div>
+          <div class="step-body"><h4><span data-lang="en" class="lang-visible">Record on Production URL</span><span data-lang="de">Auf Produktions-URL aufnehmen</span></h4><p><span data-lang="en" class="lang-visible">Show the complete user journey — from the landing page through to completing the core task. Never record on localhost.</span><span data-lang="de">Den kompletten User-Journey zeigen — von der Landing Page bis zur Kernaufgabe. Niemals auf localhost aufnehmen.</span></p></div>
+        </div>
+        <div class="step">
+          <div class="step-n sn-amber">2</div>
+          <div class="step-body"><h4><span data-lang="en" class="lang-visible">Add AI Narration</span><span data-lang="de">KI-Kommentar hinzufügen</span></h4><p><span data-lang="en" class="lang-visible">Write a voiceover script, generate with an AI TTS tool. Keep total length under 2 minutes.</span><span data-lang="de">Voiceover-Script schreiben, mit KI-TTS generieren. Gesamtlänge unter 2 Minuten halten.</span></p></div>
+        </div>
+        <div class="step">
+          <div class="step-n sn-amber">3</div>
+          <div class="step-body"><h4><span data-lang="en" class="lang-visible">Export &amp; Embed</span><span data-lang="de">Exportieren &amp; Einbetten</span></h4><p><span data-lang="en" class="lang-visible">Upload to YouTube or host via Vercel. Embed in landing page hero. Link from README and demo presentation.</span><span data-lang="de">Auf YouTube hochladen oder über Vercel hosten. In Landing-Page-Hero einbetten. Aus README und Demopräsentation verlinken.</span></p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 Required Deliverables banner -->
+    <div class="card p4 card-pad col12 reveal">
+      <div class="badge b-amber" style="margin-bottom:12px;display:inline-flex"><span data-lang="en" class="lang-visible">HOWTO.md — Project Checklist</span><span data-lang="de">HOWTO.md — Projektcheckliste</span></div>
+      <h3 class="card-title"><span data-lang="en" class="lang-visible">5 Required Deliverables — Every Sprint, No Exceptions</span><span data-lang="de">5 Pflicht-Liefergegenstände — Jeder Sprint, keine Ausnahmen</span></h3>
+      <p class="card-intro"><span data-lang="en" class="lang-visible">The HOWTO.md project checklist defines exactly what must exist before a sprint is considered complete. Any sprint that ships without these five items is incomplete — regardless of whether the code works or the Vercel deployment is green.</span><span data-lang="de">Die HOWTO.md-Projektcheckliste definiert genau, was existieren muss, bevor ein Sprint als abgeschlossen gilt. Ein Sprint ohne diese fünf Punkte ist unvollständig — egal ob der Code funktioniert oder der Vercel-Deploy grün ist.</span></p>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:4px">
+        <div class="con-item" style="text-align:center">
+          <div style="font-size:28px;margin-bottom:8px">🌐</div>
+          <div class="con-title" style="color:#fcd34d"><span data-lang="en" class="lang-visible">Landing Page</span><span data-lang="de">Landing Page</span></div>
+          <p><span data-lang="en" class="lang-visible">Live on custom domain. Hero, features, video, CTA.</span><span data-lang="de">Live auf Eigendomain. Hero, Features, Video, CTA.</span></p>
+        </div>
+        <div class="con-item" style="text-align:center">
+          <div style="font-size:28px;margin-bottom:8px">📖</div>
+          <div class="con-title" style="color:#fcd34d"><span data-lang="en" class="lang-visible">Manual</span><span data-lang="de">Handbuch</span></div>
+          <p><span data-lang="en" class="lang-visible">Quick-start guide + all core workflows documented with screenshots.</span><span data-lang="de">Schnellstart + alle Kernworkflows mit Screenshots dokumentiert.</span></p>
+        </div>
+        <div class="con-item" style="text-align:center">
+          <div style="font-size:28px;margin-bottom:8px">⚙️</div>
+          <div class="con-title" style="color:#fcd34d"><span data-lang="en" class="lang-visible">Main Process</span><span data-lang="de">Hauptprozess</span></div>
+          <p><span data-lang="en" class="lang-visible">The core feature working end-to-end in production. Verified on the live URL.</span><span data-lang="de">Das Kernfeature läuft end-to-end in der Produktion. Auf der Live-URL verifiziert.</span></p>
+        </div>
+        <div class="con-item" style="text-align:center">
+          <div style="font-size:28px;margin-bottom:8px">🎬</div>
+          <div class="con-title" style="color:#fcd34d"><span data-lang="en" class="lang-visible">Video</span><span data-lang="de">Video</span></div>
+          <p><span data-lang="en" class="lang-visible">AI-narrated demo video. Embedded in landing page. Under 2 minutes.</span><span data-lang="de">KI-kommentiertes Demo-Video. In Landing Page eingebettet. Unter 2 Minuten.</span></p>
+        </div>
+        <div class="con-item" style="text-align:center">
+          <div style="font-size:28px;margin-bottom:8px">🔗</div>
+          <div class="con-title" style="color:#fcd34d"><span data-lang="en" class="lang-visible">Domain</span><span data-lang="de">Domain</span></div>
+          <p><span data-lang="en" class="lang-visible">Custom domain from Strato. DNS propagated. SSL active. App accessible.</span><span data-lang="de">Eigendomain von Strato. DNS propagiert. SSL aktiv. App erreichbar.</span></p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- =================== PHASE 5 =================== -->
+<section class="phase-section reveal" id="phase5">
+  <div class="phase-head">
+    <div class="ph-num gt-pink">05</div>
+    <div class="ph-info">
+      <div class="ph-day"><span data-lang="en" class="lang-visible">Phase 5 — Every Monday Evening</span><span data-lang="de">Phase 5 — Jeden Montagabend</span></div>
+      <h2><span data-lang="en" class="lang-visible">Closure &amp; Presentation</span><span data-lang="de">Abschluss &amp; Präsentation</span></h2>
+      <p><span data-lang="en" class="lang-visible">The sprint is not over when the code is deployed. Every Monday evening is dedicated to verifying the final state, presenting the product to the team, and — critically — conducting a retrospective that makes the entire team smarter for the next sprint.</span><span data-lang="de">Der Sprint ist nicht vorbei, wenn der Code deployt ist. Jeden Montagabend erfolgt die Verifikation, die Team-Präsentation und — entscheidend — die Retrospektive, die das Team für den nächsten Sprint klüger macht.</span></p>
+    </div>
+  </div>
+  <div class="grid12">
+
+    <!-- FINAL CHECKLIST / FINISH LINE -->
+    <div class="card p5 card-pad col4 reveal">
+      <div class="badge b-pink" style="margin-bottom:12px"><span data-lang="en" class="lang-visible">The Finish Line</span><span data-lang="de">Die Ziellinie</span></div>
+      <h3 class="card-title"><span data-lang="en" class="lang-visible">Ready-for-Demo Verification</span><span data-lang="de">Demo-Bereitschaft prüfen</span></h3>
+      <p class="card-intro"><span data-lang="en" class="lang-visible">Before showing the app to management or clients, run through this verification. A failed demo in front of stakeholders damages trust far more than shipping one day late. Verify everything works on the live production URL — not localhost.</span><span data-lang="de">Bevor die App Management oder Kunden gezeigt wird, diese Verifikation durchführen. Ein fehlgeschlagenes Demo vor Stakeholdern beschädigt das Vertrauen weit mehr als ein Tag Verspätung. Alles auf der Live-Produktions-URL prüfen — nicht localhost.</span></p>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
+        <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surface2);border-radius:9px;border:1px solid rgba(34,197,94,0.2)"><div style="width:8px;height:8px;border-radius:50%;background:#22c55e;flex-shrink:0"></div><span style="font-size:13px;color:var(--text2)"><span data-lang="en" class="lang-visible">Production URL accessible and fast</span><span data-lang="de">Produktions-URL erreichbar und schnell</span></span></div>
+        <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surface2);border-radius:9px;border:1px solid rgba(34,197,94,0.2)"><div style="width:8px;height:8px;border-radius:50%;background:#22c55e;flex-shrink:0"></div><span style="font-size:13px;color:var(--text2)"><span data-lang="en" class="lang-visible">All core user flows work end-to-end</span><span data-lang="de">Alle Nutzerflows funktionieren end-to-end</span></span></div>
+        <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surface2);border-radius:9px;border:1px solid rgba(34,197,94,0.2)"><div style="width:8px;height:8px;border-radius:50%;background:#22c55e;flex-shrink:0"></div><span style="font-size:13px;color:var(--text2)"><span data-lang="en" class="lang-visible">Data stores and retrieves from Supabase correctly</span><span data-lang="de">Daten werden korrekt in Supabase gespeichert und abgerufen</span></span></div>
+        <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surface2);border-radius:9px;border:1px solid rgba(34,197,94,0.2)"><div style="width:8px;height:8px;border-radius:50%;background:#22c55e;flex-shrink:0"></div><span style="font-size:13px;color:var(--text2)"><span data-lang="en" class="lang-visible">Legal pages (Imprint, T&amp;C, Privacy) are live</span><span data-lang="de">Rechtliche Seiten (Impressum, AGB, Datenschutz) sind live</span></span></div>
+        <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surface2);border-radius:9px;border:1px solid rgba(34,197,94,0.2)"><div style="width:8px;height:8px;border-radius:50%;background:#22c55e;flex-shrink:0"></div><span style="font-size:13px;color:var(--text2)"><span data-lang="en" class="lang-visible">Custom domain resolves correctly</span><span data-lang="de">Eigene Domain löst korrekt auf</span></span></div>
+        <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--surface2);border-radius:9px;border:1px solid rgba(34,197,94,0.2)"><div style="width:8px;height:8px;border-radius:50%;background:#22c55e;flex-shrink:0"></div><span style="font-size:13px;color:var(--text2)"><span data-lang="en" class="lang-visible">Demo script prepared and rehearsed</span><span data-lang="de">Demo-Script vorbereitet und geübt</span></span></div>
+      </div>
+    </div>
+
+    <!-- THE SHOW -->
+    <div class="card p5 card-pad col4 reveal">
+      <div class="badge b-pink" style="margin-bottom:12px"><span data-lang="en" class="lang-visible">The Show — Team Presentation</span><span data-lang="de">Die Show — Team-Präsentation</span></div>
+      <h3 class="card-title"><span data-lang="en" class="lang-visible">Live Demo Protocol</span><span data-lang="de">Live-Demo-Protokoll</span></h3>
+      <p class="card-intro"><span data-lang="en" class="lang-visible">The presentation is not a PowerPoint slideshow — it is a live walkthrough of the working application. The goal is to show real value, demonstrate the AI's contribution, and invite team feedback for the next iteration.</span><span data-lang="de">Die Präsentation ist keine PowerPoint-Slideshow — es ist ein Live-Walkthrough der funktionierenden Anwendung. Ziel: echten Mehrwert zeigen, KI-Beitrag demonstrieren und Team-Feedback einladen.</span></p>
+      <div class="steps" style="margin-top:14px">
+        <div class="step">
+          <div class="step-n sn-pink">1</div>
+          <div class="step-body"><h4><span data-lang="en" class="lang-visible">Open on Production URL</span><span data-lang="de">Auf Produktions-URL öffnen</span></h4><p><span data-lang="en" class="lang-visible">Never demo on localhost. The production URL is proof that it is truly built and deployed — not just running on your laptop.</span><span data-lang="de">Niemals auf localhost demonstrieren. Die Produktions-URL beweist, dass es wirklich deployt ist.</span></p></div>
+        </div>
+        <div class="step">
+          <div class="step-n sn-pink">2</div>
+          <div class="step-body"><h4><span data-lang="en" class="lang-visible">Walk Through Core User Flows</span><span data-lang="de">Kern-User-Flows durchgehen</span></h4><p><span data-lang="en" class="lang-visible">Show the app through the eyes of a real user. Sign up, complete a key task, see the result. Keep it concise — maximum 10 minutes of demo time.</span><span data-lang="de">Die App aus Sicht eines echten Nutzers zeigen. Anmelden, eine Kernaufgabe erledigen, Ergebnis sehen. Maximal 10 Minuten Demo.</span></p></div>
+        </div>
+        <div class="step">
+          <div class="step-n sn-pink">3</div>
+          <div class="step-body"><h4><span data-lang="en" class="lang-visible">Play the AI Explainer Video</span><span data-lang="de">KI-Erklärvideo abspielen</span></h4><p><span data-lang="en" class="lang-visible">The explainer video was created to help new users understand the product. Playing it in the presentation shows the team what end users will see and validates the onboarding experience.</span><span data-lang="de">Das Erklärvideo wurde für neue Nutzer erstellt. Es zeigt dem Team, was Endnutzer sehen werden, und validiert das Onboarding.</span></p></div>
+        </div>
+        <div class="step">
+          <div class="step-n sn-pink">4</div>
+          <div class="step-body"><h4><span data-lang="en" class="lang-visible">Highlight AI Contribution</span><span data-lang="de">KI-Beitrag hervorheben</span></h4><p><span data-lang="en" class="lang-visible">Share the best Golden Prompts. Show examples where Copilot wrote entire modules correctly on the first attempt. Quantify if possible: "Copilot wrote 60% of the code in Phase 2."</span><span data-lang="de">Die besten Golden Prompts teilen. Zeigen, wo Copilot ganze Module korrekt auf Anhieb geschrieben hat. Wenn möglich quantifizieren.</span></p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RETROSPECTIVE -->
+    <div class="card p5 card-pad col4 reveal">
+      <div class="badge b-pink" style="margin-bottom:12px"><span data-lang="en" class="lang-visible">The Look Back — Retrospective</span><span data-lang="de">Der Rückblick — Retrospektive</span></div>
+      <h3 class="card-title"><span data-lang="en" class="lang-visible">The Team Gets Smarter</span><span data-lang="de">Das Team wird klüger</span></h3>
+      <p class="card-intro"><span data-lang="en" class="lang-visible">A retrospective is a structured conversation about what just happened. It is one of the most valuable practices in software development — the entire team shares what went wrong, what went right, and what should be done differently. Written down, it compounds: each sprint, the team is more efficient than the last.</span><span data-lang="de">Eine Retrospektive ist ein strukturiertes Gespräch über das Geschehene. Es ist eine der wertvollsten Praktiken in der Softwareentwicklung — das Team teilt, was schiefgelaufen ist, was gut lief und was anders gemacht werden sollte. Schriftlich festgehalten, summiert es sich: Mit jedem Sprint wird das Team effizienter.</span></p>
+      <div class="analogy">
+        <div class="label">ELI5 Analogy</div>
+        <p><span data-lang="en" class="lang-visible">Think of a sports team watching the video recording of their last game together. They point out "we fumbled the ball here — next time, do this instead." The next game they play better. The retrospective log is your team's game tape.</span><span data-lang="de">Stell dir vor, ein Sportteam schaut gemeinsam das Video ihres letzten Spiels. Sie zeigen: "Hier haben wir den Ball verloren — nächstes Mal so." Das nächste Spiel spielen sie besser. Das Retrospektive-Log ist das Spielband des Teams.</span></p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-top:14px">
+        <div style="padding:14px 16px;background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.2);border-radius:10px">
+          <div style="font-size:12px;font-weight:700;color:#fca5a5;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:6px"><span data-lang="en" class="lang-visible">Challenges</span><span data-lang="de">Herausforderungen</span></div>
+          <p style="font-size:13px;color:var(--text2);line-height:1.6"><span data-lang="en" class="lang-visible">What blocked you? What was harder than expected? Which technical decisions caused rework? Be honest and specific — blame systems, not people.</span><span data-lang="de">Was hat blockiert? Was war schwieriger als erwartet? Welche technischen Entscheidungen haben Nacharbeit verursacht? Ehrlich und spezifisch sein — Systeme kritisieren, nicht Menschen.</span></p>
+        </div>
+        <div style="padding:14px 16px;background:rgba(34,197,94,0.06);border:1px solid rgba(34,197,94,0.2);border-radius:10px">
+          <div style="font-size:12px;font-weight:700;color:#86efac;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:6px"><span data-lang="en" class="lang-visible">Solutions</span><span data-lang="de">Lösungen</span></div>
+          <p style="font-size:13px;color:var(--text2);line-height:1.6"><span data-lang="en" class="lang-visible">How was each challenge resolved? Document every solution clearly enough that a new team member could follow it. These solutions become the team's knowledge base.</span><span data-lang="de">Wie wurde jede Herausforderung gelöst? Jede Lösung so klar dokumentieren, dass ein neues Teammitglied sie nachvollziehen kann. Diese Lösungen werden die Wissensdatenbank des Teams.</span></p>
+        </div>
+        <div style="padding:14px 16px;background:rgba(139,92,246,0.06);border:1px solid rgba(139,92,246,0.2);border-radius:10px">
+          <div style="font-size:12px;font-weight:700;color:#c4b5fd;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:6px"><span data-lang="en" class="lang-visible">AI Outlook</span><span data-lang="de">KI-Ausblick</span></div>
+          <p style="font-size:13px;color:var(--text2);line-height:1.6"><span data-lang="en" class="lang-visible">Where did GitHub Copilot accelerate development? Where did it fail or produce wrong code? Which Golden Prompts should be reused in the next sprint? This section defines how the team improves its AI usage.</span><span data-lang="de">Wo hat GitHub Copilot die Entwicklung beschleunigt? Wo hat es versagt? Welche Golden Prompts sollten beim nächsten Sprint wiederverwendet werden?</span></p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- =================== READY FOR DEMO TRACKER =================== -->
+<div id="progress-wrap" class="reveal">
+  <div class="card card-pad">
+    <div class="prog-header">
+      <div class="badge b-green" style="margin-bottom:12px;display:inline-flex">Interactive Sprint Tracker</div>
+      <h2 style="font-size:clamp(22px,3vw,32px);font-weight:900;margin-bottom:8px"><span data-lang="en" class="lang-visible">Ready for Demo?</span><span data-lang="de">Demo-bereit?</span></h2>
+      <p style="font-size:14px;color:var(--text3)"><span data-lang="en" class="lang-visible">Click each item to mark it complete. Progress is tracked in your session.</span><span data-lang="de">Jeden Eintrag anklicken, um ihn als erledigt zu markieren.</span></p>
+      <div class="prog-bar-wrap"><div class="prog-bar" id="pgBar" style="width:0%"></div></div>
+      <div class="prog-label" id="pgLabel">0 / 18 completed</div>
+    </div>
+
+    <!-- Phase 1 group -->
+    <div class="check-group">
+      <div class="check-section-title" style="color:var(--blue)">Phase 1 — <span data-lang="en" class="lang-visible">Planning</span><span data-lang="de">Planung</span></div>
+      <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box"><span class="chk-tick">&#10003;</span></div><div><div class="chk-main"><span data-lang="en" class="lang-visible">Requirements document submitted and approved</span><span data-lang="de">Anforderungsdokument eingereicht und genehmigt</span></div><div class="chk-sub"><span data-lang="en" class="lang-visible">Acceptance criteria per module. Scope frozen.</span><span data-lang="de">Akzeptanzkriterien pro Modul. Scope eingefroren.</span></div></div></div>
+      <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box"><span class="chk-tick">&#10003;</span></div><div><div class="chk-main"><span data-lang="en" class="lang-visible">Supabase project created, credentials in .env.local</span><span data-lang="de">Supabase-Projekt erstellt, Zugangsdaten in .env.local</span></div><div class="chk-sub"><span data-lang="en" class="lang-visible">.env.local not committed to Git.</span><span data-lang="de">.env.local nicht in Git eingecheckt.</span></div></div></div>
+      <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box"><span class="chk-tick">&#10003;</span></div><div><div class="chk-main"><span data-lang="en" class="lang-visible">Planning docs moved to OneDrive team folder</span><span data-lang="de">Planungsdokumente in den OneDrive-Teamordner verschoben</span></div><div class="chk-sub"><span data-lang="en" class="lang-visible">Full team has visibility into scope and decisions.</span><span data-lang="de">Das gesamte Team hat Einblick in Scope und Entscheidungen.</span></div></div></div>
+    </div>
+
+    <!-- Phase 2 group -->
+    <div class="check-group">
+      <div class="check-section-title" style="color:var(--violet)">Phase 2 — <span data-lang="en" class="lang-visible">Implementation</span><span data-lang="de">Implementierung</span></div>
+      <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box"><span class="chk-tick">&#10003;</span></div><div><div class="chk-main"><span data-lang="en" class="lang-visible">Repo cloned from template_repo and initialized</span><span data-lang="de">Repo von template_repo geklont und initialisiert</span></div><div class="chk-sub"><code>npm install</code> <span data-lang="en" class="lang-visible">done. Initial commit pushed to main.</span><span data-lang="de">ausgeführt. Initialer Commit auf main gepusht.</span></div></div></div>
+      <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box"><span class="chk-tick">&#10003;</span></div><div><div class="chk-main"><span data-lang="en" class="lang-visible">GitHub Workflow verified in .github/workflows/</span><span data-lang="de">GitHub-Workflow in .github/workflows/ geprüft</span></div><div class="chk-sub"><code>Wamocon/github_workflow</code> <span data-lang="en" class="lang-visible">reference confirmed correct.</span><span data-lang="de">Referenz korrekt bestätigt.</span></div></div></div>
+      <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box"><span class="chk-tick">&#10003;</span></div><div><div class="chk-main"><span data-lang="en" class="lang-visible">Supabase MCP connected to VS Code</span><span data-lang="de">Supabase MCP mit VS Code verbunden</span></div><div class="chk-sub"><span data-lang="en" class="lang-visible">Migrations in supabase/migrations/. Schema permissions granted.</span><span data-lang="de">Migrationen in supabase/migrations/. Schema-Berechtigungen vergeben.</span></div></div></div>
+      <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box"><span class="chk-tick">&#10003;</span></div><div><div class="chk-main"><span data-lang="en" class="lang-visible">All features built and functionally tested in browser</span><span data-lang="de">Alle Features gebaut und im Browser funktional getestet</span></div><div class="chk-sub"><span data-lang="en" class="lang-visible">Golden Prompts documented for future sprints.</span><span data-lang="de">Golden Prompts für zukünftige Sprints dokumentiert.</span></div></div></div>
+      <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box"><span class="chk-tick">&#10003;</span></div><div><div class="chk-main"><span data-lang="en" class="lang-visible">All PRs merged to main. No open feature branches.</span><span data-lang="de">Alle PRs in main gemergt. Keine offenen Feature-Branches.</span></div><div class="chk-sub"><code>typecheck</code> + <code>lint</code> <span data-lang="en" class="lang-visible">passed locally before every PR was opened.</span><span data-lang="de">lokal bestanden, bevor jeder PR geöffnet wurde.</span></div></div></div>
+    </div>
+
+    <!-- Phase 3 group -->
+    <div class="check-group">
+      <div class="check-section-title" style="color:var(--cyan)">Phase 3 — <span data-lang="en" class="lang-visible">Deployment</span><span data-lang="de">Deployment</span></div>
+      <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box"><span class="chk-tick">&#10003;</span></div><div><div class="chk-main"><span data-lang="en" class="lang-visible">Vercel project imported. VERCEL_PROJECT_ID added to GitHub Secrets.</span><span data-lang="de">Vercel-Projekt importiert. VERCEL_PROJECT_ID als GitHub Secret hinzugefügt.</span></div><div class="chk-sub"><span data-lang="en" class="lang-visible">Repo reverted to Internal visibility after import.</span><span data-lang="de">Repo nach dem Import wieder auf Internal zurückgesetzt.</span></div></div></div>
+      <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box"><span class="chk-tick">&#10003;</span></div><div><div class="chk-main"><span data-lang="en" class="lang-visible">All .env.local variables imported in Vercel Settings</span><span data-lang="de">Alle .env.local-Variablen in Vercel Settings importiert</span></div><div class="chk-sub"><span data-lang="en" class="lang-visible">Production build passes. App is live on Vercel URL.</span><span data-lang="de">Produktions-Build erfolgreich. App ist live auf der Vercel-URL.</span></div></div></div>
+      <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box"><span class="chk-tick">&#10003;</span></div><div><div class="chk-main"><span data-lang="en" class="lang-visible">Custom domain configured at Strato and added to Vercel</span><span data-lang="de">Eigene Domain bei Strato konfiguriert und in Vercel hinzugefügt</span></div><div class="chk-sub"><span data-lang="en" class="lang-visible">DNS propagated. App accessible on custom domain.</span><span data-lang="de">DNS propagiert. App auf eigener Domain erreichbar.</span></div></div></div>
+      <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box"><span class="chk-tick">&#10003;</span></div><div><div class="chk-main"><span data-lang="en" class="lang-visible">Imprint, Terms &amp; Conditions, Privacy Policy are live</span><span data-lang="de">Impressum, AGB, Datenschutzerklärung sind live</span></div><div class="chk-sub"><span data-lang="en" class="lang-visible">Templates from legal-docs/ adapted. All linked in footer.</span><span data-lang="de">Vorlagen aus legal-docs/ angepasst. Alle im Footer verlinkt.</span></div></div></div>
+      <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box"><span class="chk-tick">&#10003;</span></div><div><div class="chk-main"><span data-lang="en" class="lang-visible">Landing page live with AI explainer video embedded</span><span data-lang="de">Landing Page live mit eingebettetem KI-Erklärvideo</span></div><div class="chk-sub"><span data-lang="en" class="lang-visible">Marketing assets complete.</span><span data-lang="de">Marketing-Assets vollständig.</span></div></div></div>
+    </div>
+
+    <!-- Phase 4 group -->
+    <div class="check-group">
+      <div class="check-section-title" style="color:var(--amber)">Phase 4 — <span data-lang="en" class="lang-visible">Go-Live Deliverables</span><span data-lang="de">Launch-Liefergegenstände</span></div>
+      <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box"><span class="chk-tick">&#10003;</span></div><div><div class="chk-main"><span data-lang="en" class="lang-visible">Landing page live on custom domain with hero, features, and CTA</span><span data-lang="de">Landing Page live auf Eigendomain mit Hero, Features und CTA</span></div><div class="chk-sub"><span data-lang="en" class="lang-visible">AI explainer video embedded. Domain from Strato. DNS propagated.</span><span data-lang="de">KI-Erklärvideo eingebettet. Domain von Strato. DNS propagiert.</span></div></div></div>
+      <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box"><span class="chk-tick">&#10003;</span></div><div><div class="chk-main"><span data-lang="en" class="lang-visible">User manual written and published (quick-start + core workflows)</span><span data-lang="de">Nutzerhandbuch geschrieben und veröffentlicht (Schnellstart + Kernworkflows)</span></div><div class="chk-sub"><span data-lang="en" class="lang-visible">Accessible at /manual route or linked from app footer.</span><span data-lang="de">Unter /manual erreichbar oder aus dem App-Footer verlinkt.</span></div></div></div>
+      <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box"><span class="chk-tick">&#10003;</span></div><div><div class="chk-main"><span data-lang="en" class="lang-visible">Demo video recorded, AI-narrated, and embedded in landing page</span><span data-lang="de">Demo-Video aufgenommen, KI-kommentiert und in Landing Page eingebettet</span></div><div class="chk-sub"><span data-lang="en" class="lang-visible">Under 2 minutes. Uploaded to YouTube or hosted via Vercel.</span><span data-lang="de">Unter 2 Minuten. Auf YouTube oder über Vercel gehostet.</span></div></div></div>
+    </div>
+
+    <!-- Phase 5 group -->
+    <div class="check-group">
+      <div class="check-section-title" style="color:var(--pink)">Phase 5 — <span data-lang="en" class="lang-visible">Closure</span><span data-lang="de">Abschluss</span></div>
+      <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box"><span class="chk-tick">&#10003;</span></div><div><div class="chk-main"><span data-lang="en" class="lang-visible">Retrospective log written and shared with team</span><span data-lang="de">Retrospektive-Log geschrieben und mit dem Team geteilt</span></div><div class="chk-sub"><span data-lang="en" class="lang-visible">Challenges, Solutions, AI Outlook — all documented.</span><span data-lang="de">Herausforderungen, Lösungen, KI-Ausblick — alles dokumentiert.</span></div></div></div>
+      <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box"><span class="chk-tick">&#10003;</span></div><div><div class="chk-main"><span data-lang="en" class="lang-visible">Live team presentation completed on production URL</span><span data-lang="de">Live-Team-Präsentation auf der Produktions-URL abgeschlossen</span></div><div class="chk-sub"><span data-lang="en" class="lang-visible">Video played. AI contribution highlighted. Q&amp;A done.</span><span data-lang="de">Video abgespielt. KI-Beitrag hervorgehoben. Q&amp;A abgeschlossen.</span></div></div></div>
+    </div>
+
+    <div id="done-banner">
+      <h3>Sprint Complete</h3>
+      <p><span data-lang="en" class="lang-visible">All 18 items verified. Ready to ship.</span><span data-lang="de">Alle 18 Punkte verifiziert. Bereit zum Ausliefern.</span></p>
+    </div>
+  </div>
+</div>
+
+<!-- =================== SCRIPTS REFERENCE =================== -->
+<div style="max-width:1240px;margin:0 auto;padding:0 28px 80px" class="reveal">
+  <h3 style="font-size:15px;font-weight:700;color:var(--text2);margin-bottom:16px;text-transform:uppercase;letter-spacing:0.07em">Available Scripts</h3>
+  <div class="card" style="overflow:hidden">
+    <table style="width:100%;border-collapse:collapse">
+      <thead><tr style="background:var(--surface2)">
+        <th style="text-align:left;padding:12px 18px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--text3)">Command</th>
+        <th style="text-align:left;padding:12px 18px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--text3)">Description</th>
+        <th style="text-align:left;padding:12px 18px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--text3)">When</th>
+      </tr></thead>
+      <tbody>
+        <tr style="border-top:1px solid var(--border)"><td style="padding:12px 18px"><code style="color:var(--cyan)">npm run dev</code></td><td style="padding:12px 18px;font-size:13px;color:var(--text2)"><span data-lang="en" class="lang-visible">Start dev server with Turbopack (instant hot reload)</span><span data-lang="de">Dev-Server mit Turbopack starten (sofortiges Hot-Reload)</span></td><td style="padding:12px 18px"><span class="badge b-blue" style="font-size:10px"><span data-lang="en" class="lang-visible">Daily</span><span data-lang="de">Täglich</span></span></td></tr>
+        <tr style="border-top:1px solid var(--border)"><td style="padding:12px 18px"><code style="color:var(--cyan)">npm run build</code></td><td style="padding:12px 18px;font-size:13px;color:var(--text2)"><span data-lang="en" class="lang-visible">Create a production-optimized build</span><span data-lang="de">Produktions-optimierten Build erstellen</span></td><td style="padding:12px 18px"><span class="badge b-cyan" style="font-size:10px"><span data-lang="en" class="lang-visible">Pre-deploy</span><span data-lang="de">Vor Deploy</span></span></td></tr>
+        <tr style="border-top:1px solid var(--border)"><td style="padding:12px 18px"><code style="color:var(--amber)">npm run typecheck</code></td><td style="padding:12px 18px;font-size:13px;color:var(--text2)"><span data-lang="en" class="lang-visible">Run TypeScript type checker — catches logic errors before runtime</span><span data-lang="de">TypeScript-Typprüfer ausführen — findet Logikfehler vor der Laufzeit</span></td><td style="padding:12px 18px"><span class="badge b-amber" style="font-size:10px"><span data-lang="en" class="lang-visible">Before every push</span><span data-lang="de">Vor jedem Push</span></span></td></tr>
+        <tr style="border-top:1px solid var(--border)"><td style="padding:12px 18px"><code style="color:var(--amber)">npm run lint</code></td><td style="padding:12px 18px;font-size:13px;color:var(--text2)"><span data-lang="en" class="lang-visible">Run ESLint — catches code style and potential bugs</span><span data-lang="de">ESLint ausführen — findet Code-Stil-Probleme und potenzielle Fehler</span></td><td style="padding:12px 18px"><span class="badge b-amber" style="font-size:10px"><span data-lang="en" class="lang-visible">Before every push</span><span data-lang="de">Vor jedem Push</span></span></td></tr>
+        <tr style="border-top:1px solid var(--border)"><td style="padding:12px 18px"><code style="color:var(--text2)">npm run start</code></td><td style="padding:12px 18px;font-size:13px;color:var(--text2)"><span data-lang="en" class="lang-visible">Start the production server locally (after npm run build)</span><span data-lang="de">Produktionsserver lokal starten (nach npm run build)</span></td><td style="padding:12px 18px"><span class="badge b-green" style="font-size:10px"><span data-lang="en" class="lang-visible">Testing</span><span data-lang="de">Tests</span></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- =================== FOOTER =================== -->
+<footer>
+  <div class="foot-inner">
+    <div style="display:flex;align-items:center;gap:10px">
+      <div class="nav-logo-mark">W</div>
+      <small style="font-size:13px;font-weight:700;color:var(--text2)">WAMOCON GmbH</small>
+    </div>
+    <small>Standard Prozessablauf — Internal Documentation v2.0 — 2026</small>
+    <small>Powered by <span style="color:var(--violet)">template_repo</span> + GitHub Copilot</small>
+  </div>
+</footer>
+
+<!-- =================== JAVASCRIPT =================== -->
+<script>
+// ─── THEME ──────────────────────────────────────────────────────
+var currentTheme = 'dark';
+function toggleTheme() {
+  currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', currentTheme);
+  var btn = document.getElementById('themeBtn');
+  var icon = document.getElementById('themeIcon');
+  var text = document.getElementById('themeText');
+  if (currentTheme === 'light') {
+    icon.textContent = '\u2600';
+    text.textContent = 'Dark';
+  } else {
+    icon.textContent = '\u263E';
+    text.textContent = 'Light';
+  }
+}
+
+// ─── LANGUAGE ───────────────────────────────────────────────────
+var currentLang = 'en';
+function setLang(lang) {
+  currentLang = lang;
+  // Update button states
+  var btns = document.querySelectorAll('.lang-btn');
+  btns.forEach(function(b) {
+    b.classList.toggle('active', b.textContent.trim().toLowerCase() === lang);
+  });
+  // Show/hide language elements
+  var all = document.querySelectorAll('[data-lang]');
+  all.forEach(function(el) {
+    if (el.getAttribute('data-lang') === lang) {
+      el.classList.add('lang-visible');
+    } else {
+      el.classList.remove('lang-visible');
+    }
+  });
+}
+// Init language on load
+setLang('en');
+
+// ─── SCROLL REVEAL ───────────────────────────────────────────────
+var revealObs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObs.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.06, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(function(el, i) {
+  el.style.transitionDelay = (i % 5) * 0.07 + 's';
+  revealObs.observe(el);
+});
+
+// ─── CHECKLIST ───────────────────────────────────────────────────
+var TOTAL_ITEMS = 18;
+function toggleChk(el) {
+  el.classList.toggle('done');
+  updateProg();
+}
+function updateProg() {
+  var done = document.querySelectorAll('.chk-item.done').length;
+  var pct = Math.round((done / TOTAL_ITEMS) * 100);
+  document.getElementById('pgBar').style.width = pct + '%';
+  document.getElementById('pgLabel').textContent = done + ' / ' + TOTAL_ITEMS + ' completed';
+  document.getElementById('done-banner').style.display = done === TOTAL_ITEMS ? 'block' : 'none';
+}
+
+// ─── NAV SCROLL EFFECT ────────────────────────────────────────────
+window.addEventListener('scroll', function() {
+  var nav = document.getElementById('nav');
+  if (window.scrollY > 20) {
+    nav.style.boxShadow = '0 1px 30px rgba(0,0,0,0.4)';
+  } else {
+    nav.style.boxShadow = 'none';
+  }
+}, { passive: true });
+</script>
+</body>
+</html>
