@@ -7,6 +7,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
 <style>
+/* ═══════════════════════════════════════════════════════════════
+   WAMOCON Standard Prozessablauf — Clean Simple CSS (no blur/animation)
+   ═══════════════════════════════════════════════════════════════ */
 /* ─── ROOT VARIABLES ───────────────────────────────────────────── */
 :root{
   --bg:#0a0a1c;--bg2:#0e0e24;--surface:rgba(255,255,255,0.05);--surface2:rgba(255,255,255,0.08);
@@ -48,6 +51,9 @@ body{
   font-family:var(--font);background:var(--bg);color:var(--text);
   line-height:1.6;overflow-x:hidden;
   transition:background var(--transition),color var(--transition);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  text-rendering:optimizeLegibility;
 }
 ::-webkit-scrollbar{width:4px}
 ::-webkit-scrollbar-track{background:transparent}
@@ -319,8 +325,8 @@ html[data-theme="light"] .toggle-btn:hover{background:rgba(220,228,238,0.95);box
 html[data-theme="light"] .toggle-btn.active{box-shadow:var(--neu-inset)}
 html[data-theme="light"] .lang-grp{box-shadow:var(--neu-sm)}
 /* ─── BG ORB ANIMATION ─────────────────────────────────────────── */
-#bg-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;overflow:hidden;pointer-events:none;}
-.orb{position:absolute;border-radius:50%;will-change:transform;filter:blur(110px);}
+#bg-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;overflow:hidden;pointer-events:none;transform:translateZ(0);}
+.orb{position:absolute;border-radius:50%;will-change:transform;filter:blur(110px);backface-visibility:hidden;transform:translateZ(0);}
 .orb-1{width:90vw;height:70vh;background:radial-gradient(circle at 40% 35%,rgba(59,130,246,0.52),transparent 65%);top:-25vh;left:-20vw;animation:orbA 24s ease-in-out infinite;}
 .orb-2{width:80vw;height:75vh;background:radial-gradient(circle at 45% 45%,rgba(139,92,246,0.46),transparent 65%);top:10vh;right:-22vw;animation:orbB 30s ease-in-out infinite;}
 .orb-3{width:70vw;height:55vh;background:radial-gradient(circle at 50% 50%,rgba(6,182,212,0.30),transparent 65%);bottom:-8vh;left:5vw;animation:orbC 20s ease-in-out infinite;}
@@ -334,6 +340,32 @@ html[data-theme="light"] .lang-grp{box-shadow:var(--neu-sm)}
 @keyframes orbE{0%,100%{transform:translate(0,0) scale(1)}18%{transform:translate(-24vw,-20vh) scale(1.32)}38%{transform:translate(20vw,14vh) scale(0.80)}58%{transform:translate(-10vw,24vh) scale(1.14)}78%{transform:translate(14vw,-14vh) scale(0.92)}}
 @keyframes orbF{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-16vw,22vh) scale(1.22)}}
 html[data-theme="light"] .orb{opacity:0.22;}
+@media screen and (-webkit-min-device-pixel-ratio:2),(min-resolution:192dpi){
+  /* ── 4K / Retina: eliminate compound blur that pixelates text ── */
+  .orb{opacity:0.10;filter:blur(60px);}
+  #bg-canvas{opacity:0.55;}
+  .glow-shape{opacity:0.12;filter:blur(50px);}
+  /* Make cards fully opaque so backdrop-filter never blurs text */
+  .card{
+    background:rgba(13,13,28,0.97)!important;
+    backdrop-filter:none!important;
+    -webkit-backdrop-filter:none!important;
+  }
+  html[data-theme="light"] .card{
+    background:rgba(240,244,250,0.99)!important;
+    backdrop-filter:none!important;
+    -webkit-backdrop-filter:none!important;
+  }
+  /* Remove nav blur on HiDPI */
+  #nav{
+    backdrop-filter:none!important;
+    -webkit-backdrop-filter:none!important;
+    background:rgba(10,10,28,0.97)!important;
+  }
+  html[data-theme="light"] #nav{
+    background:rgba(248,250,252,0.97)!important;
+  }
+}
 /* ─── PHASE 4 STYLES ────────────────────────────────────────────── */
 .card.p4:hover{border-color:rgba(245,158,11,0.4);box-shadow:8px 8px 24px rgba(0,0,0,0.75),-3px -3px 10px rgba(245,158,11,0.12),0 0 32px rgba(245,158,11,0.18),inset 0 1px 0 rgba(245,158,11,0.1)}
 .sn-amber{background:rgba(245,158,11,0.15);color:#fcd34d;border:1px solid rgba(245,158,11,0.3);box-shadow:var(--neu-sm)}
@@ -400,26 +432,24 @@ span[data-lang].lang-visible{display:inline}
       <span data-lang="de">Ein strukturiertes, wiederholbares Framework, um produktionsreife Anwendungen von der Idee bis zum Live-Deployment — in einer einzigen Woche — zu liefern.</span>
     </p>
     <div style="display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:40px">
-      <div class="badge b-blue">Monday → Friday</div>
       <div class="badge b-cyan">Next.js · Supabase · Vercel</div>
       <div class="badge b-amber">GitHub Copilot · MCP</div>
     </div>
     <div class="week-bar">
-      <div class="week-col"><div class="day">Mon</div><div class="ph gt-blue">Phase 1</div><div class="desc" data-lang="en">Initiation</div><div class="desc" data-lang="de">Planung</div></div>
-      <div class="week-col"><div class="day">Mon–Thu</div><div class="ph gt-violet">Phase 2</div><div class="desc" data-lang="en">Build</div><div class="desc" data-lang="de">Entwicklung</div></div>
-      <div class="week-col"><div class="day">Fri AM</div><div class="ph gt-cyan">Phase 3</div><div class="desc" data-lang="en">Deploy</div><div class="desc" data-lang="de">Deployment</div></div>
-      <div class="week-col"><div class="day">Thu</div><div class="ph gt-amber">Phase 4</div><div class="desc" data-lang="en">Deliverables</div><div class="desc" data-lang="de">Liefergegenstände</div></div>
-      <div class="week-col"><div class="day">Mon Eve</div><div class="ph gt-pink">Phase 5</div><div class="desc" data-lang="en">Closure</div><div class="desc" data-lang="de">Abschluss</div></div>
+      <div class="week-col"><div class="ph gt-blue">Phase 0</div><div class="desc" data-lang="en">Initiation</div><div class="desc" data-lang="de">Initierung</div></div>
+      <div class="week-col"><div class="ph gt-violet">Phase 1</div><div class="desc" data-lang="en">Planning &amp; Prep</div><div class="desc" data-lang="de">Planung &amp; Vorbereitung</div></div>
+      <div class="week-col"><div class="ph gt-cyan">Phase 2</div><div class="desc" data-lang="en">Development</div><div class="desc" data-lang="de">Entwicklung</div></div>
+      <div class="week-col"><div class="ph gt-amber">Phase 3</div><div class="desc" data-lang="en">Deployment</div><div class="desc" data-lang="de">Deployment</div></div>
+      <div class="week-col"><div class="ph gt-pink">Phase 4</div><div class="desc" data-lang="en">Closure</div><div class="desc" data-lang="de">Abschluss &amp; Präsentation</div></div>
     </div>
   </div>
 </section>
 <!-- =================== PHASE 1 =================== -->
 <section class="phase-section reveal" id="phase1">
   <div class="phase-head">
-    <div class="ph-num gt-blue">01</div>
+    <div class="ph-num gt-blue">00</div>
     <div class="ph-info">
-      <div class="ph-day"><span data-lang="en" class="lang-visible">Phase 1 — Monday</span><span data-lang="de">Phase 1 — Montag</span></div>
-      <h2><span data-lang="en" class="lang-visible">Initiation &amp; Planning</span><span data-lang="de">Initiierung &amp; Planung</span></h2>
+      <h2><span data-lang="en" class="lang-visible">Initiation</span><span data-lang="de">Initierung</span></h2>
       <p>
         <span data-lang="en" class="lang-visible">Every great product begins with a clear idea and a solid plan. Monday is entirely dedicated to answering one question: <em>What exactly are we building this week — and how?</em></span>
         <span data-lang="de">Jedes großartige Produkt beginnt mit einer klaren Idee und einem soliden Plan. Der Montag ist vollständig einer einzigen Frage gewidmet: <em>Was genau bauen wir diese Woche — und wie?</em></span>
@@ -541,10 +571,9 @@ span[data-lang].lang-visible{display:inline}
 <!-- =================== PHASE 2 =================== -->
 <section class="phase-section reveal" id="phase2">
   <div class="phase-head">
-    <div class="ph-num gt-violet">02</div>
+    <div class="ph-num gt-violet">01</div>
     <div class="ph-info">
-      <div class="ph-day"><span data-lang="en" class="lang-visible">Phase 2 — Monday to Friday</span><span data-lang="de">Phase 2 — Montag bis Freitag</span></div>
-      <h2><span data-lang="en" class="lang-visible">Deep Dive Implementation</span><span data-lang="de">Tiefe Implementierung</span></h2>
+      <h2><span data-lang="en" class="lang-visible">Planning &amp; Preparation</span><span data-lang="de">Planung &amp; Vorbereitung</span></h2>
       <p><span data-lang="en" class="lang-visible">This is the heart of the week. You move from planning to building. Every tool, process, and convention described here exists to help you build faster, with fewer bugs, with AI as your co-pilot.</span><span data-lang="de">Das ist das Herzstück der Woche. Du wechselst vom Planen zum Bauen. Jedes hier beschriebene Tool und jeder Prozess hilft dir, schneller und mit weniger Fehlern zu bauen — mit KI als Co-Pilot.</span></p>
     </div>
   </div>
@@ -822,10 +851,9 @@ span[data-lang].lang-visible{display:inline}
 <!-- =================== PHASE 3 =================== -->
 <section class="phase-section reveal" id="phase3">
   <div class="phase-head">
-    <div class="ph-num gt-cyan">03</div>
+    <div class="ph-num gt-cyan">02</div>
     <div class="ph-info">
-      <div class="ph-day"><span data-lang="en" class="lang-visible">Phase 3 — Monday Morning</span><span data-lang="de">Phase 3 — Montagvormittag</span></div>
-      <h2><span data-lang="en" class="lang-visible">Deployment &amp; Launch</span><span data-lang="de">Deployment &amp; Launch</span></h2>
+      <h2><span data-lang="en" class="lang-visible">Development</span><span data-lang="de">Entwicklung</span></h2>
       <p><span data-lang="en" class="lang-visible">Monday morning is about taking everything built this week and pushing it into the hands of real users. This phase is not just technical — it also covers the public face of the product (domain, landing page, video) and the legal requirements that every live website must fulfill.</span><span data-lang="de">Der Montagvormittag dreht sich darum, alles was diese Woche gebaut wurde, in die Hände echter Nutzer zu bringen — inklusive öffentlichem Gesicht (Domain, Landing Page, Video) und rechtlichen Anforderungen.</span></p>
     </div>
   </div>
@@ -912,10 +940,9 @@ span[data-lang].lang-visible{display:inline}
 <!-- =================== PHASE 4 =================== -->
 <section class="phase-section reveal" id="phase4">
   <div class="phase-head">
-    <div class="ph-num gt-amber">04</div>
+    <div class="ph-num gt-amber">03</div>
     <div class="ph-info">
-      <div class="ph-day"><span data-lang="en" class="lang-visible">Phase 4 — Thursday (runs in parallel with Phase 2)</span><span data-lang="de">Phase 4 — Donnerstag (parallel zu Phase 2)</span></div>
-      <h2><span data-lang="en" class="lang-visible">Go-Live Deliverables</span><span data-lang="de">Launch-Liefergegenstände</span></h2>
+      <h2><span data-lang="en" class="lang-visible">Deployment</span><span data-lang="de">Deployment</span></h2>
       <p>
         <span data-lang="en" class="lang-visible">Shipping code is only half the job. Every WAMOCON sprint product must also ship with a complete set of go-live artifacts: a <strong>Landing Page</strong> that sells the product, a <strong>Manual</strong> that teaches users how to use it, and a <strong>Demo Video</strong> that communicates value in under two minutes. These are not optional extras — they are required deliverables for every sprint, defined in the HOWTO.md Project Checklist.</span>
         <span data-lang="de">Code zu schreiben ist nur die Hälfte der Arbeit. Jedes WAMOCON-Produkt muss auch mit einem vollständigen Set an Launch-Liefergegenständen erscheinen: eine <strong>Landing Page</strong>, die das Produkt verkauft, ein <strong>Handbuch</strong> für Nutzer und ein <strong>Demo-Video</strong>, das den Mehrwert in unter zwei Minuten vermittelt. Diese sind Pflicht — definiert in der HOWTO.md-Projektcheckliste.</span>
@@ -1039,9 +1066,8 @@ span[data-lang].lang-visible{display:inline}
 <!-- =================== PHASE 5 =================== -->
 <section class="phase-section reveal" id="phase5">
   <div class="phase-head">
-    <div class="ph-num gt-pink">05</div>
+    <div class="ph-num gt-pink">04</div>
     <div class="ph-info">
-      <div class="ph-day"><span data-lang="en" class="lang-visible">Phase 5 — Every Monday Evening</span><span data-lang="de">Phase 5 — Jeden Montagabend</span></div>
       <h2><span data-lang="en" class="lang-visible">Closure &amp; Presentation</span><span data-lang="de">Abschluss &amp; Präsentation</span></h2>
       <p><span data-lang="en" class="lang-visible">The sprint is not over when the code is deployed. Every Monday evening is dedicated to verifying the final state, presenting the product to the team, and — critically — conducting a retrospective that makes the entire team smarter for the next sprint.</span><span data-lang="de">Der Sprint ist nicht vorbei, wenn der Code deployt ist. Jeden Montagabend erfolgt die Verifikation, die Team-Präsentation und — entscheidend — die Retrospektive, die das Team für den nächsten Sprint klüger macht.</span></p>
     </div>
@@ -1128,7 +1154,7 @@ span[data-lang].lang-visible{display:inline}
 
     <!-- Phase 1 group -->
     <div class="check-group">
-      <div class="check-section-title" style="color:var(--blue)">Phase 1 — <span data-lang="en" class="lang-visible">Planning</span><span data-lang="de">Planung</span></div>
+      <div class="check-section-title" style="color:var(--blue)">Phase 0 — <span data-lang="en" class="lang-visible">Initiation</span><span data-lang="de">Initierung</span></div>
       <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box"><span class="chk-tick">&#10003;</span></div><div><div class="chk-main"><span data-lang="en" class="lang-visible">Requirements document submitted and approved</span><span data-lang="de">Anforderungsdokument eingereicht und genehmigt</span></div><div class="chk-sub"><span data-lang="en" class="lang-visible">Acceptance criteria per module. Scope frozen.</span><span data-lang="de">Akzeptanzkriterien pro Modul. Scope eingefroren.</span></div></div></div>
       <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box"><span class="chk-tick">&#10003;</span></div><div><div class="chk-main"><span data-lang="en" class="lang-visible">Supabase project created, credentials in .env.local</span><span data-lang="de">Supabase-Projekt erstellt, Zugangsdaten in .env.local</span></div><div class="chk-sub"><span data-lang="en" class="lang-visible">.env.local not committed to Git.</span><span data-lang="de">.env.local nicht in Git eingecheckt.</span></div></div></div>
       <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box"><span class="chk-tick">&#10003;</span></div><div><div class="chk-main"><span data-lang="en" class="lang-visible">Planning docs moved to OneDrive team folder</span><span data-lang="de">Planungsdokumente in den OneDrive-Teamordner verschoben</span></div><div class="chk-sub"><span data-lang="en" class="lang-visible">Full team has visibility into scope and decisions.</span><span data-lang="de">Das gesamte Team hat Einblick in Scope und Entscheidungen.</span></div></div></div>
@@ -1136,7 +1162,7 @@ span[data-lang].lang-visible{display:inline}
 
     <!-- Phase 2 group -->
     <div class="check-group">
-      <div class="check-section-title" style="color:var(--violet)">Phase 2 — <span data-lang="en" class="lang-visible">Implementation</span><span data-lang="de">Implementierung</span></div>
+      <div class="check-section-title" style="color:var(--violet)">Phase 1 — <span data-lang="en" class="lang-visible">Planning &amp; Preparation</span><span data-lang="de">Planung &amp; Vorbereitung</span></div>
       <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box"><span class="chk-tick">&#10003;</span></div><div><div class="chk-main"><span data-lang="en" class="lang-visible">Repo cloned from template_repo and initialized</span><span data-lang="de">Repo von template_repo geklont und initialisiert</span></div><div class="chk-sub"><code>npm install</code> <span data-lang="en" class="lang-visible">done. Initial commit pushed to main.</span><span data-lang="de">ausgeführt. Initialer Commit auf main gepusht.</span></div></div></div>
       <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box"><span class="chk-tick">&#10003;</span></div><div><div class="chk-main"><span data-lang="en" class="lang-visible">GitHub Workflow verified in .github/workflows/</span><span data-lang="de">GitHub-Workflow in .github/workflows/ geprüft</span></div><div class="chk-sub"><code>Wamocon/github_workflow</code> <span data-lang="en" class="lang-visible">reference confirmed correct.</span><span data-lang="de">Referenz korrekt bestätigt.</span></div></div></div>
       <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box"><span class="chk-tick">&#10003;</span></div><div><div class="chk-main"><span data-lang="en" class="lang-visible">Supabase MCP connected to VS Code</span><span data-lang="de">Supabase MCP mit VS Code verbunden</span></div><div class="chk-sub"><span data-lang="en" class="lang-visible">Migrations in supabase/migrations/. Schema permissions granted.</span><span data-lang="de">Migrationen in supabase/migrations/. Schema-Berechtigungen vergeben.</span></div></div></div>
@@ -1146,7 +1172,7 @@ span[data-lang].lang-visible{display:inline}
 
     <!-- Phase 3 group -->
     <div class="check-group">
-      <div class="check-section-title" style="color:var(--cyan)">Phase 3 — <span data-lang="en" class="lang-visible">Deployment</span><span data-lang="de">Deployment</span></div>
+      <div class="check-section-title" style="color:var(--cyan)">Phase 2 — <span data-lang="en" class="lang-visible">Development</span><span data-lang="de">Entwicklung</span></div>
       <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box"><span class="chk-tick">&#10003;</span></div><div><div class="chk-main"><span data-lang="en" class="lang-visible">Vercel project imported. VERCEL_PROJECT_ID added to GitHub Secrets.</span><span data-lang="de">Vercel-Projekt importiert. VERCEL_PROJECT_ID als GitHub Secret hinzugefügt.</span></div><div class="chk-sub"><span data-lang="en" class="lang-visible">Repo reverted to Internal visibility after import.</span><span data-lang="de">Repo nach dem Import wieder auf Internal zurückgesetzt.</span></div></div></div>
       <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box"><span class="chk-tick">&#10003;</span></div><div><div class="chk-main"><span data-lang="en" class="lang-visible">All .env.local variables imported in Vercel Settings</span><span data-lang="de">Alle .env.local-Variablen in Vercel Settings importiert</span></div><div class="chk-sub"><span data-lang="en" class="lang-visible">Production build passes. App is live on Vercel URL.</span><span data-lang="de">Produktions-Build erfolgreich. App ist live auf der Vercel-URL.</span></div></div></div>
       <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box"><span class="chk-tick">&#10003;</span></div><div><div class="chk-main"><span data-lang="en" class="lang-visible">Custom domain configured at Strato and added to Vercel</span><span data-lang="de">Eigene Domain bei Strato konfiguriert und in Vercel hinzugefügt</span></div><div class="chk-sub"><span data-lang="en" class="lang-visible">DNS propagated. App accessible on custom domain.</span><span data-lang="de">DNS propagiert. App auf eigener Domain erreichbar.</span></div></div></div>
@@ -1156,7 +1182,7 @@ span[data-lang].lang-visible{display:inline}
 
     <!-- Phase 4 group -->
     <div class="check-group">
-      <div class="check-section-title" style="color:var(--amber)">Phase 4 — <span data-lang="en" class="lang-visible">Go-Live Deliverables</span><span data-lang="de">Launch-Liefergegenstände</span></div>
+      <div class="check-section-title" style="color:var(--amber)">Phase 3 — <span data-lang="en" class="lang-visible">Deployment</span><span data-lang="de">Deployment</span></div>
       <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box"><span class="chk-tick">&#10003;</span></div><div><div class="chk-main"><span data-lang="en" class="lang-visible">Landing page live on custom domain with hero, features, and CTA</span><span data-lang="de">Landing Page live auf Eigendomain mit Hero, Features und CTA</span></div><div class="chk-sub"><span data-lang="en" class="lang-visible">AI explainer video embedded. Domain from Strato. DNS propagated.</span><span data-lang="de">KI-Erklärvideo eingebettet. Domain von Strato. DNS propagiert.</span></div></div></div>
       <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box"><span class="chk-tick">&#10003;</span></div><div><div class="chk-main"><span data-lang="en" class="lang-visible">User manual written and published (quick-start + core workflows)</span><span data-lang="de">Nutzerhandbuch geschrieben und veröffentlicht (Schnellstart + Kernworkflows)</span></div><div class="chk-sub"><span data-lang="en" class="lang-visible">Accessible at /manual route or linked from app footer.</span><span data-lang="de">Unter /manual erreichbar oder aus dem App-Footer verlinkt.</span></div></div></div>
       <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box"><span class="chk-tick">&#10003;</span></div><div><div class="chk-main"><span data-lang="en" class="lang-visible">Demo video recorded, AI-narrated, and embedded in landing page</span><span data-lang="de">Demo-Video aufgenommen, KI-kommentiert und in Landing Page eingebettet</span></div><div class="chk-sub"><span data-lang="en" class="lang-visible">Under 2 minutes. Uploaded to YouTube or hosted via Vercel.</span><span data-lang="de">Unter 2 Minuten. Auf YouTube oder über Vercel gehostet.</span></div></div></div>
@@ -1164,7 +1190,7 @@ span[data-lang].lang-visible{display:inline}
 
     <!-- Phase 5 group -->
     <div class="check-group">
-      <div class="check-section-title" style="color:var(--pink)">Phase 5 — <span data-lang="en" class="lang-visible">Closure</span><span data-lang="de">Abschluss</span></div>
+      <div class="check-section-title" style="color:var(--pink)">Phase 4 — <span data-lang="en" class="lang-visible">Closure &amp; Presentation</span><span data-lang="de">Abschluss &amp; Präsentation</span></div>
       <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box"><span class="chk-tick">&#10003;</span></div><div><div class="chk-main"><span data-lang="en" class="lang-visible">Retrospective log written and shared with team</span><span data-lang="de">Retrospektive-Log geschrieben und mit dem Team geteilt</span></div><div class="chk-sub"><span data-lang="en" class="lang-visible">Challenges, Solutions, AI Outlook — all documented.</span><span data-lang="de">Herausforderungen, Lösungen, KI-Ausblick — alles dokumentiert.</span></div></div></div>
       <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box"><span class="chk-tick">&#10003;</span></div><div><div class="chk-main"><span data-lang="en" class="lang-visible">Live team presentation completed on production URL</span><span data-lang="de">Live-Team-Präsentation auf der Produktions-URL abgeschlossen</span></div><div class="chk-sub"><span data-lang="en" class="lang-visible">Video played. AI contribution highlighted. Q&amp;A done.</span><span data-lang="de">Video abgespielt. KI-Beitrag hervorgehoben. Q&amp;A abgeschlossen.</span></div></div></div>
     </div>
