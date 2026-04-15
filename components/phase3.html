@@ -1,0 +1,130 @@
+﻿<!-- =================== PHASE 4 =================== -->
+<section class="phase-section reveal" id="phase4">
+  <div class="phase-head">
+    <div class="ph-num gt-amber">03</div>
+    <div class="ph-info">
+      <h2><span data-lang="en" class="lang-visible">Deployment</span><span data-lang="de">Deployment</span></h2>
+      <p>
+        <span data-lang="en" class="lang-visible">Deployment means controlled automation. First run is manual to provision the Vercel project. Then you add environment variables, trigger deployment again, and the app goes live. Later deployments are one-click workflow runs; only update Vercel variables when new ones are added in the project.</span>
+        <span data-lang="de">Deployment bedeutet kontrollierte Automatisierung. Der erste Lauf ist manuell, damit das Vercel-Projekt angelegt wird. Danach Variablen in Vercel eintragen, Workflow erneut starten, und die App geht live. Spätere Deployments sind One-Click-Workflow-Läufe; Vercel-Variablen nur bei neuen Projektvariablen ergänzen.</span>
+      </p>
+    </div>
+  </div>
+  <div class="grid12">
+
+    <!-- Landing Page -->
+    <div class="card p4 card-pad col5 reveal">
+      <div class="badge b-amber" style="margin-bottom:12px"><span data-lang="en" class="lang-visible">Deployment Flow</span><span data-lang="de">Deployment-Ablauf</span></div>
+      <h3 class="card-title"><span class="icon3d" aria-hidden="true">⚙️</span><span data-lang="en" class="lang-visible">GitHub Workflow → Vercel → Domain</span><span data-lang="de">GitHub-Workflow → Vercel → Domain</span></h3>
+      <p class="card-intro"><span data-lang="en" class="lang-visible">Use <code>deploy.yml</code> manually for the first deployment. It can provision the project when <code>VERCEL_PROJECT_ID</code> is missing. Then add all env variables in Vercel and run deployment again. After that, deployment is repeatable and stable.</span><span data-lang="de">Für das erste Deployment <code>deploy.yml</code> manuell starten. Der Workflow kann ein Projekt provisionieren, wenn <code>VERCEL_PROJECT_ID</code> fehlt. Danach alle Env-Variablen in Vercel eintragen und Deployment erneut starten. Ab dann ist der Ablauf wiederholbar und stabil.</span></p>
+      <div class="analogy">
+        <div class="label">ELI5 Analogy</div>
+        <p><span data-lang="en" class="lang-visible">Your app is a great restaurant — but without a sign on the street and a menu in the window, nobody walks in. The landing page is the shop front that makes strangers curious enough to come inside and try the food.</span><span data-lang="de">Deine App ist ein tolles Restaurant — aber ohne Schild an der Straße und Speisekarte im Fenster kommt niemand rein. Die Landing Page ist das Schaufenster, das Neugier auf das Essen weckt.</span></p>
+      </div>
+      <div class="steps" style="margin-top:10px">
+        <div class="step">
+          <div class="step-n sn-amber">1</div>
+          <div class="step-body"><h4><span data-lang="en" class="lang-visible">Run deploy workflow first time (manual)</span><span data-lang="de">Deploy-Workflow zuerst manuell starten</span></h4><p><span data-lang="en" class="lang-visible">Open GitHub Actions and run <code>Deploy to Vercel</code>. First run creates or links the Vercel project.</span><span data-lang="de">In GitHub Actions <code>Deploy to Vercel</code> manuell ausführen. Der erste Lauf erstellt oder verknüpft das Vercel-Projekt.</span></p></div>
+        </div>
+        <div class="step">
+          <div class="step-n sn-amber">2</div>
+          <div class="step-body"><h4><span data-lang="en" class="lang-visible">Add all env variables in Vercel</span><span data-lang="de">Alle Env-Variablen in Vercel eintragen</span></h4><p><span data-lang="en" class="lang-visible">Copy variables from <code>.env.local</code> into Vercel Project Settings. If new variables appear later, add them before deploying.</span><span data-lang="de">Variablen aus <code>.env.local</code> in Vercel Project Settings übernehmen. Wenn später neue Variablen hinzukommen, vor dem Deployment ergänzen.</span></p></div>
+        </div>
+        <div class="step">
+          <div class="step-n sn-amber">3</div>
+          <div class="step-body"><h4><span data-lang="en" class="lang-visible">Trigger deploy second time</span><span data-lang="de">Deployment zweites Mal auslösen</span></h4><p><span data-lang="en" class="lang-visible">Run the workflow again after env setup. This is the run that typically brings the full app live correctly.</span><span data-lang="de">Workflow nach Env-Setup erneut starten. Dieser Lauf bringt die App in der Regel korrekt live.</span></p></div>
+        </div>
+        <div class="step">
+          <div class="step-n sn-amber">4</div>
+          <div class="step-body"><h4><span data-lang="en" class="lang-visible">Connect Strato domain + Supabase-backed app</span><span data-lang="de">Strato-Domain + Supabase-App verbinden</span></h4><p><span data-lang="en" class="lang-visible">Set DNS records from Vercel in Strato, verify SSL, and test one full write/read flow to Supabase on production URL.</span><span data-lang="de">DNS-Einträge aus Vercel in Strato setzen, SSL prüfen und einen kompletten Schreib-/Lese-Flow zu Supabase auf der Produktions-URL testen.</span></p></div>
+        </div>
+      </div>
+      <div class="note" style="margin-top:14px">
+        <div class="nl">Landing Page Workflow</div>
+        <p><span data-lang="en" class="lang-visible">Today you can use <code>lp-generator.yml</code> to generate a landing page via GitHub workflow. In future this will move into a dedicated GitHub skill with a direct prompt flow.</span><span data-lang="de">Aktuell kann für Landing Pages <code>lp-generator.yml</code> verwendet werden. Zukünftig wird das in einen dedizierten GitHub-Skill mit direktem Prompt-Flow überführt.</span></p>
+      </div>
+    </div>
+
+    <!-- Manual -->
+    <div class="card p4 card-pad col4 reveal">
+      <div class="badge b-amber" style="margin-bottom:12px"><span data-lang="en" class="lang-visible">Deliverable 2</span><span data-lang="de">Liefergegenstand 2</span></div>
+      <h3 class="card-title"><span class="icon3d" aria-hidden="true">📘</span><span data-lang="en" class="lang-visible">User Manual / Handbuch</span><span data-lang="de">Nutzerhandbuch / Handbuch</span></h3>
+      <p class="card-intro"><span data-lang="en" class="lang-visible">A manual is the first thing a support team reaches for when a user asks "how do I...?". It documents every core workflow step-by-step with screenshots if needed. Every sprint ships a manual. No exceptions.</span><span data-lang="de">Ein Handbuch ist das Erste, auf das ein Support-Team zurückgreift, wenn ein Nutzer fragt "Wie mache ich...?". Es dokumentiert jeden Kernworkflow Schritt für Schritt mit Screenshots, falls erforderlich. Jeder Sprint liefert ein Handbuch. Keine Ausnahmen.</span></p>
+      <div class="con-grid" style="margin-top:10px">
+        <div class="con-item">
+          <div class="con-title" style="color:#fcd34d"><span data-lang="en" class="lang-visible">Quick-Start Guide</span><span data-lang="de">Schnellstart</span></div>
+          <p><span data-lang="en" class="lang-visible">One page: sign up, log in, complete the first key task. A new user follows it in under 5 minutes.</span><span data-lang="de">Eine Seite: Registrierung, Login, erste Kernaufgabe. Neuer Nutzer folgt in unter 5 Minuten.</span></p>
+        </div>
+        <!-- <div class="con-item">
+          <div class="con-title" style="color:#fcd34d"><span data-lang="en" class="lang-visible">Core Workflows</span><span data-lang="de">Kern-Workflows</span></div>
+          <p><span data-lang="en" class="lang-visible">Each major feature gets numbered steps + screenshots. UI-heavy flows require screen recordings.</span><span data-lang="de">Jedes Hauptfeature bekommt nummerierte Schritte + Screenshots. UI-intensive Flows brauchen Screenrecordings.</span></p>
+        </div> -->
+        <div class="con-item">
+          <div class="con-title" style="color:#fcd34d">FAQ</div>
+          <p><span data-lang="en" class="lang-visible">Anticipate the 5 most common questions and write clear answers. The FAQ grows after every sprint.</span><span data-lang="de">Die 5 häufigsten Fragen antizipieren und beantworten. Das FAQ wächst mit jedem Sprint.</span></p>
+        </div>
+        <div class="con-item">
+          <div class="con-title" style="color:#fcd34d"><span data-lang="en" class="lang-visible">Where it lives</span><span data-lang="de">Wo es lebt</span></div>
+          <p><span data-lang="en" class="lang-visible">At <code>/manual</code> in the app, or on OneDrive linked from the footer. Accessible before the Monday evening presentation.</span><span data-lang="de">Unter <code>/manual</code> in der App, oder auf OneDrive verlinkt aus dem Footer. Vor der Montagabend-Präsentation erreichbar.</span></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Demo Video -->
+    <div class="card p4 card-pad col3 reveal">
+      <div class="badge b-amber" style="margin-bottom:12px"><span data-lang="en" class="lang-visible">Deliverable 3</span><span data-lang="de">Liefergegenstand 3</span></div>
+      <h3 class="card-title"><span class="icon3d" aria-hidden="true">🎬</span><span data-lang="en" class="lang-visible">Demo Video</span><span data-lang="de">Demo-Video</span></h3>
+      <p class="card-intro"><span data-lang="en" class="lang-visible">A 60–120 second AI-narrated screencast showing exactly how the product works. Created Thursday, embedded in the landing page and played in the Monday evening presentation.</span><span data-lang="de">Ein 60–120-sekündiger KI-kommentierter Screencast. Donnerstag erstellt, in die Landing Page eingebettet und in der Montagabend-Präsentation abgespielt.</span></p>
+      <div class="steps" style="margin-top:10px">
+        <div class="step">
+          <div class="step-n sn-amber">1</div>
+          <div class="step-body"><h4><span data-lang="en" class="lang-visible">Record on Production URL</span><span data-lang="de">Auf Produktions-URL aufnehmen</span></h4><p><span data-lang="en" class="lang-visible">Show the complete user journey — from the landing page through to completing the core task. Never record on localhost.</span><span data-lang="de">Den kompletten User-Journey zeigen — von der Landing Page bis zur Kernaufgabe. Niemals auf localhost aufnehmen.</span></p></div>
+        </div>
+        <div class="step">
+          <div class="step-n sn-amber">2</div>
+          <div class="step-body"><h4><span data-lang="en" class="lang-visible">Add AI Narration</span><span data-lang="de">KI-Kommentar hinzufügen</span></h4><p><span data-lang="en" class="lang-visible">Write a voiceover script, generate with an AI TTS tool. Keep total length under 2 minutes.</span><span data-lang="de">Voiceover-Script schreiben, mit KI-TTS generieren. Gesamtlänge unter 2 Minuten halten.</span></p></div>
+        </div>
+        <div class="step">
+          <div class="step-n sn-amber">3</div>
+          <div class="step-body"><h4><span data-lang="en" class="lang-visible">Export &amp; Embed</span><span data-lang="de">Exportieren &amp; Einbetten</span></h4><p><span data-lang="en" class="lang-visible">Upload to YouTube or host via Vercel. Embed in landing page hero. Link from README and demo presentation.</span><span data-lang="de">Auf YouTube hochladen oder über Vercel hosten. In Landing-Page-Hero einbetten. Aus README und Demopräsentation verlinken.</span></p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 Required Deliverables banner -->
+    <div class="card p4 card-pad col12 reveal">
+      <div class="badge b-amber" style="margin-bottom:12px;display:inline-flex"><span data-lang="en" class="lang-visible">HOWTO.md — Project Checklist</span><span data-lang="de">HOWTO.md — Projektcheckliste</span></div>
+      <h3 class="card-title"><span class="icon3d" aria-hidden="true">📋</span><span data-lang="en" class="lang-visible">5 Required Deliverables — Every Sprint, No Exceptions</span><span data-lang="de">5 Pflicht-Liefergegenstände — Jeder Sprint, keine Ausnahmen</span></h3>
+      <p class="card-intro"><span data-lang="en" class="lang-visible">The HOWTO.md project checklist defines exactly what must exist before a sprint is considered complete. Any sprint that ships without these five items is incomplete — regardless of whether the code works or the Vercel deployment is green.</span><span data-lang="de">Die HOWTO.md-Projektcheckliste definiert genau, was existieren muss, bevor ein Sprint als abgeschlossen gilt. Ein Sprint ohne diese fünf Punkte ist unvollständig — egal ob der Code funktioniert oder der Vercel-Deploy grün ist.</span></p>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:4px">
+        <div class="con-item" style="text-align:center">
+          <div style="font-size:28px;margin-bottom:8px">🌐</div>
+          <div class="con-title" style="color:#fcd34d"><span data-lang="en" class="lang-visible">Landing Page</span><span data-lang="de">Landing Page</span></div>
+          <p><span data-lang="en" class="lang-visible">Live on custom domain. Hero, features, video, CTA.</span><span data-lang="de">Live auf Eigendomain. Hero, Features, Video, CTA.</span></p>
+        </div>
+        <div class="con-item" style="text-align:center">
+          <div style="font-size:28px;margin-bottom:8px">📖</div>
+          <div class="con-title" style="color:#fcd34d"><span data-lang="en" class="lang-visible">Manual</span><span data-lang="de">Handbuch</span></div>
+          <p><span data-lang="en" class="lang-visible">Quick-start guide + all core workflows documented with screenshots.</span><span data-lang="de">Schnellstart + alle Kernworkflows mit Screenshots dokumentiert.</span></p>
+        </div>
+        <div class="con-item" style="text-align:center">
+          <div style="font-size:28px;margin-bottom:8px">⚙️</div>
+          <div class="con-title" style="color:#fcd34d"><span data-lang="en" class="lang-visible">Main Process</span><span data-lang="de">Hauptprozess</span></div>
+          <p><span data-lang="en" class="lang-visible">The core feature working end-to-end in production. Verified on the live URL.</span><span data-lang="de">Das Kernfeature läuft end-to-end in der Produktion. Auf der Live-URL verifiziert.</span></p>
+        </div>
+        <div class="con-item" style="text-align:center">
+          <div style="font-size:28px;margin-bottom:8px">🎬</div>
+          <div class="con-title" style="color:#fcd34d"><span data-lang="en" class="lang-visible">Video</span><span data-lang="de">Video</span></div>
+          <p><span data-lang="en" class="lang-visible">AI-narrated demo video. Embedded in landing page. Under 2 minutes.</span><span data-lang="de">KI-kommentiertes Demo-Video. In Landing Page eingebettet. Unter 2 Minuten.</span></p>
+        </div>
+        <div class="con-item" style="text-align:center">
+          <div style="font-size:28px;margin-bottom:8px">🔗</div>
+          <div class="con-title" style="color:#fcd34d"><span data-lang="en" class="lang-visible">Domain</span><span data-lang="de">Domain</span></div>
+          <p><span data-lang="en" class="lang-visible">Custom domain from Strato. DNS propagated. SSL active. App accessible.</span><span data-lang="de">Eigendomain von Strato. DNS propagiert. SSL aktiv. App erreichbar.</span></p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+

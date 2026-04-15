@@ -1,0 +1,286 @@
+﻿<!-- =================== PHASE 2 =================== -->
+<section class="phase-section reveal" id="phase2">
+  <div class="phase-head">
+    <div class="ph-num gt-violet">01</div>
+    <div class="ph-info">
+      <h2><span data-lang="en" class="lang-visible">Planning &amp; Preparation</span><span data-lang="de">Planung &amp; Vorbereitung</span></h2>
+      <p><span data-lang="en" class="lang-visible">This is the heart of the week. You move from planning to building. Every tool, process, and convention described here exists to help you build faster, with fewer bugs, with AI as your co-pilot.</span><span data-lang="de">Das ist das Herzstück der Woche. Du wechselst vom Planen zum Bauen. Jedes hier beschriebene Tool und jeder Prozess hilft dir, schneller und mit weniger Fehlern zu bauen — mit KI als Co-Pilot.</span></p>
+    </div>
+  </div>
+  <div class="grid12">
+
+    <!-- FOUNDATION: template_repo -->
+    <div class="card p2 card-pad col6 reveal" id="template-repo">
+      <div class="badge b-violet" style="margin-bottom:12px"><span data-lang="en" class="lang-visible">The Foundation — GitHub</span><span data-lang="de">Das Fundament — GitHub</span></div>
+      <h3 class="card-title gt-violet"><span class="icon3d" aria-hidden="true">📦</span>template_repo</h3>
+      <p class="card-intro">
+        <span data-lang="en" class="lang-visible">Now that the repository is already cloned in Phase 0, Phase 1 is pure setup and orientation. Think of <code>template_repo</code> as a professionally-prepared empty house. You do not build the foundation again, you only activate utilities and prepare rooms for real work.
+        <br><br>
+        It is the official WAMOCON starting point for every new application. It ships with Next.js 16, TypeScript, Tailwind CSS, Supabase, CI/CD pipelines, and a full GitHub Copilot configuration — all pre-wired and ready.</span>
+        <span data-lang="de">Da das Repository bereits in Phase 0 geklont wurde, ist Phase 1 reine Einrichtung und Orientierung. Stell dir <code>template_repo</code> wie ein professionell vorbereitetes Haus vor. Du baust nicht erneut das Fundament, sondern aktivierst nur die Infrastruktur und bereitest alles für die Umsetzung vor.
+        <br><br>
+        Es ist der offizielle WAMOCON-Startpunkt für jede neue Anwendung. Enthalten: Next.js 16, TypeScript, Tailwind CSS, Supabase, CI/CD-Pipelines und eine vollständige GitHub-Copilot-Konfiguration.</span>
+      </p>
+      <div style="margin-bottom:18px">
+        <div class="info-row"><span class="irl">Framework</span><span class="tag">Next.js 16 App Router</span></div>
+        <div class="info-row"><span class="irl">Language</span><span class="tag">TypeScript (strict mode)</span></div>
+        <div class="info-row"><span class="irl">Styling</span><span class="tag">Tailwind CSS v4</span></div>
+        <div class="info-row"><span class="irl">Database</span><span class="tag">Supabase (PostgreSQL + RLS)</span></div>
+        <div class="info-row"><span class="irl">Deployment</span><span class="tag">Vercel via GitHub Actions</span></div>
+        <div class="info-row"><span class="irl">Safety</span><span class="tag">Pre-commit secret scanner hook</span></div>
+        <div class="info-row"><span class="irl">CI/CD Source</span><span class="tag">Wamocon/github_workflow</span></div>
+        <div class="info-row"><span class="irl">AI Config</span><span class="tag">AGENTS.md + Instructions</span></div>
+      </div>
+      <div style="font-size:12px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:8px">Quick Start</div>
+      <div class="codeblock">
+<span class="c-comment"># Step 1: Install all dependencies (like downloading all ingredients)</span>
+<span class="c-cmd">npm install</span>
+
+<span class="c-comment"># Step 2: Install one-time pre-commit safety hook</span>
+<span class="c-cmd">bash</span> hooks/install.sh
+
+<span class="c-comment"># Step 3: Copy the environment variable template</span>
+<span class="c-cmd">cp</span> .env.example .env.local
+
+<span class="c-comment"># Step 4: Start the development server</span>
+<span class="c-cmd">npm run dev</span>  <span class="c-comment"># Open http://localhost:3000</span></div>
+      <div class="analogy" style="margin-top:16px">
+        <div class="label">ELI5 Analogy</div>
+        <p><span data-lang="en" class="lang-visible">You already copied the recipe book in Phase 0. Phase 1 is buying ingredients, labeling drawers, and checking safety before cooking.</span><span data-lang="de">Das Rezeptbuch wurde bereits in Phase 0 kopiert. Phase 1 heißt: Zutaten kaufen, Schubladen beschriften und Sicherheit prüfen, bevor gekocht wird.</span></p>
+      </div>
+    </div>
+
+    <!-- AI: COPILOT -->
+    <div class="card p2 card-pad col6 reveal">
+      <div class="badge b-violet" style="margin-bottom:12px"><span data-lang="en" class="lang-visible">The AI Assistant — GitHub Copilot</span><span data-lang="de">Der KI-Assistent — GitHub Copilot</span></div>
+      <h3 class="card-title"><span class="icon3d" aria-hidden="true">🤖</span><span data-lang="en" class="lang-visible">Your Intelligent Co-Pilot</span><span data-lang="de">Dein intelligenter Co-Pilot</span></h3>
+      <p class="card-intro"><span data-lang="en" class="lang-visible">GitHub Copilot is an AI that lives inside VS Code and writes code alongside you. But unlike a simple autocomplete, Copilot in this project is fine-tuned to know exactly our tech stack, our rules, and our coding conventions — through a set of configuration files that ship inside <code>template_repo</code>.</span><span data-lang="de">GitHub Copilot ist eine KI, die in VS Code lebt und Code neben dir schreibt. Aber anders als ein einfaches Autocomplete kennt Copilot in diesem Projekt unseren Tech-Stack, unsere Regeln und Konventionen — durch Konfigurationsdateien in <code>template_repo</code>.</span></p>
+      <div class="analogy">
+        <div class="label">ELI5 Analogy</div>
+        <p><span data-lang="en" class="lang-visible">Imagine having a genius friend who has read every programming book ever written, knows your project inside-out, and sits next to you while you code. When you start typing, they finish the sentence — correctly, every time. That is GitHub Copilot. The configuration files are like giving that friend a briefing document about your specific project before they start.</span><span data-lang="de">Stell dir vor, du hast einen genialen Freund, der jedes Programmierbuch gelesen hat, dein Projekt in- und auswendig kennt und neben dir sitzt. Wenn du anfängst zu tippen, vervollständigt er den Satz — jedes Mal korrekt. Das ist GitHub Copilot.</span></p>
+      </div>
+      <div class="steps" style="margin-top:16px">
+        <div class="step">
+          <div class="step-n sn-violet">1</div>
+          <div class="step-body">
+            <h4>copilot-instructions.md</h4>
+            <p><span data-lang="en" class="lang-visible">Located at <code>.github/copilot-instructions.md</code>. This file is automatically loaded on <strong>every single Copilot interaction</strong>. It tells the AI the tech stack, critical rules (how to use Supabase, how to handle async components), and team conventions. Think of it as the AI's standing briefing document.</span><span data-lang="de">In <code>.github/copilot-instructions.md</code>. Diese Datei wird bei <strong>jeder</strong> Copilot-Interaktion automatisch geladen. Sie teilt der KI den Tech-Stack, kritische Regeln und Team-Konventionen mit.</span></p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n sn-violet">2</div>
+          <div class="step-body">
+            <h4>.instructions.md Files</h4>
+            <p><span data-lang="en" class="lang-visible">Pattern-scoped guidelines inside <code>.github/instructions/</code>. For example, the Next.js instruction file only activates when Copilot works on <code>.tsx</code> or <code>.ts</code> files. This keeps instructions focused and relevant — the AI only receives the guidance that applies to the file it is currently editing.</span><span data-lang="de">Muster-gebundene Richtlinien in <code>.github/instructions/</code>. Die Next.js-Datei aktiviert sich z. B. nur bei <code>.tsx</code>/<code>.ts</code>-Dateien. So bleiben die Anweisungen fokussiert.</span></p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n sn-violet">3</div>
+          <div class="step-body">
+            <h4>@planner Agent</h4>
+            <p><span data-lang="en" class="lang-visible">A specialized AI persona defined in <code>.github/agents/</code>. Invoked by typing <code>@planner</code> in the VS Code Copilot chat. When you give it a task (like "Add an authentication page"), it explores the codebase, identifies all affected files, and creates a numbered plan — but it never writes code. Use it to <em>plan before you build</em>.</span><span data-lang="de">Eine spezialisierte KI-Persona in <code>.github/agents/</code>. Aufgerufen mit <code>@planner</code> im Copilot-Chat. Es erkundet die Codebase, identifiziert betroffene Dateien und erstellt einen nummerierten Plan — schreibt aber nie Code. Zum <em>Planen vor dem Bauen</em> verwenden.</span></p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n sn-violet">4</div>
+          <div class="step-body">
+            <h4>AGENTS.md — Read This First</h4>
+            <p><span data-lang="en" class="lang-visible">The most important onboarding file in the entire project. It explains every agent, every instruction file, and when to use each one. Before writing a single line of code on a new project, read <code>AGENTS.md</code> from cover to cover.</span><span data-lang="de">Die wichtigste Onboarding-Datei im gesamten Projekt. Sie erklärt jeden Agenten, jede Instruction-Datei und wann welche zu verwenden ist. Vor dem Schreiben von Code unbedingt lesen.</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DATABASE: SUPABASE & MCP -->
+    <div class="card p2 card-pad col5 reveal">
+      <div class="badge b-cyan" style="margin-bottom:12px"><span data-lang="en" class="lang-visible">The Database — Supabase &amp; MCP</span><span data-lang="de">Die Datenbank — Supabase &amp; MCP</span></div>
+      <h3 class="card-title"><span class="icon3d" aria-hidden="true">🗄️</span><span data-lang="en" class="lang-visible">Where Your App Stores Its Memory</span><span data-lang="de">Wo die App Daten speichert</span></h3>
+      <p class="card-intro"><span data-lang="en" class="lang-visible">Every app needs to remember things — user accounts, product listings, messages. Supabase is the cloud database that stores all of this. It is like a giant, secure filing cabinet in the cloud that your app reads from and writes to 24/7.</span><span data-lang="de">Jede App muss Dinge speichern — Nutzerkonten, Produkte, Nachrichten. Supabase ist die Cloud-Datenbank, in der all das gespeichert wird. Es ist wie ein riesiger, sicherer Aktenschrank in der Cloud.</span></p>
+      <div class="analogy">
+        <div class="label">ELI5 Analogy — What is MCP?</div>
+        <p><span data-lang="en" class="lang-visible">MCP (Model Context Protocol) is like giving Copilot a direct phone line to Supabase. Instead of you manually clicking buttons in Supabase to create tables, you can simply tell Copilot: "Create a users table with name, email, and created_at columns" — and Copilot calls Supabase directly through MCP and does it for you.</span><span data-lang="de">MCP (Model Context Protocol) ist wie ein direkter Telefonanschluss zwischen Copilot und Supabase. Statt manuell Tabellen anzulegen, sagt man Copilot: „Erstelle eine Nutzertabelle mit name, email und created_at" — und Copilot ruft Supabase direkt über MCP an.</span></p>
+      </div>
+      <div class="steps" style="margin-top:14px">
+        <div class="step">
+          <div class="step-n sn-cyan">1</div>
+          <div class="step-body">
+            <h4><span data-lang="en" class="lang-visible">Request Domain + Supabase Access</span><span data-lang="de">Domain + Supabase-Zugang anfragen</span></h4>
+            <p><span data-lang="en" class="lang-visible">Find a fitting domain at Strato, then ask Waleri to register it and provide your production Supabase credentials. You still can use temporary local/dev values, but production values must come from the managed process.</span><span data-lang="de">Eine passende Domain bei Strato suchen und dann Waleri bitten, die Domain zu registrieren und die Produktions-Supabase-Zugangsdaten bereitzustellen. Für lokal/dev sind temporäre Werte möglich, Produktionswerte kommen aus dem managed Prozess.</span></p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n sn-cyan">2</div>
+          <div class="step-body">
+            <h4><span data-lang="en" class="lang-visible">Populate .env.local</span><span data-lang="de">.env.local befüllen</span></h4>
+            <p><span data-lang="en" class="lang-visible">Paste the three values into your <code>.env.local</code> file. This file is like a secret notebook that your app reads to know where the database is and how to log in. Never commit this file to GitHub — it contains secrets.</span><span data-lang="de">Die drei Werte in <code>.env.local</code> eintragen. Diese Datei ist wie ein geheimes Notizbuch, das die App liest. Niemals auf GitHub hochladen — sie enthält Geheimnisse.</span></p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n sn-cyan">3</div>
+          <div class="step-body">
+            <h4><span data-lang="en" class="lang-visible">Connect Supabase MCP to VS Code</span><span data-lang="de">Supabase MCP mit VS Code verbinden</span></h4>
+            <p><span data-lang="en" class="lang-visible">Install the Supabase MCP extension and configure it with your project credentials. Once connected, Copilot can directly create tables, run migrations, and manage permissions — all via natural language commands in the chat.</span><span data-lang="de">Die Supabase-MCP-Erweiterung installieren und mit den Projektdaten konfigurieren. Danach kann Copilot direkt Tabellen erstellen, Migrationen ausführen und Berechtigungen verwalten.</span></p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n sn-cyan">4</div>
+          <div class="step-body">
+            <h4><span data-lang="en" class="lang-visible">Grant Schema Permissions</span><span data-lang="de">Schema-Berechtigungen vergeben</span></h4>
+            <p><span data-lang="en" class="lang-visible">If using custom schemas (e.g. <code>app</code>, <code>internal</code>), you must grant <code>USAGE</code> and <code>ALL TABLES</code> permissions and expose the schema via <code>Settings → API → Exposed Schemas</code>. Without this, Supabase returns empty results.</span><span data-lang="de">Bei eigenen Schemas (z. B. <code>app</code>, <code>internal</code>) müssen <code>USAGE</code> und <code>ALL TABLES</code> Berechtigungen vergeben und das Schema über <code>Settings → API → Exposed Schemas</code> freigegeben werden.</span></p>
+          </div>
+        </div>
+      </div>
+      <div class="codeblock" style="margin-top:16px">
+<span class="c-comment"># .env.local — fill in your real values</span>
+<span class="c-flag">NEXT_PUBLIC_SUPABASE_URL</span>=https://<span class="c-path">&lt;ref&gt;</span>.supabase.co
+<span class="c-flag">NEXT_PUBLIC_SUPABASE_ANON_KEY</span>=<span class="c-val">&lt;anon-key&gt;</span>
+<span class="c-flag">SUPABASE_SERVICE_ROLE_KEY</span>=<span class="c-val">&lt;service-role-key&gt;</span></div>
+      <div class="warn" style="margin-top:14px">
+        <div class="wl">Critical Rule</div>
+        <p><span data-lang="en" class="lang-visible">Never store test data as local JSON files or SQL dumps in the project folder. Insert all data directly into Supabase via Dashboard, MCP, or migrations. One source of truth from day one.</span><span data-lang="de">Testdaten niemals als lokale JSON-Dateien oder SQL-Dumps im Projektordner speichern. Alle Daten direkt in Supabase per Dashboard, MCP oder Migrationen pflegen. Eine einzige Datenquelle von Anfang an.</span></p>
+      </div>
+    </div>
+
+    <!-- BRANCHING & CI/CD -->
+    <div class="card p2 card-pad col7 reveal">
+      <div class="badge b-violet" style="margin-bottom:12px"><span data-lang="en" class="lang-visible">The Safe Path — Branching &amp; CI/CD</span><span data-lang="de">Der sichere Weg — Branching &amp; CI/CD</span></div>
+      <h3 class="card-title"><span class="icon3d" aria-hidden="true">🛡️</span><span data-lang="en" class="lang-visible">Never Break the Live App</span><span data-lang="de">Die Live-App niemals beschädigen</span></h3>
+      <p class="card-intro"><span data-lang="en" class="lang-visible">The <code>main</code> branch is the source of truth for production. It is always stable and always deployable. To add new features, you work on a separate copy called a "feature branch." Once your feature is finished and tested, you merge it in.</span><span data-lang="de">Der <code>main</code>-Branch ist die Quelle der Wahrheit für die Produktion. Er ist immer stabil. Neue Features werden in einem separaten „Feature-Branch" entwickelt und erst nach Tests gemergt.</span></p>
+      <div class="analogy">
+        <div class="label">ELI5 Analogy</div>
+        <p><span data-lang="en" class="lang-visible">Imagine <code>main</code> is the published version of a book in the bookstore. A feature branch is your personal draft copy where you write new chapters and fix mistakes. Only when the new chapter is perfect do you send it to the publisher to update the bookstore version.</span><span data-lang="de"><code>main</code> ist die veröffentlichte Version eines Buches. Ein Feature-Branch ist dein persönliches Exemplar, in dem du neue Kapitel schreibst. Erst wenn das neue Kapitel perfekt ist, schickst du es zum Verlag.</span></p>
+      </div>
+      <div class="steps" style="margin-top:16px">
+        <div class="step">
+          <div class="step-n sn-violet">1</div>
+          <div class="step-body">
+            <h4><span data-lang="en" class="lang-visible">Create a Feature Branch</span><span data-lang="de">Feature-Branch erstellen</span></h4>
+            <p><span data-lang="en" class="lang-visible">Always name it <code>feature/your-feature-name</code>. This naming convention makes it immediately clear what the branch contains. Run: <code>git checkout -b feature/my-feature</code></span><span data-lang="de">Immer nach dem Muster <code>feature/feature-name</code> benennen. Ausführen: <code>git checkout -b feature/mein-feature</code></span></p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n sn-violet">2</div>
+          <div class="step-body">
+            <h4><span data-lang="en" class="lang-visible">Run Local Quality Checks Before Every Push</span><span data-lang="de">Lokale Qualitätsprüfungen vor jedem Push</span></h4>
+            <p><span data-lang="en" class="lang-visible"><code>npm run typecheck</code> catches any TypeScript type errors (like trying to use a number where a word is expected). <code>npm run lint</code> catches code style problems. Both must pass before you push. This saves GitHub Actions minutes and prevents PR failures.</span><span data-lang="de"><code>npm run typecheck</code> findet TypeScript-Typfehler. <code>npm run lint</code> findet Code-Stilprobleme. Beide müssen bestehen, bevor gepusht wird. Das spart GitHub-Actions-Minuten.</span></p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n sn-violet">3</div>
+          <div class="step-body">
+            <h4><span data-lang="en" class="lang-visible">Push All Changes, Then Open the PR</span><span data-lang="de">Alle Änderungen pushen, dann PR öffnen</span></h4>
+            <p><span data-lang="en" class="lang-visible">Push everything you need before opening a Pull Request. Every new push to an open PR triggers the full CI pipeline — which consumes GitHub Actions minutes. Open the PR once, when you are done, not incrementally.</span><span data-lang="de">Alles pushen, bevor ein Pull Request geöffnet wird. Jeder neue Push auf einen offenen PR löst die vollständige CI-Pipeline aus. Den PR nur einmal öffnen, wenn alles fertig ist.</span></p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n sn-violet">4</div>
+          <div class="step-body">
+            <h4><span data-lang="en" class="lang-visible">The CI Pipeline Does the Rest</span><span data-lang="de">Die CI-Pipeline erledigt den Rest</span></h4>
+            <p><span data-lang="en" class="lang-visible">When a PR is opened, the centralized <code>Wamocon/github_workflow</code> automatically fixes formatting issues, runs typecheck and lint again, and deploys a Vercel <strong>preview URL</strong> so you can review the changes live before merging to <code>main</code>.</span><span data-lang="de">Wenn ein PR geöffnet wird, behebt der zentrale <code>Wamocon/github_workflow</code> automatisch Formatierungsprobleme, führt Typecheck und Lint aus und deployt eine Vercel-<strong>Vorschau-URL</strong> zum Testen.</span></p>
+          </div>
+        </div>
+      </div>
+      <div class="con-grid" style="margin-top:16px">
+        <div class="con-item"><div class="con-title" style="color:#c4b5fd">pr-checks.yml</div><p><span data-lang="en" class="lang-visible">Runs typecheck + lint on pull requests.</span><span data-lang="de">Führt Typecheck + Lint auf Pull Requests aus.</span></p></div>
+        <div class="con-item"><div class="con-title" style="color:#c4b5fd">pr-autofix.yml</div><p><span data-lang="en" class="lang-visible">Fixes formatting automatically where possible.</span><span data-lang="de">Korrigiert Formatierung automatisch, wenn möglich.</span></p></div>
+        <div class="con-item"><div class="con-title" style="color:#c4b5fd">deploy.yml</div><p><span data-lang="en" class="lang-visible">Manual deployment workflow for Vercel.</span><span data-lang="de">Manueller Deployment-Workflow für Vercel.</span></p></div>
+        <div class="con-item"><div class="con-title" style="color:#c4b5fd">lp-generator.yml</div><p><span data-lang="en" class="lang-visible">Manual landing-page generation workflow.</span><span data-lang="de">Manueller Workflow zur Landing-Page-Generierung.</span></p></div>
+      </div>
+      <div class="codeblock" style="margin-top:16px">
+<span class="c-comment"># The complete feature branch workflow</span>
+<span class="c-cmd">git checkout -b</span> <span class="c-path">feature/my-feature</span>
+
+<span class="c-comment"># Build your feature… then test locally</span>
+<span class="c-cmd">npm run typecheck</span>  <span class="c-comment"># must pass</span>
+<span class="c-cmd">npm run lint</span>       <span class="c-comment"># must pass</span>
+
+<span class="c-comment"># Commit and push ALL changes at once</span>
+<span class="c-cmd">git add</span> .
+<span class="c-cmd">git commit -m</span> <span class="c-val">"feat: description of change"</span>
+<span class="c-cmd">git push origin</span> <span class="c-path">feature/my-feature</span>
+<span class="c-comment"># NOW open the Pull Request on GitHub</span></div>
+      <div class="warn" style="margin-top:14px">
+        <div class="wl">Golden Rule</div>
+        <p><span data-lang="en" class="lang-visible">Never push directly to <code>main</code>. Never have more than one PR open at a time. Test locally first — then push — then open the PR.</span><span data-lang="de">Niemals direkt auf <code>main</code> pushen. Niemals mehr als einen offenen PR gleichzeitig. Erst lokal testen — dann pushen — dann PR öffnen.</span></p>
+      </div>
+    </div>
+
+    <!-- VERCEL -->
+    <div class="card p2 card-pad col6 reveal">
+      <div class="badge b-cyan" style="margin-bottom:12px"><span data-lang="en" class="lang-visible">The Live Server — Vercel</span><span data-lang="de">Der Live-Server — Vercel</span></div>
+      <h3 class="card-title"><span class="icon3d" aria-hidden="true">🌍</span><span data-lang="en" class="lang-visible">Opening the Store to the World</span><span data-lang="de">Das Geschäft für die Welt öffnen</span></h3>
+      <p class="card-intro"><span data-lang="en" class="lang-visible">Vercel is the platform that hosts the application. When code is merged to <code>main</code>, Vercel automatically picks it up and publishes the new version within minutes. It is like having a robot employee whose entire job is to update the website the moment you approve a change.</span><span data-lang="de">Vercel ist die Plattform, die die Anwendung hostet. Wenn Code in <code>main</code> gemergt wird, veröffentlicht Vercel automatisch die neue Version. Es ist wie ein Roboter-Mitarbeiter, dessen einzige Aufgabe es ist, die Website sofort nach Genehmigung einer Änderung zu aktualisieren.</span></p>
+      <div class="analogy">
+        <div class="label">ELI5 Analogy</div>
+        <p><span data-lang="en" class="lang-visible">Deploying to Vercel is like printing and putting your book in the bookstore for the first time. Once it is there, every customer can read it. Every time you release a new edition (merge to main), Vercel automatically swaps the old copies with the new ones — no manual work needed.</span><span data-lang="de">Auf Vercel deployen ist wie das Drucken und Einlegen eines Buches in den Buchladen. Jeder kann es lesen. Jedes neue Release tauscht Vercel automatisch gegen die neue Version aus.</span></p>
+      </div>
+      <div class="steps" style="margin-top:16px">
+        <div class="step">
+          <div class="step-n sn-cyan">1</div>
+          <div class="step-body">
+            <h4><span data-lang="en" class="lang-visible">Temporarily Make Repo Public</span><span data-lang="de">Repo vorübergehend öffentlich machen</span></h4>
+            <p><span data-lang="en" class="lang-visible">Vercel needs to read the code to import the project. Go to <code>Repository → Settings → General → Change visibility → Public</code>. You will revert this to Internal immediately after.</span><span data-lang="de">Vercel muss den Code lesen, um das Projekt zu importieren. Zu <code>Repository → Settings → General → Change visibility → Public</code> gehen. Danach sofort wieder auf Internal zurücksetzen.</span></p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n sn-cyan">2</div>
+          <div class="step-body">
+            <h4><span data-lang="en" class="lang-visible">Import &amp; Deploy on Vercel</span><span data-lang="de">Auf Vercel importieren &amp; deployen</span></h4>
+            <p><span data-lang="en" class="lang-visible">Go to <a href="https://vercel.com" target="_blank">vercel.com</a> → Add New Project → Import your repository → Deploy. Vercel will build the app and give it a public URL.</span><span data-lang="de">Auf <a href="https://vercel.com" target="_blank">vercel.com</a> gehen → Neues Projekt hinzufügen → Repository importieren → Deployen.</span></p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n sn-cyan">3</div>
+          <div class="step-body">
+            <h4><span data-lang="en" class="lang-visible">Copy Project ID → GitHub Secret</span><span data-lang="de">Projekt-ID → GitHub Secret</span></h4>
+            <p><span data-lang="en" class="lang-visible">In Vercel, go to <code>Settings → General → Project ID</code>. Copy it. In GitHub, go to <code>Repository → Settings → Secrets → Actions → New secret</code>. Name it <code>VERCEL_PROJECT_ID</code>. This connects GitHub Actions to your specific Vercel project.</span><span data-lang="de">In Vercel zu <code>Settings → General → Project ID</code> gehen und die ID kopieren. In GitHub als Secret <code>VERCEL_PROJECT_ID</code> hinzufügen. Das verbindet GitHub Actions mit dem Vercel-Projekt.</span></p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n sn-cyan">4</div>
+          <div class="step-body">
+            <h4><span data-lang="en" class="lang-visible">Import All Environment Variables</span><span data-lang="de">Alle Umgebungsvariablen importieren</span></h4>
+            <p><span data-lang="en" class="lang-visible">Go to <code>Vercel → Settings → Environment Variables</code> and add every variable from your <code>.env.local</code> file. If you skip this, the production build will fail because the app cannot find its database credentials.</span><span data-lang="de">Zu <code>Vercel → Settings → Environment Variables</code> gehen und alle Variablen aus <code>.env.local</code> hinzufügen. Ohne diesen Schritt schlägt der Produktions-Build fehl.</span></p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n sn-cyan">5</div>
+          <div class="step-body">
+            <h4><span data-lang="en" class="lang-visible">Revert Repo to Internal</span><span data-lang="de">Repo auf Internal zurücksetzen</span></h4>
+            <p><span data-lang="en" class="lang-visible">Go back to <code>Repository → Settings → General → Change visibility → Internal</code>. The existing Vercel connection continues to work via GitHub Actions — the repo does not need to stay public.</span><span data-lang="de">Zurück zu <code>Repository → Settings → General → Change visibility → Internal</code>. Die Vercel-Verbindung funktioniert weiterhin über GitHub Actions.</span></p>
+          </div>
+        </div>
+      </div>
+      <div class="note" style="margin-top:14px">
+        <div class="nl">Pre-configured Secrets</div>
+        <p><span data-lang="en" class="lang-visible"><code>VERCEL_TOKEN</code> and <code>VERCEL_ORG_ID</code> are already configured at the GitHub organization level. You only need to add <code>VERCEL_PROJECT_ID</code> to the individual repository.</span><span data-lang="de"><code>VERCEL_TOKEN</code> und <code>VERCEL_ORG_ID</code> sind bereits auf GitHub-Organisationsebene konfiguriert. Nur <code>VERCEL_PROJECT_ID</code> muss zum Repository hinzugefügt werden.</span></p>
+      </div>
+    </div>
+
+    <!-- BUILD LOOP -->
+    <div class="card p2 card-pad col6 reveal" style="background:var(--violet-dim)">
+      <div class="badge b-violet" style="margin-bottom:12px"><span data-lang="en" class="lang-visible">The Daily Build Loop</span><span data-lang="de">Die tägliche Build-Schleife</span></div>
+      <h3 class="card-title"><span class="icon3d" aria-hidden="true">🔁</span><span data-lang="en" class="lang-visible">Build → Test → Document → Repeat</span><span data-lang="de">Bauen → Testen → Dokumentieren → Wiederholen</span></h3>
+      <p class="card-intro"><span data-lang="en" class="lang-visible">From Tuesday to Thursday, the team runs on a tight daily loop. Each feature is built, functionally tested in the browser, and only then pushed. High-quality Copilot prompts that produce excellent results are saved as "Golden Prompts" — a growing knowledge base for the team.</span><span data-lang="de">Von Dienstag bis Donnerstag läuft das Team in einer engen täglichen Schleife. Jedes Feature wird gebaut, im Browser getestet und erst dann gepusht. Hochwertige Copilot-Prompts werden als „Golden Prompts" gespeichert — eine wachsende Wissensdatenbank.</span></p>
+      <div class="con-grid">
+        <div class="con-item">
+          <div class="con-title" style="color:#c4b5fd"><span data-lang="en" class="lang-visible">Build with Copilot</span><span data-lang="de">Mit Copilot bauen</span></div>
+          <p><span data-lang="en" class="lang-visible">Use Copilot agent mode for each feature. Use <code>@planner</code> first to plan, then implement. The AI writes 80% of the boilerplate — you focus on business logic and decisions.</span><span data-lang="de">Copilot-Agentenmodus für jedes Feature verwenden. Erst <code>@planner</code> zum Planen, dann implementieren. Die KI schreibt 80% des Boilerplates — du fokussierst dich auf Logik.</span></p>
+        </div>
+        <div class="con-item">
+          <div class="con-title" style="color:#c4b5fd"><span data-lang="en" class="lang-visible">Golden Prompts</span><span data-lang="de">Goldene Prompts</span></div>
+          <p><span data-lang="en" class="lang-visible">When a Copilot prompt produces outstanding, production-ready code on the first try — document it. These "Golden Prompts" are shared with the team and reused in future sprints, compounding sprint efficiency over time.</span><span data-lang="de">Wenn ein Copilot-Prompt beim ersten Versuch hervorragenden Code produziert — dokumentieren. Diese "Goldenen Prompts" werden geteilt und in zukünftigen Sprints wiederverwendet.</span></p>
+        </div>
+        <div class="con-item">
+          <div class="con-title" style="color:#c4b5fd"><span data-lang="en" class="lang-visible">Functional Testing</span><span data-lang="de">Funktionstests</span></div>
+          <p><span data-lang="en" class="lang-visible">After each feature, open the browser and test every user flow end-to-end. Does clicking the button do what it should? Does the data save to Supabase? Test before committing — not after.</span><span data-lang="de">Nach jedem Feature den Browser öffnen und jeden Nutzerflow testen. Funktioniert alles? Werden Daten in Supabase gespeichert? Vor dem Commit testen — nicht danach.</span></p>
+        </div>
+        <div class="con-item">
+          <div class="con-title" style="color:#c4b5fd"><span data-lang="en" class="lang-visible">PR Quality Gate</span><span data-lang="de">PR-Qualitätsstufe</span></div>
+          <p><span data-lang="en" class="lang-visible">Only open a PR once <code>typecheck</code> and <code>lint</code> pass locally. Every push on an open PR burns CI minutes. One clean push — one PR — one merge.</span><span data-lang="de">PR nur öffnen, wenn <code>typecheck</code> und <code>lint</code> lokal bestehen. Ein sauberer Push — ein PR — ein Merge.</span></p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>

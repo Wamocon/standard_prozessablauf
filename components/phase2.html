@@ -1,0 +1,89 @@
+﻿<!-- =================== PHASE 3 =================== -->
+<section class="phase-section reveal" id="phase3">
+  <div class="phase-head">
+    <div class="ph-num gt-cyan">02</div>
+    <div class="ph-info">
+      <h2><span data-lang="en" class="lang-visible">Development</span><span data-lang="de">Entwicklung</span></h2>
+      <p><span data-lang="en" class="lang-visible">Monday morning is about taking everything built this week and pushing it into the hands of real users. This phase is not just technical — it also covers the public face of the product (domain, landing page, video) and the legal requirements that every live website must fulfill.</span><span data-lang="de">Der Montagvormittag dreht sich darum, alles was diese Woche gebaut wurde, in die Hände echter Nutzer zu bringen — inklusive öffentlichem Gesicht (Domain, Landing Page, Video) und rechtlichen Anforderungen.</span></p>
+    </div>
+  </div>
+  <div class="grid12">
+
+    <!-- GOING LIVE -->
+    <div class="card p3 card-pad col4 reveal">
+      <div class="badge b-cyan" style="margin-bottom:12px"><span data-lang="en" class="lang-visible">Going Live</span><span data-lang="de">Go-Live</span></div>
+      <h3 class="card-title"><span class="icon3d" aria-hidden="true">🚀</span><span data-lang="en" class="lang-visible">The Final Merge</span><span data-lang="de">Der finale Merge</span></h3>
+      <p class="card-intro"><span data-lang="en" class="lang-visible">Production launch is the direct result of merging the final PR into <code>main</code>. The GitHub Actions pipeline automatically triggers a Vercel production deployment. No manual steps. No clicking "deploy" buttons. Just merge — and within minutes, the new version is live worldwide.</span><span data-lang="de">Der Production-Launch ist das direkte Ergebnis des Zusammenführens des letzten PRs in <code>main</code>. Die GitHub-Actions-Pipeline löst automatisch ein Vercel-Produktions-Deployment aus. Einfach mergen — und innerhalb von Minuten ist die neue Version live.</span></p>
+      <div class="steps" style="margin-top:14px">
+        <div class="step">
+          <div class="step-n sn-cyan">1</div>
+          <div class="step-body"><h4><span data-lang="en" class="lang-visible">Merge Final PR to main</span><span data-lang="de">Letzten PR in main mergen</span></h4><p><span data-lang="en" class="lang-visible">All feature branches completed and merged. The <code>main</code> branch contains the full, tested product.</span><span data-lang="de">Alle Feature-Branches abgeschlossen und gemergt. <code>main</code> enthält das vollständige, getestete Produkt.</span></p></div>
+        </div>
+        <div class="step">
+          <div class="step-n sn-cyan">2</div>
+          <div class="step-body"><h4><span data-lang="en" class="lang-visible">Verify Vercel Env Vars</span><span data-lang="de">Vercel-Env-Vars prüfen</span></h4><p><span data-lang="en" class="lang-visible">Double-check that all <code>.env.local</code> variables exist in <code>Vercel → Settings → Environment Variables</code>. Missing variables are the #1 cause of production build failures.</span><span data-lang="de">Sicherstellen, dass alle <code>.env.local</code>-Variablen in Vercel eingetragen sind. Fehlende Variablen sind die häufigste Ursache für fehlgeschlagene Produktion-Builds.</span></p></div>
+        </div>
+        <div class="step">
+          <div class="step-n sn-cyan">3</div>
+          <div class="step-body"><h4><span data-lang="en" class="lang-visible">Smoke Test on Production URL</span><span data-lang="de">Smoke-Test auf der Produktions-URL</span></h4><p><span data-lang="en" class="lang-visible">Visit the live URL. Click every button. Log in. Submit a form. Create a record. Verify data appears in Supabase. A 5-minute smoke test catches 90% of deployment issues.</span><span data-lang="de">Die Live-URL besuchen. Jeden Button klicken. Einloggen. Ein Formular abschicken. Daten in Supabase prüfen. Ein 5-minütiger Smoke-Test findet 90% aller Deployment-Probleme.</span></p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DOMAIN & MARKETING -->
+    <div class="card p3 card-pad col4 reveal">
+      <div class="badge b-cyan" style="margin-bottom:12px"><span data-lang="en" class="lang-visible">Name &amp; Face — Domain &amp; Marketing</span><span data-lang="de">Name &amp; Gesicht — Domain &amp; Marketing</span></div>
+      <h3 class="card-title"><span class="icon3d" aria-hidden="true">🌐</span><span data-lang="en" class="lang-visible">The Product's Public Identity</span><span data-lang="de">Die öffentliche Identität</span></h3>
+      <p class="card-intro"><span data-lang="en" class="lang-visible">A Vercel URL like <code>my-app-xyz.vercel.app</code> works, but a real product needs a real address. This section covers connecting a custom domain, building a marketing landing page, and creating an AI explainer video for onboarding users.</span><span data-lang="de">Eine Vercel-URL funktioniert, aber ein echtes Produkt braucht eine echte Adresse. Hier geht es um eine eigene Domain, eine Marketing-Landing-Page und ein KI-Erklärvideo.</span></p>
+      <div class="steps" style="margin-top:14px">
+        <div class="step">
+          <div class="step-n sn-cyan">1</div>
+          <div class="step-body"><h4><span data-lang="en" class="lang-visible">Purchase Domain via Strato</span><span data-lang="de">Domain über Strato kaufen</span></h4><p><span data-lang="en" class="lang-visible">Go to <a href="https://www.strato.de" target="_blank">strato.de</a>, search and purchase your domain (e.g. <code>myapp.de</code>). Strato is the approved domain registrar for WAMOCON projects.</span><span data-lang="de">Auf <a href="https://www.strato.de" target="_blank">strato.de</a> die Domain suchen und kaufen. Strato ist der genehmigte Domain-Registrar für WAMOCON-Projekte.</span></p></div>
+        </div>
+        <div class="step">
+          <div class="step-n sn-cyan">2</div>
+          <div class="step-body"><h4><span data-lang="en" class="lang-visible">Connect Domain in Vercel</span><span data-lang="de">Domain in Vercel verbinden</span></h4><p><span data-lang="en" class="lang-visible">In Vercel, go to <code>Settings → Domains</code>, add your domain. Vercel shows you the DNS records to set. In Strato's DNS panel, create the CNAME or A-record exactly as shown.</span><span data-lang="de">In Vercel zu <code>Settings → Domains</code> gehen und die Domain hinzufügen. Vercel zeigt die DNS-Einträge an. Im Strato-DNS-Panel genau wie angegeben eintragen.</span></p></div>
+        </div>
+        <div class="step">
+          <div class="step-n sn-cyan">3</div>
+          <div class="step-body"><h4><span data-lang="en" class="lang-visible">Build the Landing Page Layer</span><span data-lang="de">Landing-Page-Layer bauen</span></h4><p><span data-lang="en" class="lang-visible">A marketing landing page is the front door of your product — it shows what the app does, why someone should use it, and a call-to-action (sign up, request access). Build it as a route in your Next.js app.</span><span data-lang="de">Eine Marketing-Landing-Page ist die Eingangstür zum Produkt — sie zeigt was die App macht, warum man sie nutzen sollte und einen Call-to-Action. Als Route in der Next.js-App bauen.</span></p></div>
+        </div>
+        <div class="step">
+          <div class="step-n sn-cyan">4</div>
+          <div class="step-body"><h4><span data-lang="en" class="lang-visible">Create AI Explainer Video</span><span data-lang="de">KI-Erklärvideo erstellen</span></h4><p><span data-lang="en" class="lang-visible">Use an AI video tool (e.g. HeyGen, Synthesia, Loom) to create a short 1-2 minute demo showing the app's core value. Embed it on the landing page. This dramatically improves user understanding and conversion.</span><span data-lang="de">Ein KI-Videotool (z. B. HeyGen, Synthesia) verwenden, um ein 1-2-minütiges Demo-Video zu erstellen. Auf der Landing Page einbetten. Das verbessert das Nutzerverständnis erheblich.</span></p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LEGAL -->
+    <div class="card p3 card-pad col4 reveal" style="border-color:rgba(245,158,11,0.25)">
+      <div class="badge b-amber" style="margin-bottom:12px"><span data-lang="en" class="lang-visible">The Rules — Legal Documents</span><span data-lang="de">Die Regeln — Rechtliche Dokumente</span></div>
+      <h3 class="card-title"><span class="icon3d" aria-hidden="true">⚖️</span><span data-lang="en" class="lang-visible">Every Website Has Legal Obligations</span><span data-lang="de">Jede Website hat rechtliche Pflichten</span></h3>
+      <p class="card-intro"><span data-lang="en" class="lang-visible">Before any website goes live in Germany, it must have three legal pages. These are not optional. Launching without them exposes the company to fines. The <code>template_repo/legal-docs/</code> folder contains pre-written templates in both German and English — you just fill in the company-specific placeholders.</span><span data-lang="de">Bevor eine Website in Deutschland live geht, muss sie drei rechtliche Seiten haben. Das ist Pflicht. Ohne diese riskiert das Unternehmen Bußgelder. <code>template_repo/legal-docs/</code> enthält vorgefertigte Vorlagen auf Deutsch und Englisch.</span></p>
+      <div class="analogy">
+        <div class="label">ELI5 Analogy</div>
+        <p><span data-lang="en" class="lang-visible">Imagine opening a shop. Before you can open the door, you need a sign showing who owns the shop (Imprint), a receipt explaining the rules of buying (Terms &amp; Conditions), and a promise about how you treat customers' private information (Privacy Policy). Without these, the government can fine you and make you close the shop.</span><span data-lang="de">Stell dir vor, du eröffnest ein Geschäft. Bevor du öffnen kannst, brauchst du ein Schild mit dem Eigentümer (Impressum), Kaufregeln (AGB) und ein Versprechen zum Umgang mit Kundendaten (Datenschutz).</span></p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-top:14px">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--surface2);border-radius:10px;border:1px solid var(--border)">
+          <div><div style="font-size:13px;font-weight:700;color:var(--text)">Imprint (Impressum)</div><div style="font-size:12px;color:var(--text3)"><span data-lang="en" class="lang-visible">Who owns the site. Company name, address, contact. Required by German law (TMG §5).</span><span data-lang="de">Wer die Seite betreibt. Firmenname, Adresse, Kontakt. Rechtlich vorgeschrieben (TMG §5).</span></div></div>
+          <div class="badge b-amber">Required</div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--surface2);border-radius:10px;border:1px solid var(--border)">
+          <div><div style="font-size:13px;font-weight:700;color:var(--text)">Terms &amp; Conditions (AGB)</div><div style="font-size:12px;color:var(--text3)"><span data-lang="en" class="lang-visible">The rules for using the service. Defines user rights, liabilities, and permitted usage.</span><span data-lang="de">Die Regeln für die Nutzung des Dienstes. Nutzerrechte, Haftung und erlaubte Nutzung.</span></div></div>
+          <div class="badge b-amber">Required</div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--surface2);border-radius:10px;border:1px solid var(--border)">
+          <div><div style="font-size:13px;font-weight:700;color:var(--text)">Privacy Policy (Datenschutz)</div><div style="font-size:12px;color:var(--text3)"><span data-lang="en" class="lang-visible">How user data is collected, stored, and used. Required by GDPR across all EU countries.</span><span data-lang="de">Wie Nutzerdaten erfasst, gespeichert und verwendet werden. DSGVO-Pflicht für alle EU-Länder.</span></div></div>
+          <div class="badge b-amber">Required</div>
+        </div>
+      </div>
+      <div class="note" style="margin-top:14px">
+        <div class="nl">Action</div>
+        <p><span data-lang="en" class="lang-visible">Open <code>template_repo/legal-docs/</code>. Fill in all placeholders marked with <code>[PLACEHOLDER]</code>. Deploy all three pages linked in the footer before go-live.</span><span data-lang="de"><code>template_repo/legal-docs/</code> öffnen. Alle <code>[PLATZHALTER]</code> ausfüllen. Alle drei Seiten vor dem Go-Live im Footer verlinken.</span></p>
+      </div>
+    </div>
+
+  </div>
+</section>
+

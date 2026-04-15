@@ -1,0 +1,58 @@
+﻿<!-- ===== BG ANIMATION CANVAS ===== -->
+<div id="bg-canvas" aria-hidden="true">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <div class="orb orb-4"></div>
+  <div class="orb orb-5"></div>
+  <div class="orb orb-6"></div>
+</div>
+<!-- ===== NAV ===== -->
+<nav id="nav">
+  <div class="nav-logo">
+    <div class="nav-logo-mark">W</div>
+    <span>WAMOCON</span>
+    <small>Standard Prozessablauf</small>
+  </div>
+  <div class="nav-right">
+    <div class="badge b-green"><div class="live-dot"></div><span>Internal v2.0</span></div>
+    <div class="lang-grp" id="langGrp">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('de')">DE</button>
+    </div>
+    <button class="toggle-btn" id="themeBtn" onclick="toggleTheme()">
+      <span id="themeIcon">&#9728;</span>
+      <span id="themeText">Dark</span>
+    </button>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section id="hero">
+  <div class="glow-shape" style="width:500px;height:500px;background:radial-gradient(#3b82f6,transparent 70%);top:-150px;left:-100px;animation-delay:0s"></div>
+  <div class="glow-shape" style="width:400px;height:400px;background:radial-gradient(#8b5cf6,transparent 70%);top:-80px;right:-80px;animation-delay:3s"></div>
+  <div class="hero-inner">
+    <div class="hero-kicker">
+      <div class="badge b-violet">2026 — Weekly Sprint Protocol</div>
+    </div>
+    <h1 class="hero-h1">
+      <span class="gt-main">Standard</span><br>
+      <span class="gt-blue">Prozessablauf</span>
+    </h1>
+    <p class="hero-sub">
+      <span data-lang="en" class="lang-visible">A structured, repeatable framework for shipping production-grade applications from concept to live deployment — in a single week.</span>
+      <span data-lang="de">Ein strukturiertes, wiederholbares Framework, um produktionsreife Anwendungen von der Idee bis zum Live-Deployment — in einer einzigen Woche — zu liefern.</span>
+    </p>
+    <div style="display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:40px">
+      <div class="badge b-cyan">Next.js · Supabase · Vercel</div>
+      <div class="badge b-amber">GitHub Copilot · MCP</div>
+    </div>
+    <div class="week-bar">
+      <div class="week-col week-link" tabindex="0" role="button" data-scroll-target="phase1"><div class="ph gt-blue">Phase 0</div><div class="desc" data-lang="en">Initiation</div><div class="desc" data-lang="de">Initierung</div></div>
+      <div class="week-col week-link" tabindex="0" role="button" data-scroll-target="phase2"><div class="ph gt-violet">Phase 1</div><div class="desc" data-lang="en">Planning &amp; Prep</div><div class="desc" data-lang="de">Planung &amp; Vorbereitung</div></div>
+      <div class="week-col week-link" tabindex="0" role="button" data-scroll-target="phase3"><div class="ph gt-cyan">Phase 2</div><div class="desc" data-lang="en">Development</div><div class="desc" data-lang="de">Entwicklung</div></div>
+      <div class="week-col week-link" tabindex="0" role="button" data-scroll-target="phase4"><div class="ph gt-amber">Phase 3</div><div class="desc" data-lang="en">Deployment</div><div class="desc" data-lang="de">Deployment</div></div>
+      <div class="week-col week-link" tabindex="0" role="button" data-scroll-target="phase5"><div class="ph gt-pink">Phase 4</div><div class="desc" data-lang="en">Closure</div><div class="desc" data-lang="de">Abschluss &amp; Präsentation</div></div>
+    </div>
+  </div>
+</section>

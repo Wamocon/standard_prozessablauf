@@ -1,0 +1,85 @@
+﻿<!-- =================== PHASE 1 =================== -->
+<section class="phase-section reveal" id="phase1">
+  <div class="phase-head">
+    <div class="ph-num gt-blue">00</div>
+    <div class="ph-info">
+      <h2><span data-lang="en" class="lang-visible">Initiation</span><span data-lang="de">Initierung</span></h2>
+      <p>
+        <span data-lang="en" class="lang-visible">Phase 0 means: pick one real problem, create the project base, and get a clear requirements document approved. Simple rule: no approved requirements, no coding.</span>
+        <span data-lang="de">Phase 0 bedeutet: ein echtes Problem auswählen, die Projektbasis anlegen und ein klares Anforderungsdokument freigeben lassen. Einfache Regel: ohne Freigabe kein Coding.</span>
+      </p>
+    </div>
+  </div>
+  <div class="grid12">
+
+    <div class="card p1 card-pad col8 reveal">
+      <div class="badge b-blue" style="margin-bottom:12px"><span data-lang="en" class="lang-visible">Idea + Repo Start</span><span data-lang="de">Idee + Repo-Start</span></div>
+      <h3 class="card-title"><span class="icon3d" aria-hidden="true">💡</span><span data-lang="en" class="lang-visible">Choose a Real Problem and Create Your Repo</span><span data-lang="de">Echtes Problem wählen und Repo erstellen</span></h3>
+      <p class="card-intro">
+        <span data-lang="en" class="lang-visible">Start with one clear problem from real life. If a 10-year-old cannot explain the problem in one sentence, the idea is still too fuzzy. Then create a new repository from <code>template_repo</code> and clone it. This step was moved to Phase 0 on purpose, so requirements and implementation context start in the same repo from day one.</span>
+        <span data-lang="de">Starte mit einem klaren Problem aus der echten Welt. Wenn ein 10-jähriges Kind das Problem nicht in einem Satz erklären kann, ist die Idee noch zu unscharf. Danach ein neues Repository aus <code>template_repo</code> erstellen und klonen. Dieser Schritt ist bewusst in Phase 0, damit Anforderungen und Umsetzung von Tag 1 im selben Repo liegen.</span>
+      </p>
+      <div class="codeblock">
+<span class="c-comment"># 1) Create repo from template in GitHub</span>
+<span class="c-comment"># 2) Clone it locally</span>
+<span class="c-cmd">git clone</span> https://github.com/Wamocon/<span class="c-path">&lt;your-repo&gt;</span>.git
+<span class="c-cmd">cd</span> <span class="c-path">&lt;your-repo&gt;</span>
+      </div>
+      <div class="analogy" style="margin-top:16px">
+        <div class="label">ELI5 Analogy</div>
+        <p><span data-lang="en" class="lang-visible">Think of this like building a house: first decide what family problem the house solves, then get the approved blueprint folder. You do not start with random walls.</span><span data-lang="de">Denk an Hausbau: zuerst klären, welches Familienproblem das Haus löst, dann den freigegebenen Bauordner holen. Nicht mit zufälligen Wänden starten.</span></p>
+      </div>
+    </div>
+
+    <div class="card p1 card-pad col4 reveal">
+      <div class="badge b-amber" style="margin-bottom:12px"><span data-lang="en" class="lang-visible">Risk Check</span><span data-lang="de">Risiko-Check</span></div>
+      <h3 class="card-title"><span class="icon3d" aria-hidden="true">⚠️</span><span data-lang="en" class="lang-visible">Avoid the 3 Typical Week-Killers</span><span data-lang="de">Die 3 typischen Wochen-Killer vermeiden</span></h3>
+      <div class="risk-item">
+        <div class="risk-title" style="color:#fcd34d">Scope Explosion</div>
+        <p><span data-lang="en" class="lang-visible">Too many features. Fix: freeze scope after review draft v1.</span><span data-lang="de">Zu viele Features. Lösung: Scope nach Review-Entwurf v1 einfrieren.</span></p>
+      </div>
+      <div class="risk-item">
+        <div class="risk-title" style="color:#fca5a5">Unclear Problem</div>
+        <p><span data-lang="en" class="lang-visible">Building something nobody needs. Fix: write the real user pain in plain language.</span><span data-lang="de">Etwas bauen, das niemand braucht. Lösung: echten Nutzerschmerz einfach aufschreiben.</span></p>
+      </div>
+      <div class="risk-item">
+        <div class="risk-title" style="color:#86efac">Missing Approval</div>
+        <p><span data-lang="en" class="lang-visible">Coding before sign-off. Fix: wait for Waleri approval and continue other ongoing work in the meantime.</span><span data-lang="de">Coding vor Freigabe. Lösung: auf Waleri-Freigabe warten und in der Zeit am laufenden Projekt arbeiten.</span></p>
+      </div>
+    </div>
+
+    <div class="card p1 card-pad col5 reveal">
+      <div class="badge b-blue" style="margin-bottom:12px"><span data-lang="en" class="lang-visible">Requirements with AI</span><span data-lang="de">Anforderungen mit KI</span></div>
+      <h3 class="card-title"><span class="icon3d" aria-hidden="true">🧠</span><span data-lang="en" class="lang-visible">Use AGENTS.md to Build the Requirement Document</span><span data-lang="de">AGENTS.md nutzen für das Anforderungsdokument</span></h3>
+      <p class="card-intro"><span data-lang="en" class="lang-visible">Open <code>AGENTS.md</code> first. It explains how to use Copilot agents and skills. Use the built-in requirement workflow to generate a professional document, then review and simplify the text yourself.</span><span data-lang="de">Zuerst <code>AGENTS.md</code> öffnen. Dort steht, wie Copilot-Agenten und Skills genutzt werden. Mit dem Requirement-Workflow ein professionelles Dokument erzeugen und danach selbst prüfen und vereinfachen.</span></p>
+      <div class="codeblock">
+<span class="c-comment"># Copilot Chat prompt (from AGENTS process)</span>
+@workspace Du bist der Senior Business Analyst bei WAMOCON GmbH.
+Lies <span class="c-path">IDEA.md</span> und <span class="c-path">.github/skills/anforderungsdokument/SKILL.md</span>.
+Erstelle das vollständige Anforderungs- und Analysedokument
+als <span class="c-path">public/Anforderungsdokument_[ProjektName].docx</span>.
+      </div>
+      <div class="steps" style="margin-top:14px">
+        <div class="step"><div class="step-n sn-blue">1</div><div class="step-body"><h4><span data-lang="en" class="lang-visible">Fill IDEA.md</span><span data-lang="de">IDEA.md ausfüllen</span></h4><p><span data-lang="en" class="lang-visible">Project name, target group, real pain, core flow.</span><span data-lang="de">Projektname, Zielgruppe, echtes Problem, Kernablauf.</span></p></div></div>
+        <div class="step"><div class="step-n sn-blue">2</div><div class="step-body"><h4><span data-lang="en" class="lang-visible">Run AI document flow</span><span data-lang="de">KI-Dokumentenflow starten</span></h4><p><span data-lang="en" class="lang-visible">Use Copilot or Claude with the AGENTS skill instructions.</span><span data-lang="de">Copilot oder Claude mit AGENTS-Skill-Anleitung verwenden.</span></p></div></div>
+        <div class="step"><div class="step-n sn-blue">3</div><div class="step-body"><h4><span data-lang="en" class="lang-visible">Self-review and simplify</span><span data-lang="de">Selbst prüfen und vereinfachen</span></h4><p><span data-lang="en" class="lang-visible">Remove unclear technical jargon. Keep it understandable.</span><span data-lang="de">Unklare Fachwörter entfernen. Verständlich halten.</span></p></div></div>
+      </div>
+    </div>
+
+    <div class="card p1 card-pad col7 reveal" style="background:var(--blue-dim)">
+      <div class="badge b-blue" style="margin-bottom:12px"><span data-lang="en" class="lang-visible">Approval Workflow</span><span data-lang="de">Freigabe-Workflow</span></div>
+      <h3 class="card-title"><span class="icon3d" aria-hidden="true">✅</span><span data-lang="en" class="lang-visible">Review → OneDrive (Welle) → Waleri Approval</span><span data-lang="de">Review → OneDrive (Welle) → Freigabe durch Waleri</span></h3>
+      <p class="card-intro"><span data-lang="en" class="lang-visible">When the document is ready, store it in the correct OneDrive folder structure under the right <strong>Welle</strong>, then send it to Waleri for review. You can also use the Anforderung Manager app, but until that flow is fully ready, direct submission to Waleri is allowed.</span><span data-lang="de">Wenn das Dokument fertig ist, im richtigen OneDrive-Ordner unter der passenden <strong>Welle</strong> ablegen und dann an Waleri zur Prüfung senden. Die App „Anforderung Manager" kann genutzt werden. Bis der Flow vollständig fertig ist, ist die direkte Abgabe an Waleri erlaubt.</span></p>
+      <div class="flow-grid">
+        <div class="flow-item"><div class="flow-n gt-blue">01</div><div class="flow-label"><span data-lang="en" class="lang-visible">Internal Review</span><span data-lang="de">Interne Prüfung</span></div><p><span data-lang="en" class="lang-visible">You check content quality and wording first.</span><span data-lang="de">Inhalt und Formulierung zuerst selbst prüfen.</span></p></div>
+        <div class="flow-item"><div class="flow-n gt-violet">02</div><div class="flow-label"><span data-lang="en" class="lang-visible">Store in OneDrive</span><span data-lang="de">In OneDrive ablegen</span></div><p><span data-lang="en" class="lang-visible">Correct Welle, correct folder structure, versioned file name.</span><span data-lang="de">Richtige Welle, richtige Ordnerstruktur, versionierter Dateiname.</span></p></div>
+        <div class="flow-item"><div class="flow-n gt-cyan">03</div><div class="flow-label"><span data-lang="en" class="lang-visible">Send to Waleri</span><span data-lang="de">An Waleri senden</span></div><p><span data-lang="en" class="lang-visible">Wait for approval. While waiting, continue your ongoing project tasks.</span><span data-lang="de">Auf Freigabe warten. In der Zeit am laufenden Projekt weiterarbeiten.</span></p></div>
+      </div>
+      <div class="note" style="margin-top:16px">
+        <div class="nl">Rule</div>
+        <p><span data-lang="en" class="lang-visible">No approved requirement document means no development start.</span><span data-lang="de">Ohne freigegebenes Anforderungsdokument kein Entwicklungsstart.</span></p>
+      </div>
+    </div>
+
+  </div>
+</section>
