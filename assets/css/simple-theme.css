@@ -64,9 +64,8 @@ body{
 .toggle-btn,
 .lang-grp,
 .chk-box{
-  backdrop-filter:none !important;
-  -webkit-backdrop-filter:none !important;
-  box-shadow:none !important;
+  backdrop-filter:blur(14px) saturate(125%) !important;
+  -webkit-backdrop-filter:blur(14px) saturate(125%) !important;
   filter:none !important;
 }
 
@@ -78,8 +77,9 @@ body{
 .codeblock,
 .toggle-btn,
 .lang-grp{
-  background:var(--surface) !important;
-  border:1px solid var(--border) !important;
+  background:color-mix(in srgb, var(--surface) 78%, transparent) !important;
+  border:1px solid color-mix(in srgb, var(--border2) 82%, white 18%) !important;
+  box-shadow:0 10px 24px rgba(15,23,42,0.24), inset 0 1px 0 rgba(255,255,255,0.18) !important;
 }
 
 .card.p1{border-left:4px solid #3b82f6 !important}
@@ -114,8 +114,68 @@ html[data-theme="dark"] .icon3d{
 }
 
 #nav{
-  background:var(--bg2) !important;
-  border-bottom:1px solid var(--border) !important;
+  background:color-mix(in srgb, var(--bg2) 74%, transparent) !important;
+  border-bottom:1px solid color-mix(in srgb, var(--border2) 80%, white 20%) !important;
+}
+
+.card:hover,
+.card:focus-within,
+.week-col:hover,
+.week-col:focus-within,
+.con-item:hover,
+.con-item:focus-within,
+.risk-item:hover,
+.risk-item:focus-within,
+.flow-item:hover,
+.flow-item:focus-within{
+  border-color:color-mix(in srgb, var(--blue) 44%, var(--border2) 56%) !important;
+  box-shadow:0 16px 34px rgba(59,130,246,0.18), inset 0 1px 0 rgba(255,255,255,0.28) !important;
+}
+
+.card,
+.week-col,
+.con-item,
+.risk-item,
+.flow-item{
+  transition:border-color .28s ease, box-shadow .28s ease, background-color .28s ease;
+}
+
+/* Readability zoom: text enlarges on hover/focus for each box (including nested boxes). */
+.card :is(p, li, .card-intro, .step-body p, .flow-item p, .risk-item p, .chk-main, .chk-sub),
+.week-col :is(.desc),
+.con-item p,
+.flow-item p,
+.risk-item p{
+  transition:font-size .24s ease, line-height .24s ease;
+}
+
+.card:hover :is(p, li, .card-intro, .step-body p, .flow-item p, .risk-item p, .chk-main, .chk-sub),
+.card:focus-within :is(p, li, .card-intro, .step-body p, .flow-item p, .risk-item p, .chk-main, .chk-sub),
+.week-col:hover :is(.desc),
+.week-col:focus-within :is(.desc),
+.con-item:hover p,
+.con-item:focus-within p,
+.flow-item:hover p,
+.flow-item:focus-within p,
+.risk-item:hover p,
+.risk-item:focus-within p{
+  font-size:1.04em;
+  line-height:1.78;
+}
+
+@media (max-width: 900px){
+  .card:hover :is(p, li, .card-intro, .step-body p, .flow-item p, .risk-item p, .chk-main, .chk-sub),
+  .card:focus-within :is(p, li, .card-intro, .step-body p, .flow-item p, .risk-item p, .chk-main, .chk-sub),
+  .week-col:hover :is(.desc),
+  .week-col:focus-within :is(.desc),
+  .con-item:hover p,
+  .con-item:focus-within p,
+  .flow-item:hover p,
+  .flow-item:focus-within p,
+  .risk-item:hover p,
+  .risk-item:focus-within p{
+    font-size:1.03em;
+  }
 }
 
 .card:hover,
