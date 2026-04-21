@@ -210,6 +210,62 @@ function initNavScrollEffect() {
   }, { passive: true });
 }
 
+function initVideoGuides() {
+  var videos = document.querySelectorAll('.guide-video');
+  if (!videos.length) {
+    return;
+  }
+
+  function toTime(sec) {
+    if (!Number.isFinite(sec) || sec < 0) {
+      return '00:00';
+    }
+    var total = Math.floor(sec);
+    var mins = String(Math.floor(total / 60)).padStart(2, '0');
+    var secs = String(total % 60).padStart(2, '0');
+    return mins + ':' + secs;
+  }
+
+  videos.forEach(function(video) {
+    video.loop = false;
+    var card = video.closest('.media-card') || video.parentElement;
+    if (!card) {
+      return;
+    }
+
+    var speedSelect = card.querySelector('.video-speed');
+    var durationEl = card.querySelector('.video-duration');
+    var remainingEl = card.querySelector('.video-remaining');
+
+    function updateTimes() {
+      if (durationEl) {
+        durationEl.textContent = toTime(video.duration || 0);
+      }
+      if (remainingEl) {
+        remainingEl.textContent = toTime((video.duration || 0) - (video.currentTime || 0));
+      }
+    }
+
+    video.addEventListener('loadedmetadata', updateTimes);
+    video.addEventListener('timeupdate', updateTimes);
+    video.addEventListener('ended', function() {
+      updateTimes();
+    });
+
+    if (speedSelect) {
+      speedSelect.addEventListener('change', function() {
+        var rate = parseFloat(speedSelect.value);
+        if (Number.isFinite(rate) && rate > 0) {
+          video.playbackRate = rate;
+        }
+      });
+      video.playbackRate = parseFloat(speedSelect.value) || 1;
+    }
+
+    updateTimes();
+  });
+}
+
 // ─── BOOTSTRAP ──────────────────────────────────────────────────
 async function initApp() {
   await loadPartials();
@@ -224,6 +280,7 @@ async function initApp() {
   initChecklistDropdowns();
   initMainPhaseDropdowns();
   initNavScrollEffect();
+  initVideoGuides();
 }
 
 window.addEventListener('DOMContentLoaded', initApp);

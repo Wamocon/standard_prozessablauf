@@ -210,11 +210,69 @@ h1,h2,h3,h4{
   overflow:auto;
 }
 
+.media-card{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.media-frame{
+  border:1px solid color-mix(in srgb, var(--border2) 80%, white 20%);
+  border-radius:12px;
+  overflow:hidden;
+  background:color-mix(in srgb, var(--surface2) 82%, transparent);
+}
+
+.guide-video{
+  width:100%;
+  height:auto;
+  display:block;
+  background:#070b15;
+  max-height:420px;
+}
+
+.media-meta{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:10px 16px;
+  font-size:12px;
+  color:var(--text2);
+}
+
+.speed-wrap{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+}
+
+.video-speed{
+  border:1px solid var(--border2);
+  border-radius:8px;
+  padding:4px 8px;
+  color:var(--text);
+  background:color-mix(in srgb, var(--surface2) 88%, transparent);
+}
+
+.time-wrap{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+.video-duration,
+.video-remaining{
+  color:var(--text);
+  font-variant-numeric:tabular-nums;
+}
+
 @media (max-width:900px){
   #hero{padding:110px 16px 40px !important}
   .phase-section{padding:0 16px 42px !important}
   .card-pad{padding:18px !important}
   #progress-wrap{padding:0 16px 56px !important}
+  .guide-video{max-height:300px}
 }
 
 @media screen and (min-resolution:192dpi){
