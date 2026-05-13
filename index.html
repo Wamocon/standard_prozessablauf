@@ -30,7 +30,7 @@
     <small>Standard Prozessablauf</small>
   </div>
   <div class="nav-right">
-    <div class="badge b-green"><div class="live-dot"></div><span>Internal v2.0</span></div>
+    <div class="badge b-green"><div class="live-dot"></div><span>Internal v3.0</span></div>
     <div class="lang-grp" id="langGrp">
       <button class="lang-btn active" onclick="setLang('en')">EN</button>
       <button class="lang-btn" onclick="setLang('de')">DE</button>
@@ -422,63 +422,27 @@ als <span class="c-path">public/Anforderungsdokument_[ProjektName].docx</span>.
       </div>
     </div>
 
-    <!-- VERCEL -->
-    <div class="card p2 card-pad col6 reveal">
-      <div class="badge b-cyan" style="margin-bottom:12px"><span data-lang="en" class="lang-visible">The Live Server — Vercel</span><span data-lang="de">Der Live-Server — Vercel</span></div>
-      <h3 class="card-title"><span class="icon3d" aria-hidden="true">🌍</span><span data-lang="en" class="lang-visible">Opening the Store to the World</span><span data-lang="de">Das Geschäft für die Welt öffnen</span></h3>
-      <p class="card-intro"><span data-lang="en" class="lang-visible">Vercel is the platform that hosts the application. When code is merged to <code>main</code>, Vercel automatically picks it up and publishes the new version within minutes. It is like having a robot employee whose entire job is to update the website the moment you approve a change.</span><span data-lang="de">Vercel ist die Plattform, die die Anwendung hostet. Wenn Code in <code>main</code> gemergt wird, veröffentlicht Vercel automatisch die neue Version. Es ist wie ein Roboter-Mitarbeiter, dessen einzige Aufgabe es ist, die Website sofort nach Genehmigung einer Änderung zu aktualisieren.</span></p>
-      <div class="analogy">
-        <div class="label">ELI5 Analogy</div>
-        <p><span data-lang="en" class="lang-visible">Deploying to Vercel is like printing and putting your book in the bookstore for the first time. Once it is there, every customer can read it. Every time you release a new edition (merge to main), Vercel automatically swaps the old copies with the new ones — no manual work needed.</span><span data-lang="de">Auf Vercel deployen ist wie das Drucken und Einlegen eines Buches in den Buchladen. Jeder kann es lesen. Jedes neue Release tauscht Vercel automatisch gegen die neue Version aus.</span></p>
-      </div>
-      <div class="steps" style="margin-top:16px">
-        <div class="step">
-          <div class="step-n sn-cyan">1</div>
-          <div class="step-body">
-            <h4><span data-lang="en" class="lang-visible">Temporarily Make Repo Public</span><span data-lang="de">Repo vorübergehend öffentlich machen</span></h4>
-            <p><span data-lang="en" class="lang-visible">Vercel needs to read the code to import the project. Go to <code>Repository → Settings → General → Change visibility → Public</code>. You will revert this to Internal immediately after.</span><span data-lang="de">Vercel muss den Code lesen, um das Projekt zu importieren. Zu <code>Repository → Settings → General → Change visibility → Public</code> gehen. Danach sofort wieder auf Internal zurücksetzen.</span></p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-n sn-cyan">2</div>
-          <div class="step-body">
-            <h4><span data-lang="en" class="lang-visible">Import &amp; Deploy on Vercel</span><span data-lang="de">Auf Vercel importieren &amp; deployen</span></h4>
-            <p><span data-lang="en" class="lang-visible">Go to <a href="https://vercel.com" target="_blank">vercel.com</a> → Add New Project → Import your repository → Deploy. Vercel will build the app and give it a public URL.</span><span data-lang="de">Auf <a href="https://vercel.com" target="_blank">vercel.com</a> gehen → Neues Projekt hinzufügen → Repository importieren → Deployen.</span></p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-n sn-cyan">3</div>
-          <div class="step-body">
-            <h4><span data-lang="en" class="lang-visible">Copy Project ID → GitHub Secret</span><span data-lang="de">Projekt-ID → GitHub Secret</span></h4>
-            <p><span data-lang="en" class="lang-visible">In Vercel, go to <code>Settings → General → Project ID</code>. Copy it. In GitHub, go to <code>Repository → Settings → Secrets → Actions → New secret</code>. Name it <code>VERCEL_PROJECT_ID</code>. This connects GitHub Actions to your specific Vercel project.</span><span data-lang="de">In Vercel zu <code>Settings → General → Project ID</code> gehen und die ID kopieren. In GitHub als Secret <code>VERCEL_PROJECT_ID</code> hinzufügen. Das verbindet GitHub Actions mit dem Vercel-Projekt.</span></p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-n sn-cyan">4</div>
-          <div class="step-body">
-            <h4><span data-lang="en" class="lang-visible">Import All Environment Variables</span><span data-lang="de">Alle Umgebungsvariablen importieren</span></h4>
-            <p><span data-lang="en" class="lang-visible">Go to <code>Vercel → Settings → Environment Variables</code> and add every variable from your <code>.env.local</code> file. If you skip this, the production build will fail because the app cannot find its database credentials.</span><span data-lang="de">Zu <code>Vercel → Settings → Environment Variables</code> gehen und alle Variablen aus <code>.env.local</code> hinzufügen. Ohne diesen Schritt schlägt der Produktions-Build fehl.</span></p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-n sn-cyan">5</div>
-          <div class="step-body">
-            <h4><span data-lang="en" class="lang-visible">Revert Repo to Internal</span><span data-lang="de">Repo auf Internal zurücksetzen</span></h4>
-            <p><span data-lang="en" class="lang-visible">Go back to <code>Repository → Settings → General → Change visibility → Internal</code>. The existing Vercel connection continues to work via GitHub Actions — the repo does not need to stay public.</span><span data-lang="de">Zurück zu <code>Repository → Settings → General → Change visibility → Internal</code>. Die Vercel-Verbindung funktioniert weiterhin über GitHub Actions.</span></p>
-          </div>
-        </div>
-      </div>
-      <div class="note" style="margin-top:14px">
-        <div class="nl">Pre-configured Secrets</div>
-        <p><span data-lang="en" class="lang-visible"><code>VERCEL_TOKEN</code> and <code>VERCEL_ORG_ID</code> are already configured at the GitHub organization level. You only need to add <code>VERCEL_PROJECT_ID</code> to the individual repository.</span><span data-lang="de"><code>VERCEL_TOKEN</code> und <code>VERCEL_ORG_ID</code> sind bereits auf GitHub-Organisationsebene konfiguriert. Nur <code>VERCEL_PROJECT_ID</code> muss zum Repository hinzugefügt werden.</span></p>
-      </div>
-    </div>
 
-    <!-- BUILD LOOP -->
-    <div class="card p2 card-pad col6 reveal" style="background:var(--violet-dim)">
+  </div>
+</section>
+  <!-- END components/phase1.html -->
+  <!-- BEGIN components/phase2.html -->
+<!-- =================== PHASE 3 =================== -->
+<section class="phase-section reveal" id="phase3">
+  <div class="phase-head">
+    <div class="ph-num gt-cyan">02</div>
+    <div class="ph-info">
+      <h2><span data-lang="en" class="lang-visible">Development</span><span data-lang="de">Entwicklung</span></h2>
+      <p><span data-lang="en" class="lang-visible">Development runs Tuesday to Thursday. Build each feature using AI agents in order: plan first, implement second, review before the PR. Follow the daily loop — no skipping steps, no surprise code in main.</span><span data-lang="de">Die Entwicklung läuft Dienstag bis Donnerstag. Jedes Feature mit KI-Agenten der Reihe nach bauen: zuerst planen, dann umsetzen, vor dem PR reviewen. Die tägliche Schleife einhalten — keine übersprungenen Schritte, kein ungepüfter Code in main.</span></p>
+    </div>
+  </div>
+  <div class="grid12">
+
+    <!-- DAILY BUILD LOOP -->
+    <div class="card p3 card-pad col6 reveal" style="background:var(--violet-dim)">
       <div class="badge b-violet" style="margin-bottom:12px"><span data-lang="en" class="lang-visible">The Daily Build Loop</span><span data-lang="de">Die tägliche Build-Schleife</span></div>
       <h3 class="card-title"><span class="icon3d" aria-hidden="true">🔁</span><span data-lang="en" class="lang-visible">Build → Test → Document → Repeat</span><span data-lang="de">Bauen → Testen → Dokumentieren → Wiederholen</span></h3>
-      <p class="card-intro"><span data-lang="en" class="lang-visible">From Tuesday to Thursday, the team runs on a tight daily loop. Each feature is built, functionally tested in the browser, and only then pushed. High-quality Copilot prompts that produce excellent results are saved as "Golden Prompts" — a growing knowledge base for the team.</span><span data-lang="de">Von Dienstag bis Donnerstag läuft das Team in einer engen täglichen Schleife. Jedes Feature wird gebaut, im Browser getestet und erst dann gepusht. Hochwertige Copilot-Prompts werden als „Golden Prompts" gespeichert — eine wachsende Wissensdatenbank.</span></p>
+      <p class="card-intro"><span data-lang="en" class="lang-visible">From Tuesday to Thursday, the team runs on a tight daily loop. Each feature is built, functionally tested in the browser, and only then pushed. High-quality Copilot prompts that produce excellent results are saved as "Golden Prompts" — a growing knowledge base for the team.</span><span data-lang="de">Von Dienstag bis Donnerstag läuft das Team in einer engen täglichen Schleife. Jedes Feature wird gebaut, im Browser getestet und erst dann gepusht. Hochwertige Copilot-Prompts werden als „Golden Prompts“ gespeichert — eine wachsende Wissensdatenbank.</span></p>
       <div class="con-grid">
         <div class="con-item">
           <div class="con-title" style="color:#c4b5fd"><span data-lang="en" class="lang-visible">Build with Copilot</span><span data-lang="de">Mit Copilot bauen</span></div>
@@ -499,105 +463,46 @@ als <span class="c-path">public/Anforderungsdokument_[ProjektName].docx</span>.
       </div>
     </div>
 
-  </div>
-</section>
-  <!-- END components/phase1.html -->
-  <!-- BEGIN components/phase2.html -->
-<!-- =================== PHASE 3 =================== -->
-<section class="phase-section reveal" id="phase3">
-  <div class="phase-head">
-    <div class="ph-num gt-cyan">02</div>
-    <div class="ph-info">
-      <h2><span data-lang="en" class="lang-visible">Development</span><span data-lang="de">Entwicklung</span></h2>
-      <p><span data-lang="en" class="lang-visible">Monday morning is about taking everything built this week and pushing it into the hands of real users. This phase is not just technical — it also covers the public face of the product (domain, landing page, video) and the legal requirements that every live website must fulfill.</span><span data-lang="de">Der Montagvormittag dreht sich darum, alles was diese Woche gebaut wurde, in die Hände echter Nutzer zu bringen — inklusive öffentlichem Gesicht (Domain, Landing Page, Video) und rechtlichen Anforderungen.</span></p>
-    </div>
-  </div>
-  <div class="grid12">
-
-    <!-- GOING LIVE -->
-    <div class="card p3 card-pad col4 reveal">
-      <div class="badge b-cyan" style="margin-bottom:12px"><span data-lang="en" class="lang-visible">Going Live</span><span data-lang="de">Go-Live</span></div>
-      <h3 class="card-title"><span class="icon3d" aria-hidden="true">🚀</span><span data-lang="en" class="lang-visible">The Final Merge</span><span data-lang="de">Der finale Merge</span></h3>
-      <p class="card-intro"><span data-lang="en" class="lang-visible">Production launch is the direct result of merging the final PR into <code>main</code>. The GitHub Actions pipeline automatically triggers a Vercel production deployment. No manual steps. No clicking "deploy" buttons. Just merge — and within minutes, the new version is live worldwide.</span><span data-lang="de">Der Production-Launch ist das direkte Ergebnis des Zusammenführens des letzten PRs in <code>main</code>. Die GitHub-Actions-Pipeline löst automatisch ein Vercel-Produktions-Deployment aus. Einfach mergen — und innerhalb von Minuten ist die neue Version live.</span></p>
-      <div class="steps" style="margin-top:14px">
+    <!-- COPILOT AGENT WORKFLOW -->
+    <div class="card p3 card-pad col6 reveal">
+      <div class="badge b-cyan" style="margin-bottom:12px"><span data-lang="en" class="lang-visible">The Three-Agent Workflow</span><span data-lang="de">Der Drei-Agenten-Workflow</span></div>
+      <h3 class="card-title"><span class="icon3d" aria-hidden="true">🤖</span><span data-lang="en" class="lang-visible">@planner → @developer → @reviewer</span><span data-lang="de">@planner → @developer → @reviewer</span></h3>
+      <p class="card-intro"><span data-lang="en" class="lang-visible">Each feature goes through three AI agents in sequence. Never jump straight to coding. The agents are defined in <code>.github/agents/</code> and each has a specific role — planning, implementing, and reviewing. Using all three consistently produces higher-quality code with fewer rework cycles.</span><span data-lang="de">Jedes Feature durchläuft drei KI-Agenten der Reihe nach. Niemals direkt mit dem Coding beginnen. Die Agenten sind in <code>.github/agents/</code> definiert und haben jeweils eine spezifische Rolle — Planung, Umsetzung und Review. Alle drei konsequent einzusetzen liefert besseren Code mit weniger Nacharbeit.</span></p>
+      <div class="steps" style="margin-top:16px">
         <div class="step">
           <div class="step-n sn-cyan">1</div>
-          <div class="step-body"><h4><span data-lang="en" class="lang-visible">Merge Final PR to main</span><span data-lang="de">Letzten PR in main mergen</span></h4><p><span data-lang="en" class="lang-visible">All feature branches completed and merged. The <code>main</code> branch contains the full, tested product.</span><span data-lang="de">Alle Feature-Branches abgeschlossen und gemergt. <code>main</code> enthält das vollständige, getestete Produkt.</span></p></div>
+          <div class="step-body">
+            <h4>@planner — <span data-lang="en" class="lang-visible">Plan Before You Code</span><span data-lang="de">Zuerst planen, dann coden</span></h4>
+            <p><span data-lang="en" class="lang-visible">Invoked in VS Code Copilot Chat as <code>@planner</code>. Give it the task — it explores the codebase, identifies every file that must change, and produces a numbered plan. It never writes code.<br><br><em>Example: <code>@planner Add an authentication page</code></em></span><span data-lang="de">Im VS Code Copilot Chat als <code>@planner</code> aufrufen. Die Aufgabe eingeben — er erkundet die Codebase, identifiziert alle zu ändernden Dateien und erstellt einen nummerierten Plan. Schreibt keinen Code.<br><br><em>Beispiel: <code>@planner Füge eine Authentifizierungsseite hinzu</code></em></span></p>
+          </div>
         </div>
         <div class="step">
           <div class="step-n sn-cyan">2</div>
-          <div class="step-body"><h4><span data-lang="en" class="lang-visible">Verify Vercel Env Vars</span><span data-lang="de">Vercel-Env-Vars prüfen</span></h4><p><span data-lang="en" class="lang-visible">Double-check that all <code>.env.local</code> variables exist in <code>Vercel → Settings → Environment Variables</code>. Missing variables are the #1 cause of production build failures.</span><span data-lang="de">Sicherstellen, dass alle <code>.env.local</code>-Variablen in Vercel eingetragen sind. Fehlende Variablen sind die häufigste Ursache für fehlgeschlagene Produktion-Builds.</span></p></div>
+          <div class="step-body">
+            <h4>@developer — <span data-lang="en" class="lang-visible">Implement the Plan</span><span data-lang="de">Den Plan umsetzen</span></h4>
+            <p><span data-lang="en" class="lang-visible">After you review and approve the plan, pass it to <code>@developer</code>. It implements each step in sequence, modifying only the files the plan specifies.<br><br><em>Example: <code>@developer Implement this plan: [paste plan]</code></em></span><span data-lang="de">Nachdem du den Plan geprüft hast, übergibst du ihn an <code>@developer</code>. Er setzt jeden Schritt der Reihe nach um und ändert nur die im Plan angegebenen Dateien.<br><br><em>Beispiel: <code>@developer Setze diesen Plan um: [Plan einfügen]</code></em></span></p>
+          </div>
         </div>
         <div class="step">
           <div class="step-n sn-cyan">3</div>
-          <div class="step-body"><h4><span data-lang="en" class="lang-visible">Smoke Test on Production URL</span><span data-lang="de">Smoke-Test auf der Produktions-URL</span></h4><p><span data-lang="en" class="lang-visible">Visit the live URL. Click every button. Log in. Submit a form. Create a record. Verify data appears in Supabase. A 5-minute smoke test catches 90% of deployment issues.</span><span data-lang="de">Die Live-URL besuchen. Jeden Button klicken. Einloggen. Ein Formular abschicken. Daten in Supabase prüfen. Ein 5-minütiger Smoke-Test findet 90% aller Deployment-Probleme.</span></p></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- DOMAIN & MARKETING -->
-    <div class="card p3 card-pad col4 reveal">
-      <div class="badge b-cyan" style="margin-bottom:12px"><span data-lang="en" class="lang-visible">Name &amp; Face — Domain &amp; Marketing</span><span data-lang="de">Name &amp; Gesicht — Domain &amp; Marketing</span></div>
-      <h3 class="card-title"><span class="icon3d" aria-hidden="true">🌐</span><span data-lang="en" class="lang-visible">The Product's Public Identity</span><span data-lang="de">Die öffentliche Identität</span></h3>
-      <p class="card-intro"><span data-lang="en" class="lang-visible">A Vercel URL like <code>my-app-xyz.vercel.app</code> works, but a real product needs a real address. This section covers connecting a custom domain, building a marketing landing page, and creating an AI explainer video for onboarding users.</span><span data-lang="de">Eine Vercel-URL funktioniert, aber ein echtes Produkt braucht eine echte Adresse. Hier geht es um eine eigene Domain, eine Marketing-Landing-Page und ein KI-Erklärvideo.</span></p>
-      <div class="steps" style="margin-top:14px">
-        <div class="step">
-          <div class="step-n sn-cyan">1</div>
-          <div class="step-body"><h4><span data-lang="en" class="lang-visible">Purchase Domain via Strato</span><span data-lang="de">Domain über Strato kaufen</span></h4><p><span data-lang="en" class="lang-visible">Go to <a href="https://www.strato.de" target="_blank">strato.de</a>, search and purchase your domain (e.g. <code>myapp.de</code>). Strato is the approved domain registrar for WAMOCON projects.</span><span data-lang="de">Auf <a href="https://www.strato.de" target="_blank">strato.de</a> die Domain suchen und kaufen. Strato ist der genehmigte Domain-Registrar für WAMOCON-Projekte.</span></p></div>
-        </div>
-        <div class="step">
-          <div class="step-n sn-cyan">2</div>
-          <div class="step-body"><h4><span data-lang="en" class="lang-visible">Connect Domain in Vercel</span><span data-lang="de">Domain in Vercel verbinden</span></h4><p><span data-lang="en" class="lang-visible">In Vercel, go to <code>Settings → Domains</code>, add your domain. Vercel shows you the DNS records to set. In Strato's DNS panel, create the CNAME or A-record exactly as shown.</span><span data-lang="de">In Vercel zu <code>Settings → Domains</code> gehen und die Domain hinzufügen. Vercel zeigt die DNS-Einträge an. Im Strato-DNS-Panel genau wie angegeben eintragen.</span></p></div>
-        </div>
-        <div class="step">
-          <div class="step-n sn-cyan">3</div>
-          <div class="step-body"><h4><span data-lang="en" class="lang-visible">Build the Landing Page Layer</span><span data-lang="de">Landing-Page-Layer bauen</span></h4><p><span data-lang="en" class="lang-visible">A marketing landing page is the front door of your product — it shows what the app does, why someone should use it, and a call-to-action (sign up, request access). Build it as a route in your Next.js app.</span><span data-lang="de">Eine Marketing-Landing-Page ist die Eingangstür zum Produkt — sie zeigt was die App macht, warum man sie nutzen sollte und einen Call-to-Action. Als Route in der Next.js-App bauen.</span></p></div>
-        </div>
-        <div class="step">
-          <div class="step-n sn-cyan">4</div>
-          <div class="step-body"><h4><span data-lang="en" class="lang-visible">Create AI Explainer Video</span><span data-lang="de">KI-Erklärvideo erstellen</span></h4><p><span data-lang="en" class="lang-visible">Use an AI video tool (e.g. HeyGen, Synthesia, Loom) to create a short 1-2 minute demo showing the app's core value. Embed it on the landing page. This dramatically improves user understanding and conversion.</span><span data-lang="de">Ein KI-Videotool (z. B. HeyGen, Synthesia) verwenden, um ein 1-2-minütiges Demo-Video zu erstellen. Auf der Landing Page einbetten. Das verbessert das Nutzerverständnis erheblich.</span></p></div>
-        </div>
-      </div>
-
-      <div class="sep" style="margin-top:16px"></div>
-      <div class="media-card">
-        <div class="badge b-cyan" style="margin-bottom:10px"><span data-lang="en" class="lang-visible">Video 3 of 3</span><span data-lang="de">Video 3 von 3</span></div>
-        <h4 style="font-size:16px;font-weight:800;margin-bottom:8px"><span data-lang="en" class="lang-visible">Custom Domain Connection in Vercel</span><span data-lang="de">Custom-Domain-Verbindung in Vercel</span></h4>
-        <p class="card-intro" style="margin-bottom:12px"><span data-lang="en" class="lang-visible">Third video: selecting domain source and connecting the domain to Vercel after deployment.</span><span data-lang="de">Drittes Video: Domain-Quelle auswählen und die Domain nach Deployment mit Vercel verbinden.</span></p>
-        <div class="media-frame">
-          <video class="guide-video" controls preload="metadata" playsinline src="https://github.com/Wamocon/standard_prozessablauf/releases/download/v1.0-videos/Domain-connection.mp4"></video>
-        </div>
-        <div class="media-meta">
-          <label class="speed-wrap">
-            <span data-lang="en" class="lang-visible">Speed</span><span data-lang="de">Geschwindigkeit</span>
-            <select class="video-speed" aria-label="Video speed">
-              <option value="0.75">0.75x</option>
-              <option value="1" selected>1x</option>
-              <option value="1.25">1.25x</option>
-              <option value="1.5">1.5x</option>
-              <option value="2">2x</option>
-            </select>
-          </label>
-          <div class="time-wrap">
-            <span data-lang="en" class="lang-visible">Duration:</span><span data-lang="de">Dauer:</span>
-            <strong class="video-duration">00:00</strong>
-            <span data-lang="en" class="lang-visible">Remaining:</span><span data-lang="de">Verbleibend:</span>
-            <strong class="video-remaining">00:00</strong>
+          <div class="step-body">
+            <h4>@reviewer — <span data-lang="en" class="lang-visible">Review Before the PR</span><span data-lang="de">Vor dem PR reviewen</span></h4>
+            <p><span data-lang="en" class="lang-visible">Before opening a pull request, invoke <code>@reviewer</code> to inspect the changes. It checks for type safety, missing edge cases, and code quality issues — a second expert pair of eyes on every diff.<br><br><em>Example: <code>@reviewer Review the changes in src/app/dashboard/</code></em></span><span data-lang="de">Vor dem Öffnen eines Pull Requests <code>@reviewer</code> aufrufen. Er prüft Typsicherheit, fehlende Randfälle und Codequalität — ein zweites Expertenpaar auf jedem Diff.<br><br><em>Beispiel: <code>@reviewer Überprüfe die Änderungen in src/app/dashboard/</code></em></span></p>
           </div>
         </div>
       </div>
+      <div class="analogy" style="margin-top:16px">
+        <div class="label">ELI5 Analogy</div>
+        <p><span data-lang="en" class="lang-visible">Three specialists: the Architect (@planner) draws the blueprints, the Builder (@developer) constructs exactly what was planned, and the Inspector (@reviewer) walks through and catches problems before the client sees it. Never hand the keys to the client before the inspector signs off.</span><span data-lang="de">Drei Spezialisten: Der Architekt (@planner) zeichnet den Plan, der Baumeister (@developer) baut genau das Geplante, und der Inspektor (@reviewer) geht durch und findet Probleme, bevor der Kunde es sieht. Nie übergeben, bevor der Inspektor unterschreibt.</span></p>
+      </div>
     </div>
 
-    <!-- LEGAL -->
-    <div class="card p3 card-pad col4 reveal" style="border-color:rgba(245,158,11,0.25)">
-      <div class="badge b-amber" style="margin-bottom:12px"><span data-lang="en" class="lang-visible">The Rules — Legal Documents</span><span data-lang="de">Die Regeln — Rechtliche Dokumente</span></div>
-      <h3 class="card-title"><span class="icon3d" aria-hidden="true">⚖️</span><span data-lang="en" class="lang-visible">Every Website Has Legal Obligations</span><span data-lang="de">Jede Website hat rechtliche Pflichten</span></h3>
-      <p class="card-intro"><span data-lang="en" class="lang-visible">Before any website goes live in Germany, it must have three legal pages. These are not optional. Launching without them exposes the company to fines. The <code>template_repo/legal-docs/</code> folder contains pre-written templates in both German and English — you just fill in the company-specific placeholders.</span><span data-lang="de">Bevor eine Website in Deutschland live geht, muss sie drei rechtliche Seiten haben. Das ist Pflicht. Ohne diese riskiert das Unternehmen Bußgelder. <code>template_repo/legal-docs/</code> enthält vorgefertigte Vorlagen auf Deutsch und Englisch.</span></p>
-      <div class="analogy">
-        <div class="label">ELI5 Analogy</div>
-        <p><span data-lang="en" class="lang-visible">Imagine opening a shop. Before you can open the door, you need a sign showing who owns the shop (Imprint), a receipt explaining the rules of buying (Terms &amp; Conditions), and a promise about how you treat customers' private information (Privacy Policy). Without these, the government can fine you and make you close the shop.</span><span data-lang="de">Stell dir vor, du eröffnest ein Geschäft. Bevor du öffnen kannst, brauchst du ein Schild mit dem Eigentümer (Impressum), Kaufregeln (AGB) und ein Versprechen zum Umgang mit Kundendaten (Datenschutz).</span></p>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:10px;margin-top:14px">
+    <!-- LEGAL DOCS -->
+    <div class="card p3 card-pad col12 reveal" style="border-color:rgba(245,158,11,0.25)">
+      <div class="badge b-amber" style="margin-bottom:12px"><span data-lang="en" class="lang-visible">Legal Deliverable — Prepare During Development</span><span data-lang="de">Rechtliche Lieferpflicht — Während der Entwicklung vorbereiten</span></div>
+      <h3 class="card-title"><span class="icon3d" aria-hidden="true">⚖️</span><span data-lang="en" class="lang-visible">Legal Pages — Required Before Go-Live</span><span data-lang="de">Rechtliche Seiten — Pflicht vor Go-Live</span></h3>
+      <p class="card-intro"><span data-lang="en" class="lang-visible">Before any website goes live in Germany, it must have three legal pages. These are not optional — launching without them exposes the company to fines. Prepare them <strong>during development</strong> so they are ready for Phase 3. The <code>template_repo/legal-docs/</code> folder contains pre-written templates in both German and English — you only fill in the company-specific placeholders.</span><span data-lang="de">Bevor eine Website in Deutschland live geht, muss sie drei rechtliche Seiten haben. Das ist Pflicht. Ohne diese riskiert das Unternehmen Bußgelder. Während der Entwicklung vorbereiten, damit sie für Phase 3 bereit sind. <code>template_repo/legal-docs/</code> enthält vorgefertigte Vorlagen auf Deutsch und Englisch.</span></p>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px">
         <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--surface2);border-radius:10px;border:1px solid var(--border)">
           <div><div style="font-size:13px;font-weight:700;color:var(--text)">Imprint (Impressum)</div><div style="font-size:12px;color:var(--text3)"><span data-lang="en" class="lang-visible">Who owns the site. Company name, address, contact. Required by German law (TMG §5).</span><span data-lang="de">Wer die Seite betreibt. Firmenname, Adresse, Kontakt. Rechtlich vorgeschrieben (TMG §5).</span></div></div>
           <div class="badge b-amber">Required</div>
@@ -613,7 +518,7 @@ als <span class="c-path">public/Anforderungsdokument_[ProjektName].docx</span>.
       </div>
       <div class="note" style="margin-top:14px">
         <div class="nl">Action</div>
-        <p><span data-lang="en" class="lang-visible">Open <code>template_repo/legal-docs/</code>. Fill in all placeholders marked with <code>[PLACEHOLDER]</code>. Deploy all three pages linked in the footer before go-live.</span><span data-lang="de"><code>template_repo/legal-docs/</code> öffnen. Alle <code>[PLATZHALTER]</code> ausfüllen. Alle drei Seiten vor dem Go-Live im Footer verlinken.</span></p>
+        <p><span data-lang="en" class="lang-visible">Open <code>template_repo/legal-docs/</code>. Fill in all placeholders marked with <code>[PLACEHOLDER]</code>. Deploy all three pages linked in the footer before go-live in Phase 3.</span><span data-lang="de"><code>template_repo/legal-docs/</code> öffnen. Alle <code>[PLATZHALTER]</code> ausfüllen. Alle drei Seiten vor dem Go-Live in Phase 3 im Footer verlinken.</span></p>
       </div>
     </div>
 
