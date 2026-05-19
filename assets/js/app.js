@@ -274,10 +274,10 @@ function updateWelleExample(num) {
   var en = document.getElementById('welleExampleEn');
   var de = document.getElementById('welleExampleDe');
   if (en) {
-    en.innerHTML = 'For <strong>Welle ' + num + '</strong>: submit requirements by Tuesday EOD of week ' + num + ' &rarr; submit Supabase &amp; Strato inquiries by Wednesday EOD of week ' + num + ' &rarr; develop &amp; deploy Wednesday&ndash;Friday of week ' + num + ' &rarr; present Monday evening of week ' + nextWeek + '.';
+    en.innerHTML = 'For <strong>Welle ' + num + '</strong>: submit requirements by Tuesday EOD of week ' + (num+10) + ' &rarr; submit Supabase &amp; Strato inquiries by Wednesday EOD of week ' + (num+10) + ' &rarr; develop &amp; deploy main process by Friday EOD of week ' + (num+10) + ' &rarr; present Monday evening of week ' + (nextWeek+10) + '.';
   }
   if (de) {
-    de.innerHTML = 'F&uuml;r <strong>Welle ' + num + '</strong>: Anforderungen bis Dienstag EOD von Woche ' + num + ' einreichen &rarr; Supabase &amp; Strato Anfragen bis Mittwoch EOD von Woche ' + num + ' stellen &rarr; Entwickeln &amp; Deployen Mittwoch bis Freitag von Woche ' + num + ' &rarr; Pr&auml;sentation Montagabend von Woche ' + nextWeek + '.';
+    de.innerHTML = 'F&uuml;r <strong>Welle ' + num + '</strong>: Anforderungen bis Dienstag EOD von Woche ' + (num+10) + ' einreichen &rarr; Supabase &amp; Strato Anfragen bis Mittwoch EOD von Woche ' + (num+10) + ' stellen &rarr; Hauptprozess Entwickeln &amp; Deployen bis Freitag EOD von Woche ' + (num+10) + ' &rarr; Pr&auml;sentation am Montagabend von Woche ' + (nextWeek+10) + '.';
   }
 }
 
