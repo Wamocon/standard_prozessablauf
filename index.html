@@ -72,6 +72,79 @@
   </div>
 </section>
   <!-- END components/nav-hero.html -->
+
+  <!-- =================== WOCHENPLAN / WEEKLY SCHEDULE =================== -->
+<section class="phase-section reveal" id="weekly-schedule">
+  <div class="phase-head">
+    <div class="ph-num" style="font-size:28px">📅</div>
+    <div class="ph-info">
+      <h2><span data-lang="en" class="lang-visible">Weekly Sprint Schedule</span><span data-lang="de">Wöchentlicher Sprint-Zeitplan</span></h2>
+      <p><span data-lang="en" class="lang-visible">Fixed deadlines every wave sprint — set the current wave number to see the example.</span><span data-lang="de">Feste Deadlines für jeden Wellen-Sprint — aktuelle Wellennummer eintragen für das Beispiel.</span></p>
+    </div>
+  </div>
+  <div class="grid12">
+    <div class="card card-pad col12" style="border-left:4px solid var(--green) !important">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;flex-wrap:wrap">
+        <div class="badge b-green"><span data-lang="en" class="lang-visible">Current Wave / Aktuelle Welle</span><span data-lang="de" style="display:none">Aktuelle Welle</span></div>
+        <span style="font-size:13px;color:var(--text3)"><span data-lang="en" class="lang-visible">Welle</span><span data-lang="de">Welle</span></span>
+        <input type="number" id="welleInput" value="1" min="1" max="99" oninput="saveWelleNumber()" onchange="saveWelleNumber()" aria-label="Wave number">
+      </div>
+
+      <div class="week-timeline-row">
+        <div class="wtl-day">
+          <div class="wtl-label">Monday</div>
+          <div class="wtl-task wtl-neutral">
+            <span data-lang="en" class="lang-visible">Sprint review &amp; new wave kickoff</span>
+            <span data-lang="de">Sprint Review &amp; Wellen-Kickoff</span>
+          </div>
+        </div>
+        <div class="wtl-arrow">→</div>
+        <div class="wtl-day">
+          <div class="wtl-label">Tuesday</div>
+          <div class="wtl-task wtl-deadline">
+            <div class="wtl-eod">EOD</div>
+            <span data-lang="en" class="lang-visible">Requirements submission</span>
+            <span data-lang="de">Anforderungseinreichung</span>
+          </div>
+        </div>
+        <div class="wtl-arrow">→</div>
+        <div class="wtl-day">
+          <div class="wtl-label">Wednesday</div>
+          <div class="wtl-task wtl-deadline">
+            <div class="wtl-eod">EOD</div>
+            <span data-lang="en" class="lang-visible">Supabase + Strato inquiries</span>
+            <span data-lang="de">Supabase + Strato Anfragen</span>
+          </div>
+        </div>
+        <div class="wtl-arrow">→</div>
+        <div class="wtl-day">
+          <div class="wtl-label"><span data-lang="en" class="lang-visible">Wed – Fri</span><span data-lang="de">Mi – Fr</span></div>
+          <div class="wtl-task wtl-dev">
+            <span data-lang="en" class="lang-visible">Development + Vercel deployment</span>
+            <span data-lang="de">Entwicklung + Vercel Deployment</span>
+          </div>
+        </div>
+        <div class="wtl-arrow">→</div>
+        <div class="wtl-day">
+          <div class="wtl-label">Monday (next)</div>
+          <div class="wtl-task wtl-present">
+            <span data-lang="en" class="lang-visible">Demo &amp; Retrospective (evening)</span>
+            <span data-lang="de">Demo &amp; Retrospektive (Abend)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="note" style="margin-top:20px">
+        <div class="nl"><span data-lang="en" class="lang-visible">Example</span><span data-lang="de">Beispiel</span></div>
+        <p>
+          <span data-lang="en" class="lang-visible" id="welleExampleEn">For <strong>Welle 1</strong>: submit requirements by Tuesday EOD of week 1 → submit Supabase &amp; Strato inquiries by Wednesday EOD of week 1 → develop &amp; deploy Wednesday–Friday of week 1 → present Monday evening of week 2.</span>
+          <span data-lang="de" id="welleExampleDe">Für <strong>Welle 1</strong>: Anforderungen bis Dienstag EOD von Woche 1 einreichen → Supabase &amp; Strato Anfragen bis Mittwoch EOD von Woche 1 stellen → Entwickeln &amp; Deployen Mittwoch bis Freitag von Woche 1 → Präsentation Montagabend von Woche 2.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
   <!-- BEGIN components/phase0.html -->
 <!-- =================== PHASE 1 =================== -->
 <section class="phase-section reveal" id="phase1">
@@ -739,68 +812,110 @@ als <span class="c-path">public/Anforderungsdokument_[ProjektName].docx</span>.
 </section>
   <!-- END components/phase4.html -->
   <!-- BEGIN components/tracker.html -->
-<!-- =================== READY FOR DEMO TRACKER =================== -->
+<!-- =================== READY FOR DEMO TRACKER (Dashboard) =================== -->
 <div id="progress-wrap" class="reveal">
   <div class="card card-pad">
-    <div class="prog-header">
+    <div class="tracker-section-header">
       <div class="badge b-green" style="margin-bottom:12px;display:inline-flex">Interactive Sprint Tracker</div>
       <h2 style="font-size:clamp(22px,3vw,32px);font-weight:900;margin-bottom:8px"><span data-lang="en" class="lang-visible">Ready for Demo?</span><span data-lang="de">Demo-bereit?</span></h2>
-      <p style="font-size:14px;color:var(--text3)"><span data-lang="en" class="lang-visible">Click each item to mark it complete. Progress is tracked in your session.</span><span data-lang="de">Jeden Eintrag anklicken, um ihn als erledigt zu markieren.</span></p>
-      <div class="prog-bar-wrap"><div class="prog-bar" id="pgBar" style="width:0%"></div></div>
-      <div class="prog-label" id="pgLabel">0 / 18 completed</div>
+      <p style="font-size:14px;color:var(--text3)"><span data-lang="en" class="lang-visible">Track each app across all phases. Checkboxes update percentage automatically. Data saved locally.</span><span data-lang="de">Jede App über alle Phasen tracken. Checkboxen aktualisieren den Fortschritt automatisch. Daten werden lokal gespeichert.</span></p>
+      <div class="prog-bar-wrap" style="margin-top:14px"><div class="prog-bar" id="pgBar" style="width:0%"></div></div>
+      <div class="prog-label" id="pgLabel" style="margin-bottom:4px">0 / 0 completed</div>
+      <div class="tracker-btn-row">
+        <button class="trk-btn trk-btn-add" onclick="trackerAddRow(null)"><span data-lang="en" class="lang-visible">+ Add App</span><span data-lang="de">+ App hinzufügen</span></button>
+        <button class="trk-btn trk-btn-reset" onclick="trackerReset()"><span data-lang="en" class="lang-visible">Reset</span><span data-lang="de">Zurücksetzen</span></button>
+        <button class="trk-btn trk-btn-export" onclick="trackerExport()"><span data-lang="en" class="lang-visible">Export</span><span data-lang="de">Exportieren</span></button>
+      </div>
     </div>
 
-    <!-- Phase 1 group -->
-    <div class="check-group">
-      <div class="check-section-title" style="color:var(--blue)">Phase 0 — <span data-lang="en" class="lang-visible">Initiation</span><span data-lang="de">Initierung</span></div>
-      <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box"><span class="chk-tick">&#10003;</span></div><div><div class="chk-main"><span data-lang="en" class="lang-visible">Real problem statement is clearly defined</span><span data-lang="de">Reales Problem klar definiert</span></div><div class="chk-sub"><span data-lang="en" class="lang-visible">One sentence, easy to explain, business value is visible.</span><span data-lang="de">Ein Satz, leicht erklärbar, Business-Nutzen erkennbar.</span></div></div></div>
-      <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box"><span class="chk-tick">&#10003;</span></div><div><div class="chk-main"><span data-lang="en" class="lang-visible">Repo created from template and cloned</span><span data-lang="de">Repo aus Template erstellt und geklont</span></div><div class="chk-sub"><span data-lang="en" class="lang-visible">Project base exists before requirement work starts.</span><span data-lang="de">Projektbasis existiert vor Start der Anforderungsarbeit.</span></div></div></div>
-      <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box"><span class="chk-tick">&#10003;</span></div><div><div class="chk-main"><span data-lang="en" class="lang-visible">Requirement document generated, reviewed, and approved</span><span data-lang="de">Anforderungsdokument erstellt, geprüft und freigegeben</span></div><div class="chk-sub"><span data-lang="en" class="lang-visible">Stored in correct OneDrive Welle structure and sent to Waleri.</span><span data-lang="de">Im richtigen OneDrive-Welle-Ordner abgelegt und an Waleri gesendet.</span></div></div></div>
-    </div>
-
-    <!-- Phase 2 group -->
-    <div class="check-group">
-      <div class="check-section-title" style="color:var(--violet)">Phase 1 — <span data-lang="en" class="lang-visible">Planning &amp; Preparation</span><span data-lang="de">Planung &amp; Vorbereitung</span></div>
-      <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box"><span class="chk-tick">&#10003;</span></div><div><div class="chk-main"><span data-lang="en" class="lang-visible">Dependencies, hook, and env setup completed</span><span data-lang="de">Abhängigkeiten, Hook und Env-Setup abgeschlossen</span></div><div class="chk-sub"><code>npm install</code>, <code>hooks/install.sh</code>, <code>.env.local</code> done.</div></div></div>
-      <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box"><span class="chk-tick">&#10003;</span></div><div><div class="chk-main"><span data-lang="en" class="lang-visible">Workflow files verified</span><span data-lang="de">Workflow-Dateien verifiziert</span></div><div class="chk-sub"><span data-lang="en" class="lang-visible">pr-checks, pr-autofix, deploy, and lp-generator understood.</span><span data-lang="de">pr-checks, pr-autofix, deploy und lp-generator verstanden.</span></div></div></div>
-      <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box"><span class="chk-tick">&#10003;</span></div><div><div class="chk-main"><span data-lang="en" class="lang-visible">Domain and Supabase production access requested</span><span data-lang="de">Domain und Supabase-Produktionszugang angefragt</span></div><div class="chk-sub"><span data-lang="en" class="lang-visible">Domain candidate from Strato sent to Waleri with DB request.</span><span data-lang="de">Domain-Vorschlag aus Strato an Waleri mit DB-Anfrage gesendet.</span></div></div></div>
-      <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box"><span class="chk-tick">&#10003;</span></div><div><div class="chk-main"><span data-lang="en" class="lang-visible">Copilot setup is ready</span><span data-lang="de">Copilot-Setup ist bereit</span></div><div class="chk-sub"><span data-lang="en" class="lang-visible">AGENTS.md, instructions, and skills are understood by the team.</span><span data-lang="de">AGENTS.md, Instructions und Skills sind im Team verstanden.</span></div></div></div>
-      <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box"><span class="chk-tick">&#10003;</span></div><div><div class="chk-main"><span data-lang="en" class="lang-visible">Supabase MCP connected and tested</span><span data-lang="de">Supabase MCP verbunden und getestet</span></div><div class="chk-sub"><span data-lang="en" class="lang-visible">First migration and permission check completed.</span><span data-lang="de">Erste Migration und Berechtigungsprüfung abgeschlossen.</span></div></div></div>
-    </div>
-
-    <!-- Phase 3 group -->
-    <div class="check-group">
-      <div class="check-section-title" style="color:var(--cyan)">Phase 2 — <span data-lang="en" class="lang-visible">Development</span><span data-lang="de">Entwicklung</span></div>
-      <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box"><span class="chk-tick">&#10003;</span></div><div><div class="chk-main"><span data-lang="en" class="lang-visible">Core features implemented</span><span data-lang="de">Kernfeatures implementiert</span></div><div class="chk-sub"><span data-lang="en" class="lang-visible">All must-have requirements are covered.</span><span data-lang="de">Alle Muss-Anforderungen sind umgesetzt.</span></div></div></div>
-      <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box"><span class="chk-tick">&#10003;</span></div><div><div class="chk-main"><span data-lang="en" class="lang-visible">Functional tests passed in browser</span><span data-lang="de">Funktionstests im Browser bestanden</span></div><div class="chk-sub"><span data-lang="en" class="lang-visible">Main user flows work end-to-end.</span><span data-lang="de">Haupt-Nutzerflows funktionieren end-to-end.</span></div></div></div>
-      <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box"><span class="chk-tick">&#10003;</span></div><div><div class="chk-main"><span data-lang="en" class="lang-visible">Golden prompts documented</span><span data-lang="de">Goldene Prompts dokumentiert</span></div><div class="chk-sub"><span data-lang="en" class="lang-visible">Reusable prompts saved for next sprint.</span><span data-lang="de">Wiederverwendbare Prompts für den nächsten Sprint gespeichert.</span></div></div></div>
-      <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box"><span class="chk-tick">&#10003;</span></div><div><div class="chk-main"><span data-lang="en" class="lang-visible">PR quality gate respected</span><span data-lang="de">PR-Qualitätsstufe eingehalten</span></div><div class="chk-sub"><code>typecheck</code> + <code>lint</code> passed before opening each PR.</div></div></div>
-      <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box"><span class="chk-tick">&#10003;</span></div><div><div class="chk-main"><span data-lang="en" class="lang-visible">All feature branches merged cleanly</span><span data-lang="de">Alle Feature-Branches sauber gemergt</span></div><div class="chk-sub"><span data-lang="en" class="lang-visible">Main branch remains stable and deployable.</span><span data-lang="de">Main-Branch bleibt stabil und deploybar.</span></div></div></div>
-    </div>
-
-    <!-- Phase 4 group -->
-    <div class="check-group">
-      <div class="check-section-title" style="color:var(--amber)">Phase 3 — <span data-lang="en" class="lang-visible">Deployment</span><span data-lang="de">Deployment</span></div>
-      <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box"><span class="chk-tick">&#10003;</span></div><div><div class="chk-main"><span data-lang="en" class="lang-visible">First manual deploy workflow run completed</span><span data-lang="de">Erster manueller Deploy-Workflow-Lauf abgeschlossen</span></div><div class="chk-sub"><span data-lang="en" class="lang-visible">Vercel project provisioned/linked successfully.</span><span data-lang="de">Vercel-Projekt erfolgreich provisioniert/verknüpft.</span></div></div></div>
-      <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box"><span class="chk-tick">&#10003;</span></div><div><div class="chk-main"><span data-lang="en" class="lang-visible">All Vercel environment variables are synced</span><span data-lang="de">Alle Vercel-Umgebungsvariablen sind synchron</span></div><div class="chk-sub"><span data-lang="en" class="lang-visible">New variables added before redeploy.</span><span data-lang="de">Neue Variablen vor Redeploy ergänzt.</span></div></div></div>
-      <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box"><span class="chk-tick">&#10003;</span></div><div><div class="chk-main"><span data-lang="en" class="lang-visible">Second deploy run is live and healthy</span><span data-lang="de">Zweiter Deploy-Lauf live und stabil</span></div><div class="chk-sub"><span data-lang="en" class="lang-visible">Production URL works with Supabase connection.</span><span data-lang="de">Produktions-URL funktioniert mit Supabase-Verbindung.</span></div></div></div>
-    </div>
-
-    <!-- Phase 5 group -->
-    <div class="check-group">
-      <div class="check-section-title" style="color:var(--pink)">Phase 4 — <span data-lang="en" class="lang-visible">Closure &amp; Presentation</span><span data-lang="de">Abschluss &amp; Präsentation</span></div>
-      <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box"><span class="chk-tick">&#10003;</span></div><div><div class="chk-main"><span data-lang="en" class="lang-visible">Retrospective log written and shared</span><span data-lang="de">Retrospektive-Log geschrieben und geteilt</span></div><div class="chk-sub"><span data-lang="en" class="lang-visible">Challenges, solutions, AI outlook documented.</span><span data-lang="de">Herausforderungen, Lösungen, KI-Ausblick dokumentiert.</span></div></div></div>
-      <div class="chk-item" onclick="toggleChk(this)"><div class="chk-box"><span class="chk-tick">&#10003;</span></div><div><div class="chk-main"><span data-lang="en" class="lang-visible">Live presentation completed on production URL</span><span data-lang="de">Live-Präsentation auf Produktions-URL abgeschlossen</span></div><div class="chk-sub"><span data-lang="en" class="lang-visible">Demo video shown, Q&amp;A done, next actions collected.</span><span data-lang="de">Demo-Video gezeigt, Q&amp;A durchgeführt, nächste Schritte gesammelt.</span></div></div></div>
+    <div class="tracker-table-container">
+      <table class="tracker-table" id="trackerTable">
+        <thead>
+          <tr>
+            <th><span data-lang="en" class="lang-visible">App Name</span><span data-lang="de">App-Name</span></th>
+            <th><span data-lang="en" class="lang-visible">Responsible</span><span data-lang="de">Verantwortlicher</span></th>
+            <th style="color:var(--blue)">Phase 0<br><span style="font-weight:400;text-transform:none;letter-spacing:0">Initierung</span></th>
+            <th style="color:var(--violet)">Phase 1<br><span style="font-weight:400;text-transform:none;letter-spacing:0">Planung &amp; Vorb.</span></th>
+            <th style="color:var(--cyan)">Phase 2<br><span style="font-weight:400;text-transform:none;letter-spacing:0">Entwicklung</span></th>
+            <th style="color:var(--amber)">Phase 3<br><span style="font-weight:400;text-transform:none;letter-spacing:0">Deployment</span></th>
+            <th style="color:var(--pink)">Phase 4<br><span style="font-weight:400;text-transform:none;letter-spacing:0">Abschluss</span></th>
+            <th><span data-lang="en" class="lang-visible">Progress</span><span data-lang="de">Fortschritt</span></th>
+            <th><span data-lang="en" class="lang-visible">Risks / Comment</span><span data-lang="de">Risiken / Kommentar</span></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="trackerBody"></tbody>
+      </table>
     </div>
 
     <div id="done-banner">
-      <h3>Sprint Complete</h3>
-      <p><span data-lang="en" class="lang-visible">All 18 items verified. Ready to ship.</span><span data-lang="de">Alle 18 Punkte verifiziert. Bereit zum Ausliefern.</span></p>
+      <h3><span data-lang="en" class="lang-visible">Sprint Complete</span><span data-lang="de">Sprint abgeschlossen</span></h3>
+      <p><span data-lang="en" class="lang-visible">All items verified. Ready to ship.</span><span data-lang="de">Alle Punkte verifiziert. Bereit zum Ausliefern.</span></p>
     </div>
   </div>
 </div>
 
+<!-- =================== REFLEKTIONSFRAGEN =================== -->
+<div id="reflektion-wrap" class="reveal">
+  <div class="card card-pad">
+    <div class="rfq-header">
+      <div>
+        <div class="badge b-pink" style="margin-bottom:12px;display:inline-flex">
+          <span data-lang="en" class="lang-visible">Reflection Questions</span>
+          <span data-lang="de">Reflektionsfragen</span>
+        </div>
+        <h2 style="font-size:clamp(20px,2.5vw,28px);font-weight:900;margin-bottom:6px">
+          <span data-lang="en" class="lang-visible">Reflektionsfragen</span>
+          <span data-lang="de">Reflektionsfragen</span>
+        </h2>
+        <p style="font-size:14px;color:var(--text3)">
+          <span data-lang="en" class="lang-visible">Fill these before end of week. Answers are saved locally.</span>
+          <span data-lang="de">Vor Ende der Woche ausfüllen. Antworten werden lokal gespeichert.</span>
+        </p>
+      </div>
+      <div class="rfq-btn-row">
+        <button class="trk-btn trk-btn-reset" onclick="rfReset()"><span data-lang="en" class="lang-visible">Reset</span><span data-lang="de">Zurücksetzen</span></button>
+        <button class="trk-btn trk-btn-export" onclick="rfExport()"><span data-lang="en" class="lang-visible">Export</span><span data-lang="de">Exportieren</span></button>
+        <button class="trk-btn trk-btn-export" id="rfCopyBtn" onclick="rfCopy()"><span data-lang="en" class="lang-visible">Copy</span><span data-lang="de">Kopieren</span></button>
+      </div>
+    </div>
 
+    <div class="rfq-question-block">
+      <label class="rfq-question-label" for="rfq-q1">
+        <span class="rfq-de">Was habe ich in der letzten Welle gelernt?</span>
+        <span class="rfq-en">What did I learn in the last wave?</span>
+      </label>
+      <textarea class="rfq-textarea" id="rfq-q1" rows="4" placeholder="..." oninput="rfSave()"></textarea>
+    </div>
+    <hr class="rfq-sep">
+
+    <div class="rfq-question-block">
+      <label class="rfq-question-label" for="rfq-q2">
+        <span class="rfq-de">Was war mein größtes Hindernis und wie habe ich es gelöst?</span>
+        <span class="rfq-en">What was my biggest obstacle and how did I solve it?</span>
+      </label>
+      <textarea class="rfq-textarea" id="rfq-q2" rows="4" placeholder="..." oninput="rfSave()"></textarea>
+    </div>
+    <hr class="rfq-sep">
+
+    <div class="rfq-question-block">
+      <label class="rfq-question-label" for="rfq-q3">
+        <span class="rfq-de">Was empfehle ich für die nächste Welle?</span>
+        <span class="rfq-en">What do I recommend for the next wave?</span>
+      </label>
+      <textarea class="rfq-textarea" id="rfq-q3" rows="4" placeholder="..." oninput="rfSave()"></textarea>
+    </div>
+    <hr class="rfq-sep">
+
+    <div class="rfq-question-block">
+      <label class="rfq-question-label" for="rfq-q4">
+        <span class="rfq-de">Begründung, warum die Ziele der Welle nicht erreicht (wenn nicht erreicht):</span>
+        <span class="rfq-en">Reason why wave goals were not achieved (if not achieved):</span>
+      </label>
+      <textarea class="rfq-textarea" id="rfq-q4" rows="4" placeholder="..." oninput="rfSave()"></textarea>
+    </div>
+  </div>
+</div>
 
   <!-- END components/tracker.html -->
   <!-- BEGIN components/footer.html -->
