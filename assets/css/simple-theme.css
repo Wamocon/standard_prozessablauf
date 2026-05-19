@@ -310,25 +310,25 @@ h1,h2,h3,h4{
 .trk-btn-add{background:var(--green);color:#fff;border-color:var(--green)!important}
 .trk-btn-reset{background:rgba(239,68,68,0.12);color:#f87171;border-color:rgba(239,68,68,0.35)!important}
 .trk-btn-export{background:var(--surface2);color:var(--text2);border-color:var(--border2)!important}
-.tracker-table-container{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-top:16px;border-radius:10px;border:1px solid var(--border)}
-.tracker-table{width:100%;border-collapse:collapse;font-size:12px;min-width:960px}
-.tracker-table th{background:var(--surface2);padding:10px 12px;text-align:left;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:0.05em;border-bottom:2px solid var(--border2);white-space:nowrap}
-.tracker-table td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+.tracker-table-container{overflow-x:visible;-webkit-overflow-scrolling:touch;margin-top:16px;border-radius:10px;border:1px solid var(--border)}
+.tracker-table{width:100%;border-collapse:collapse;font-size:11px;table-layout:fixed}
+.tracker-table th{background:var(--surface2);padding:8px 8px;text-align:left;font-weight:700;font-size:10px;text-transform:uppercase;letter-spacing:0.04em;border-bottom:2px solid var(--border2);white-space:normal;line-height:1.35}
+.tracker-table td{padding:8px 8px;border-bottom:1px solid var(--border);vertical-align:top}
 .tracker-table tbody tr:last-child td{border-bottom:none}
 .tracker-table tbody tr:hover td{background:rgba(255,255,255,0.015)}
-.trk-input{width:100%;background:var(--surface2);border:1px solid var(--border);color:var(--text);border-radius:6px;padding:6px 8px;font-size:12px;font-family:inherit;min-width:90px;box-sizing:border-box}
+.trk-input{width:100%;background:var(--surface2);border:1px solid var(--border);color:var(--text);border-radius:6px;padding:6px 8px;font-size:11px;font-family:inherit;min-width:0;box-sizing:border-box}
 .trk-input:focus{outline:none;border-color:var(--blue)}
-.phase-col{min-width:130px}
+.phase-col{min-width:0}
 .trk-chk{display:flex;align-items:flex-start;gap:5px;cursor:pointer;padding:2px 0;font-size:11px;color:var(--text3);line-height:1.4;user-select:none}
 .trk-chk input[type="checkbox"]{flex-shrink:0;margin-top:2px;accent-color:var(--green);width:12px;height:12px;cursor:pointer}
 .trk-chk input[type="checkbox"]:checked ~ span{color:var(--text2)}
 .trk-chk-alert span{font-weight:700;color:var(--amber)!important}
 .trk-chk-alert input[type="checkbox"]:checked ~ span{color:var(--green)!important}
-.trk-prog-cell{min-width:80px;text-align:center}
+.trk-prog-cell{min-width:0;text-align:center}
 .trk-prog-text{font-size:15px;font-weight:800;color:var(--text);margin-bottom:6px}
 .trk-prog-bar-wrap{height:6px;background:var(--surface2);border-radius:3px;overflow:hidden;border:1px solid var(--border)}
 .trk-prog-bar{height:100%;background:linear-gradient(90deg,var(--green),var(--cyan));border-radius:3px;transition:width 0.35s ease;width:0%}
-.trk-textarea{width:100%;min-width:130px;background:var(--surface2);border:1px solid var(--border);color:var(--text);border-radius:6px;padding:6px 8px;font-size:11px;font-family:inherit;resize:vertical;min-height:80px;box-sizing:border-box}
+.trk-textarea{width:100%;min-width:0;background:var(--surface2);border:1px solid var(--border);color:var(--text);border-radius:6px;padding:6px 8px;font-size:11px;font-family:inherit;resize:vertical;min-height:80px;box-sizing:border-box}
 .trk-textarea:focus{outline:none;border-color:var(--blue)}
 .trk-remove{background:none;border:none;color:var(--text3);font-size:16px;cursor:pointer;padding:4px 6px;border-radius:6px;line-height:1;font-family:inherit}
 .trk-remove:hover{color:#f87171;background:rgba(239,68,68,0.1)}
@@ -336,6 +336,13 @@ h1,h2,h3,h4{
 #done-banner h3{color:var(--green);margin-bottom:6px}
 
 /* ─── REFLEKTIONSFRAGEN ───────────────────────── */
+#progress-wrap,
+#reflektion-wrap{
+  max-width:1280px;
+  margin:0 auto;
+  padding:0 20px 56px !important;
+}
+
 #reflektion-wrap{margin-top:24px}
 .rfq-header{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:24px}
 .rfq-btn-row{display:flex;gap:8px;flex-wrap:wrap}
@@ -351,5 +358,6 @@ h1,h2,h3,h4{
 @media(max-width:600px){
   .week-timeline-row{flex-direction:column}
   .wtl-arrow{transform:rotate(90deg);padding:0;align-self:center}
-  .tracker-table-container{border-radius:8px}
+  .tracker-table-container{border-radius:8px;overflow-x:auto}
+  .tracker-table{font-size:12px;min-width:980px;table-layout:auto}
 }
