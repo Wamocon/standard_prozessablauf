@@ -587,9 +587,6 @@ function rfCopy() {
   }
 }
 
-
-}
-
 function initNavScrollEffect() {
   window.addEventListener('scroll', function() {
     var nav = document.getElementById('nav');
