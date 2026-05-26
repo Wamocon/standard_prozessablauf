@@ -475,6 +475,7 @@ als <span class="c-path">public/Anforderungsdokument_[ProjektName].docx</span>.
         <div class="con-item"><div class="con-title" style="color:#c4b5fd">pr-autofix.yml</div><p><span data-lang="en" class="lang-visible">Fixes formatting automatically where possible.</span><span data-lang="de">Korrigiert Formatierung automatisch, wenn möglich.</span></p></div>
         <div class="con-item"><div class="con-title" style="color:#c4b5fd">deploy.yml</div><p><span data-lang="en" class="lang-visible">Manual deployment workflow for Vercel.</span><span data-lang="de">Manueller Deployment-Workflow für Vercel.</span></p></div>
         <div class="con-item"><div class="con-title" style="color:#c4b5fd">lp-generator.yml</div><p><span data-lang="en" class="lang-visible">Manual landing-page generation workflow.</span><span data-lang="de">Manueller Workflow zur Landing-Page-Generierung.</span></p></div>
+        <div class="con-item"><div class="con-title" style="color:#f9a8d4">launch-checklist.yml</div><p><span data-lang="en" class="lang-visible">Pre-presentation gate: verifies all 8 deliverables, creates a release, and auto-deploys the manual from <code>docs/</code> to GitHub Pages.</span><span data-lang="de">Präsentations-Gate: prüft alle 8 Deliverables, erstellt ein Release und deployt das Handbuch aus <code>docs/</code> automatisch auf GitHub Pages.</span></p></div>
       </div>
       <div class="codeblock" style="margin-top:16px">
 <span class="c-comment"># The complete feature branch workflow</span>
@@ -666,9 +667,13 @@ als <span class="c-path">public/Anforderungsdokument_[ProjektName].docx</span>.
           <p><span data-lang="en" class="lang-visible">Anticipate the 5 most common questions and write clear answers. The FAQ grows after every sprint.</span><span data-lang="de">Die 5 häufigsten Fragen antizipieren und beantworten. Das FAQ wächst mit jedem Sprint.</span></p>
         </div>
         <div class="con-item">
-          <div class="con-title" style="color:#fcd34d"><span data-lang="en" class="lang-visible">Where it lives</span><span data-lang="de">Wo es lebt</span></div>
-          <p><span data-lang="en" class="lang-visible">At <code>/manual</code> in the app, or on OneDrive linked from the footer. Accessible before the Monday evening presentation.</span><span data-lang="de">Unter <code>/manual</code> in der App, oder auf OneDrive verlinkt aus dem Footer. Vor der Montagabend-Präsentation erreichbar.</span></p>
+          <div class="con-title" style="color:#fcd34d"><span data-lang="en" class="lang-visible">Where it lives — docs/ folder</span><span data-lang="de">Wo es lebt — docs/ Ordner</span></div>
+          <p><span data-lang="en" class="lang-visible">The manual must be in the <code>docs/</code> folder of your app repo. The <strong>Launch Checklist</strong> workflow auto-deploys it to GitHub Pages. Copilot must update <code>docs/</code> after every feature change — never let it fall out of sync with production.</span><span data-lang="de">Das Handbuch muss im <code>docs/</code>-Ordner des App-Repos liegen. Der <strong>Launch-Checklist</strong>-Workflow deployt es automatisch auf GitHub Pages. Copilot muss <code>docs/</code> nach jeder Feature-Änderung aktualisieren — niemals den Produktionsstand verlieren.</span></p>
         </div>
+      </div>
+      <div class="note" style="margin-top:12px">
+        <div class="nl"><span data-lang="en" class="lang-visible">Copilot Instruction</span><span data-lang="de">Copilot-Anweisung</span></div>
+        <p><span data-lang="en" class="lang-visible">After implementing any feature, always tell Copilot: <code>@developer Update the user manual in docs/ to reflect the changes just made.</code> The manual must always match what is live in production.</span><span data-lang="de">Nach jedem Feature immer Copilot anweisen: <code>@developer Aktualisiere das Nutzerhandbuch in docs/ entsprechend der gerade gemachten Änderungen.</code> Das Handbuch muss immer dem Live-Stand entsprechen.</span></p>
       </div>
     </div>
 
@@ -742,6 +747,90 @@ als <span class="c-path">public/Anforderungsdokument_[ProjektName].docx</span>.
     </div>
   </div>
   <div class="grid12">
+
+    <!-- LAUNCH CHECKLIST WORKFLOW -->
+    <div class="card p5 card-pad col12 reveal" style="background:rgba(236,72,153,0.05);border-color:rgba(236,72,153,0.3)!important">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap">
+        <div class="badge b-pink"><span data-lang="en" class="lang-visible">🚀 Required Before Every Presentation</span><span data-lang="de">🚀 Pflicht vor jeder Präsentation</span></div>
+        <code style="font-size:12px;color:var(--pink);background:rgba(236,72,153,0.1);padding:3px 8px;border-radius:5px">launch-checklist.yml</code>
+      </div>
+      <h3 class="card-title"><span class="icon3d" aria-hidden="true">🚀</span><span data-lang="en" class="lang-visible">Launch Checklist — Run It Before You Present</span><span data-lang="de">Launch Checklist — Vor der Präsentation ausführen</span></h3>
+      <p class="card-intro"><span data-lang="en" class="lang-visible">The Launch Checklist is a GitHub Actions workflow that verifies the entire sprint output in one click. It checks every required deliverable automatically, creates a dated GitHub release as proof, and deploys your user manual from the <code>docs/</code> folder to GitHub Pages if it is not already live. A green result means the sprint is shippable. Never present without running it first.</span><span data-lang="de">Der Launch Checklist ist ein GitHub-Actions-Workflow, der die gesamte Sprint-Lieferung auf Knopfdruck verifiziert. Er prüft alle Pflicht-Deliverables automatisch, erstellt ein datiertes GitHub-Release als Nachweis und deployt dein Nutzerhandbuch aus dem <code>docs/</code>-Ordner auf GitHub Pages, falls es noch nicht live ist. Ein grünes Ergebnis bedeutet: der Sprint ist präsentationsbereit. Niemals ohne diesen Lauf präsentieren.</span></p>
+
+      <div class="grid12" style="margin-top:18px;gap:16px">
+
+        <!-- How to run -->
+        <div class="col4">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--pink);margin-bottom:10px"><span data-lang="en" class="lang-visible">How to Run</span><span data-lang="de">So startest du es</span></div>
+          <div class="steps">
+            <div class="step">
+              <div class="step-n sn-pink">1</div>
+              <div class="step-body"><h4><span data-lang="en" class="lang-visible">Open GitHub Actions</span><span data-lang="de">GitHub Actions öffnen</span></h4><p><span data-lang="en" class="lang-visible">Go to your app repository on GitHub → Actions tab.</span><span data-lang="de">Im App-Repository auf GitHub → Reiter Actions gehen.</span></p></div>
+            </div>
+            <div class="step">
+              <div class="step-n sn-pink">2</div>
+              <div class="step-body"><h4><span data-lang="en" class="lang-visible">Select Launch Checklist</span><span data-lang="de">Launch Checklist auswählen</span></h4><p><span data-lang="en" class="lang-visible">Click <strong>Launch Checklist</strong> in the left workflow list, then click <strong>Run workflow</strong> on the right.</span><span data-lang="de">Links in der Workflow-Liste <strong>Launch Checklist</strong> anklicken, dann rechts <strong>Run workflow</strong> klicken.</span></p></div>
+            </div>
+            <div class="step">
+              <div class="step-n sn-pink">3</div>
+              <div class="step-body"><h4><span data-lang="en" class="lang-visible">Read the result table</span><span data-lang="de">Ergebnistabelle lesen</span></h4><p><span data-lang="en" class="lang-visible">Every row must show a green checkmark. Fix any red items before the presentation. The run also creates a GitHub release automatically.</span><span data-lang="de">Jede Zeile muss ein grünes Häkchen zeigen. Rote Punkte vor der Präsentation beheben. Der Lauf erstellt außerdem automatisch ein GitHub-Release.</span></p></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- What it checks -->
+        <div class="col5">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--pink);margin-bottom:10px"><span data-lang="en" class="lang-visible">What It Checks (8 items)</span><span data-lang="de">Was geprüft wird (8 Punkte)</span></div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--surface2);border-radius:8px;border:1px solid rgba(34,197,94,0.2)">
+              <span style="color:var(--green);font-size:14px">✓</span>
+              <div><div style="font-size:12px;font-weight:700;color:var(--text)"><span data-lang="en" class="lang-visible">Vercel — project exists</span><span data-lang="de">Vercel — Projekt existiert</span></div></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--surface2);border-radius:8px;border:1px solid rgba(34,197,94,0.2)">
+              <span style="color:var(--green);font-size:14px">✓</span>
+              <div><div style="font-size:12px;font-weight:700;color:var(--text)"><span data-lang="en" class="lang-visible">Vercel — production deployment live</span><span data-lang="de">Vercel — Produktions-Deployment live</span></div></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--surface2);border-radius:8px;border:1px solid rgba(34,197,94,0.2)">
+              <span style="color:var(--green);font-size:14px">✓</span>
+              <div><div style="font-size:12px;font-weight:700;color:var(--text)"><span data-lang="en" class="lang-visible">Vercel — preview deployment accessible</span><span data-lang="de">Vercel — Preview-Deployment erreichbar</span></div></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--surface2);border-radius:8px;border:1px solid rgba(34,197,94,0.2)">
+              <span style="color:var(--green);font-size:14px">✓</span>
+              <div><div style="font-size:12px;font-weight:700;color:var(--text)"><span data-lang="en" class="lang-visible">Vercel — custom domain resolves</span><span data-lang="de">Vercel — Eigendomain auflösbar</span></div></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--surface2);border-radius:8px;border:1px solid rgba(34,197,94,0.2)">
+              <span style="color:var(--green);font-size:14px">✓</span>
+              <div><div style="font-size:12px;font-weight:700;color:var(--text)"><span data-lang="en" class="lang-visible">Supabase — project connected</span><span data-lang="de">Supabase — Projekt verbunden</span></div></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--surface2);border-radius:8px;border:1px solid rgba(34,197,94,0.2)">
+              <span style="color:var(--green);font-size:14px">✓</span>
+              <div><div style="font-size:12px;font-weight:700;color:var(--text)"><span data-lang="en" class="lang-visible">Landing page — repo exists</span><span data-lang="de">Landing Page — Repo vorhanden</span></div></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--surface2);border-radius:8px;border:1px solid rgba(34,197,94,0.2)">
+              <span style="color:var(--green);font-size:14px">✓</span>
+              <div><div style="font-size:12px;font-weight:700;color:var(--text)"><span data-lang="en" class="lang-visible">Landing page — GitHub Pages live (HTTP 200)</span><span data-lang="de">Landing Page — GitHub Pages live (HTTP 200)</span></div></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--surface2);border-radius:8px;border:1px solid rgba(34,197,94,0.2)">
+              <span style="color:var(--green);font-size:14px">✓</span>
+              <div><div style="font-size:12px;font-weight:700;color:var(--text)"><span data-lang="en" class="lang-visible">Product handbook — accessible on GitHub Pages</span><span data-lang="de">Produkthandbuch — über GitHub Pages erreichbar</span></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- docs/ folder rule -->
+        <div class="col3">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--pink);margin-bottom:10px"><span data-lang="en" class="lang-visible">The docs/ Folder Rule</span><span data-lang="de">Die docs/ Ordner-Regel</span></div>
+          <div style="padding:14px 16px;background:rgba(236,72,153,0.07);border:1px solid rgba(236,72,153,0.25);border-radius:10px;margin-bottom:10px">
+            <p style="font-size:12px;color:var(--text2);line-height:1.6"><span data-lang="en" class="lang-visible">Your user manual <strong>must live in the <code>docs/</code> folder</strong> of your app repository. The Launch Checklist workflow reads from there and deploys it to GitHub Pages automatically if it is not yet live.<br><br>No <code>docs/</code> folder = red checklist = no green release = no presentation.</span><span data-lang="de">Dein Nutzerhandbuch <strong>muss im <code>docs/</code>-Ordner</strong> des App-Repositories liegen. Der Launch-Checklist-Workflow liest von dort und deployt es automatisch auf GitHub Pages, falls es noch nicht live ist.<br><br>Kein <code>docs/</code>-Ordner = rote Checkliste = kein grünes Release = keine Präsentation.</span></p>
+          </div>
+          <div class="warn">
+            <div class="wl"><span data-lang="en" class="lang-visible">Copilot Rule</span><span data-lang="de">Copilot-Regel</span></div>
+            <p style="font-size:12px"><span data-lang="en" class="lang-visible">After every feature change, instruct Copilot to update <code>docs/</code> to reflect the new state. The manual must always match production. Use: <code>@developer Update the user manual in docs/ to reflect the changes just made.</code></span><span data-lang="de">Nach jeder Feature-Änderung Copilot anweisen, <code>docs/</code> zu aktualisieren. Das Handbuch muss immer dem Produktionsstand entsprechen. Nutzen: <code>@developer Aktualisiere das Nutzerhandbuch in docs/ entsprechend der gerade gemachten Änderungen.</code></span></p>
+          </div>
+        </div>
+
+      </div>
+    </div>
 
     <!-- FINAL CHECKLIST / FINISH LINE -->
     <div class="card p5 card-pad col4 reveal">
